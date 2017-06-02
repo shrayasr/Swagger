@@ -1,4 +1,5 @@
-# Swagger UI responsive theme
+# Swagger
+Shiprocket Swagger Api Documentation
 
 With inspiration from the [Auth0 api explorer](https://auth0.com/docs/apiv2) the original Swagger UI repo is modified to use a responsive layout.
 
@@ -46,3 +47,7 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+=======
+# Swagger
+Shiprocket Swagger Api Documentation
+>>>>>>> ae16eae30561772dd837758a9cfc9df49194659e
