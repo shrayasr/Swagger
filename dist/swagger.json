@@ -628,26 +628,6 @@
         }
       }
     },
-    "/orders/count": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "description": "Get count of orders in unprocessable, processing and manifested tabs",
-        "summary": "Get count of orders",
-        "operationId": "Get orders count",
-        "produces": ["application/json"],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/GetOrdersCountResponse"
-            }
-          }
-        }
-      }
-    },
     "/v1/external/orders/show/{id}": {
       "get": {
         "tags": [
@@ -746,8 +726,8 @@
         "tags": [
           "Orders"
         ],
-        "description": "Add inventory for order product",
-        "summary": "Add inventory",
+        "description": "Fulfillment",
+        "summary": "Add inventory for order product",
         "operationId": "Fulfillment",
         "produces": ["application/json"],
         "parameters": [{
@@ -936,34 +916,6 @@
         }
       }
     },
-    "/v1/external/orders/delivered/{id}": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "description": "Mark an order delivered, manually",
-        "summary": "Mark order as DELIVERED",
-        "operationId": "Mark delivered",
-        "produces": ["application/json"],
-        "parameters": [{
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "The order id to mark delivered"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    },
     "/v1/external/orders/export": {
       "get": {
         "tags": [
@@ -1129,6 +1081,27 @@
           "403": {
             "description": "Unexpected error in API call. See HTTP response body for details.",
             "schema": {}
+          }
+        }
+      }
+    },
+    "/v1/external/errors/{id}/check":{
+      "get":{
+        "tags": ["FIle Imports"],
+        "summary": "Get file import results from Bulk order, products, listing imports.",
+        "description": "Check Import Response",
+        "parameters": [{
+          "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+        }],
+        "responses": {
+          "200":{
+            "description": "",
+            "schema": {
+              "$ref": "#definitions/fileImportResponse"
+            }
           }
         }
       }
@@ -1350,190 +1323,6 @@
           "404": {
             "description": "Unexpected error in API call. See HTTP response body for details.",
             "schema": {}
-          }
-        }
-      }
-    },
-    "/v1/courier/pickup/{pickup_postcode}": {
-      "get": {
-        "tags": [
-          "Couriers"
-        ],
-        "description": "Get a JSON representation of courier companies list where pickup is available.\nExample :- v1/courier/pickup/110030?pickup_couriers[]=14\u0026pickup_couriers[]=10\u0026pickup_couriers[]=12",
-        "summary": "Get Pick up availability details",
-        "operationId": "Pickup availability",
-        "produces": ["application/json"],
-        "parameters": [{
-            "name": "pickup_postcode",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Pickup postcode of the company (must be 6 digits)"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/PickupAvailabilityResponse"
-            }
-          },
-          "404": {
-            "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {}
-          }
-        }
-      }
-    },
-    "/v1/courier/delivery/{delivery_postcode}": {
-      "get": {
-        "tags": [
-          "Couriers"
-        ],
-        "description": "Get a JSON representation of courier companies list where delivery is available with 'cash on delivery' indicator (cod) as well.\nExample :- v1/courier/delivery/335513?pickup_couriers[]=14\u0026pickup_couriers[]=10\u0026pickup_couriers[]=12",
-        "summary": "Get delivery availability Details",
-        "operationId": "Delivery availability",
-        "produces": ["application/json"],
-        "parameters": [{
-            "name": "delivery_postcode",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "delivery postcode (must be 6 digits)"
-          }, {
-            "name": "pickup_couriers",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Courier company id provided by SHIPROCKET in Pickup availability API"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/DeliveryAvailabilityResponse"
-            }
-          },
-          "404": {
-            "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {}
-          }
-        }
-      }
-    },
-    "/v1/courier/preference": {
-      "post": {
-        "tags": [
-          "Couriers"
-        ],
-        "description": "Set courier companies list with preference (priority) as provided in params below.",
-        "summary": "Set courier-company priority",
-        "operationId": "Set couriers preferences",
-        "produces": ["application/json"],
-        "parameters": [{
-            "name": "courier_id",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {},
-            "description": "Courier company ids provided by SHIPROCKET in Pickup availability API"
-          }, {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SetCouriersPreferencesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/SetCouriersPreferencesResponse"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/courier/courier/list": {
-      "get": {
-        "tags": [
-          "Couriers"
-        ],
-        "description": "Get a JSON representation of active courier companies with SHIPROCKET.",
-        "summary": "Get active courier companies",
-        "operationId": "Get couriers list",
-        "produces": ["application/json"],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/GetCouriersListResponse"
-            }
-          }
-        }
-      }
-    },
-    "/v1/courier/priority": {
-      "get": {
-        "tags": [
-          "Couriers"
-        ],
-        "description": "Get a JSON representation of courier companies list with preference (priority) as provided in params below.",
-        "summary": "Get courier-company priority",
-        "operationId": "Get couriers preferences",
-        "produces": ["application/json"],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/GetCouriersPreferencesResponse"
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Couriers"
-        ],
-        "description": "Get a JSON representation of courier companies list with preference (priority) as provided in params below.",
-        "operationId": "Set courier-company priority",
-        "produces": ["application/json"],
-        "parameters": [{
-            "name": "priority",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {},
-            "description": "Courier company ids provided by SHIPROCKET in Pickup availability API"
-          }, {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SetCouriersPriorityRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/SetCouriersPriorityResponse"
-            }
           }
         }
       }
@@ -3591,6 +3380,19 @@
         }
       },
       "required": ["status", "data", "upper_fold_text", "lower_fild_text"]
+    },
+    "fileImportResponse":{
+      "title": "Import Response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+        "required": ["data"]
     },
     "SatementResponse": {
       "title": "Satement response",
