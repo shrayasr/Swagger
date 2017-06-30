@@ -2353,6 +2353,9 @@
         "sku": {
           "type": "string"
         },
+        "HSN": {
+          "type": "string"
+        },
         "name": {
           "type": "string"
         },
@@ -2855,8 +2858,26 @@
         "order_items": {
           "type": "array",
           "items": {
-            "type": "object"
-          }
+            "type": "object"},
+            "example": [
+                  {
+                    "sku": {
+                      "type": "string"
+                    },
+                    "units":{
+                      "type": "integer"
+                    },
+                    "selling_price": {
+                      "type": "integer"
+                    },
+                    "discount": {
+                      "type": "integer"
+                    },
+                    "HSN": {
+                      "type": "string"
+                    }
+                  }
+            ]
         },
         "payment_method": {
           "type": "string"
@@ -2975,7 +2996,26 @@
           "type": "array",
           "items": {
             "type": "object"
-          }
+          },
+          "example": [
+                  {
+                    "sku": {
+                      "type": "string"
+                    },
+                    "units":{
+                      "type": "integer"
+                    },
+                    "selling_price": {
+                      "type": "integer"
+                    },
+                    "discount": {
+                      "type": "integer"
+                    },
+                    "HSN": {
+                      "type": "string"
+                    }
+                  }
+            ]
         },
         "payment_method": {
           "type": "string"
