@@ -1785,31 +1785,31 @@
         "type": "object"
       },
       "couponResponse": {
-        "title": "Order fetched succesfully",
+        "title": "Coupon details fetched",
         "type": "object"
       },
       "orderCountResponse": {
-        "title": "Order fetched succesfully",
+        "title": "Order cout response",
         "type": "object"
       },
       "productCountResponse": {
-        "title": "Order fetched succesfully",
+        "title": "Product Count",
         "type": "object"
       },
       "addChannelProductRequest": {
-        "title": "Order fetched succesfully",
+        "title": "Add chennel product parameter",
         "type": "object"
       },
       "addChannelProductResponse": {
-        "title": "Order fetched succesfully",
+        "title": "Channel product added Successfully",
         "type": "object"
       },
       "getChannelProductResponse": {
-        "title": "Order fetched succesfully",
+        "title": "Channel products fetched",
         "type": "object"
       },
       "updateOrderResponse": {
-        "title": "Json response of update Orders",
+        "title": "Orders updated Successfully",
         "type": "object"
       }
     }
