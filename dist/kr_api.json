@@ -1097,7 +1097,7 @@
               "type": "array",
               "description": "Product image paths",
               "items": {
-                "type": "string",
+                "type": "string"
                 },
               "example": [
                 "data/product_image_1.jpg",
@@ -1148,7 +1148,7 @@
               "type": "array",
               "description": "Product attributes",
               "items": {
-                "type": "string",
+                "type": "string"
                 },
               "example": [
                 {
@@ -1167,7 +1167,7 @@
               "type": "array",
               "description": "Product category",
               "items": {
-                "type": "string",
+                "type": "string"
               },
               "example": [
                 "Category One>Category Two",
@@ -1210,7 +1210,7 @@
             "products": {
               "type": "array",
               "items": {
-                "type": "string",
+                "type": "string"
                 },
               "example": [
                 {
@@ -1255,7 +1255,7 @@
         "products": {
           "type": "array",
           "items": {
-            "type": "string",
+            "type": "string"
           },
           "example": [
             {
@@ -1276,7 +1276,7 @@
         "totals": {
           "type": "array",
           "items": {
-            "type": "string",
+            "type": "string"
           },
           "example": [
             {
@@ -1378,7 +1378,7 @@
         "bestseller": {
           "type": "array",
           "items": {
-            "type": "string",
+            "type": "string"
           },
           "example": [
             {
@@ -1699,7 +1699,7 @@
           "products": {
             "type": "array",
             "items": {
-              "type": "string",
+              "type": "string"
             },
             "example": [
               {
