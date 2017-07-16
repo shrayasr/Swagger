@@ -1616,10 +1616,12 @@
       "type": "object",
       "properties": {
         "email": {
-          "type": "string"
+          "type": "string",
+          "example": "abcd@xyz.com"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "example": "abcd1234"
         }
       },
       "required": ["email", "password"]
@@ -1630,26 +1632,33 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "example": 1
         },
         "first_name": {
-          "type": "string"
+          "type": "string",
+          "example": "John"
         },
         "last_name": {
-          "type": "string"
+          "type": "string",
+          "example": "Doe"
         },
         "email": {
-          "type": "string"
+          "type": "string",
+          "example": "abcd@xyz.com"
         },
         "company_id": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "example": 12
         },
         "created_at": {
-          "type": "string"
+          "type": "string",
+          "format": "dateTime"
         },
         "token": {
-          "type": "string"
+          "type": "string",
+          "example": "huiyd878y823hh2hdu232h"
         }
       },
       "required": ["id", "first_name", "last_name", "email", "company_id", "created_at", "token"]
@@ -1660,7 +1669,8 @@
       "properties": {
         "status": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "example": "200"
         },
         "data": {
           "type": "object",
@@ -2034,7 +2044,8 @@
       "properties": {
         "status": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "example": 200
         },
         "data": {
           "type": "object",
@@ -2261,6 +2272,7 @@
             "example": [{
                     "id": 395,
                     "sku": "1234",
+                    "HSN": "hcjcx1221s",
                     "name": "product2",
                     "description": "",
                     "category_code": "default",
@@ -2288,6 +2300,7 @@
                   {
                     "id": 394,
                     "sku": "1234567",
+                    "HSN": "hbhqgst663",
                     "name": "product1",
                     "description": "",
                     "category_code": "default",
@@ -2315,6 +2328,7 @@
                   {
                     "id": 393,
                     "sku": "123456",
+                    "HSN": "gyt67g72g",
                     "name": "Product1",
                     "description": "",
                     "category_code": "default",
@@ -2341,7 +2355,40 @@
             }]
         },
         "meta": {
-          "type": "object"
+          "type": "object",
+          "example": [
+          	{
+          		"pagination": {
+          			"type": "object",
+          			"example": [{
+          				"total": {
+          					"type": "integer",
+          					"example": 3
+          				},
+          				"count": {
+          					"type": "integer",
+          					"example": 3
+          				},
+          				"per_page": {
+          					"type": "integer",
+          					"example": 100
+          				},
+          				"current_page": {
+          					"type": "integer",
+          					"example": 1
+          				},
+          				"total_pages": {
+          					"type": "integer",
+          					"example": 2
+          				},
+          				"links": {
+          					"type": "array",
+          					"items": []
+          				}
+          			}]
+          		}
+          	}
+          ]
         }
       },
       "required": ["data", "meta"]
@@ -2351,77 +2398,101 @@
       "type": "object",
       "properties": {
         "sku": {
-          "type": "string"
+          "type": "string",
+          "example": "Toys"
         },
         "HSN": {
-          "type": "string"
+          "type": "string",
+          "example": "1234cdhc"
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "example": "SuperMan"
         },
         "tax_code": {
-          "type": "string"
+          "type": "string",
+          "example": "default"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "example": "Single"
         },
         "qty": {
-          "type": "string"
+          "type": "integer",
+          "example": 10
         },
         "low_stock": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "category_code": {
-          "type": "string"
+          "type": "string",
+          "example": "default"
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "brand": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "size": {
-          "type": "string"
+          "type": "integer",
+          "example": ""
         },
         "weight": {
-          "type": "string"
+          "type": "integer",
+          "example": ""
         },
         "length": {
-          "type": "string"
+          "type": "integer",
+          "example": ""
         },
         "width": {
-          "type": "string"
+          "type": "integer",
+          "example": ""
         },
         "height": {
-          "type": "string"
+          "type": "integer",
+          "example": ""
         },
         "ean": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "upc": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "isbn": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "color": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "imei_serialnumber": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "cost_price": {
-          "type": "string"
+          "type": "integer",
+          "example": ""
         },
         "mrp": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "status": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "example": 1
         },
         "image_url": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "components": {
           "type": "array",
