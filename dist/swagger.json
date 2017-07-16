@@ -2405,6 +2405,9 @@
           "type": "string",
           "example": "1234cdhc"
         },
+        "HSN": {
+          "type": "string"
+        },
         "name": {
           "type": "string",
           "example": "SuperMan"
