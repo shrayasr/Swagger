@@ -19,19 +19,18 @@
         "tags": [
           "Authentication"
         ],
-        "description": "Get user and token from credentials",
-        "summary": "Generate access token",
+        "description": "The token is the key that you need to pass before accessing any section in the ShipRocket API (Except the “get countries” and “get codes”). Generating the token is an extremely simple process. Simply type in your email id (alternate id for the ShipRocket API) and all your details will be generated.",
+        "summary": "Access Token",
         "operationId": "Get token",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetTokenRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GetTokenRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -47,8 +46,8 @@
         "tags": [
           "Countries"
         ],
-        "description": "Get a JSON representation of all countries",
-        "summary": "Get all countries",
+        "description": "Shows all the countries which are present in the ShipRocket database. ShipRocket API provides ISO Code 2 and ISO Code 3 country options and has a total of 44 countries in its database. This allows you to use these countries in your own dropdown menu.",
+        "summary": "Countries",
         "operationId": "Get countries",
         "produces": ["application/json"],
         "parameters": [],
@@ -67,22 +66,21 @@
         "tags": [
           "Countries"
         ],
-        "description": "Get all zones",
-        "summary": "Get all zones of a country",
+        "description": "Shows all the zones which are present within a country.",
+        "summary": "Get all zones",
         "operationId": "Get zones",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Country id"
-          }
-        ],
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The specific id of the country in integer format"
+        }],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Name of the specific zone",
             "schema": {
               "$ref": "#/definitions/GetZonesResponse"
             }
@@ -95,51 +93,49 @@
         "tags": [
           "Products"
         ],
-        "description": "Get a JSON representation of all products",
-        "summary": "Get all Products",
+        "description": "Shows all the details of all the products that a ShipRocket user has. This can be filtered according to details like number of products per page, ascending or descending order sorting order. ",
+        "summary": "Get Products",
         "operationId": "Get products",
         "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Page number of data to display"
-          }, {
-            "name": "per_page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of products to get per request"
-          }, {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Sort type (DESC, ASC)"
-          }, {
-            "name": "sort_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to sort by"
-          }, {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Filter value"
-          }, {
-            "name": "filter_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to filter by"
-          }
-        ],
+        "parameters": [{
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number which is to be displayed"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of products in each page"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Whether to arrange the items in ascending or descending order(DESC, ASC)"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Value by which the results will be filtered"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Validation of filtered value (data to be matched)"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -158,14 +154,13 @@
         "operationId": "Add",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AddRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/AddRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -184,17 +179,17 @@
         "tags": [
           "Products"
         ],
-        "description": "Display single product details",
-        "summary": "Get details of a single Product",
+        "description": "Shows individual product details",
+        "summary": "Show",
         "operationId": "Show",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id = The product id which is to be shown and the input should be in an integer format",
+          "type": "string"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -210,19 +205,18 @@
         "tags": [
           "Products"
         ],
-        "description": "Import CSV containing products data",
-        "summary": "Import Products in bulk",
+        "description": "This section shows the API for exporting the data of all your product and inventory details from the ShipRocket panel.",
+        "summary": "Bulk import",
         "operationId": "Bulk import",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BulkImportRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BulkImportRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -241,14 +235,14 @@
         "tags": [
           "Products"
         ],
-        "description": "Export CSV file containing company's products data",
-        "summary": "Export Products in bulk",
+        "description": "The particular sample which is to be downloaded",
+        "summary": "Bulk Sample",
         "operationId": "Bulk export",
         "produces": ["application/json"],
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Sample file containing required data in format",
             "schema": {
               "type": "array",
               "items": {
@@ -283,23 +277,22 @@
       }
     },
     "/v1/external/products/update/imei": {
-      "post": {
+      "patch": {
         "tags": [
           "Products"
         ],
-        "description": "Update product IMEI",
-        "summary": "Update IMEI of a Product",
+        "description": "This section shows the API for updating IMEI numbers. In case you have two mobile phones of the same model, it could be an option for differentiating them.",
+        "summary": "Update IMEI",
         "operationId": "Update IMEI",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateImeiRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/UpdateImeiRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": ""
@@ -317,45 +310,44 @@
         "operationId": "Get all",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Page number of data to display"
-          }, {
-            "name": "per_page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of listings to get per request"
-          }, {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Sort type (DESC, ASC)"
-          }, {
-            "name": "sort_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to sort by"
-          }, {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Filter value"
-          }, {
-            "name": "filter_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to filter by"
-          }
-        ],
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Page number of the data which is to be displayed"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of channel orders listed in each page"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "The order in which the listings should be sorted"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Value by which the results will be filtered"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Validation of filtered value (data to be matched)"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -376,14 +368,13 @@
         "operationId": "Bulk import1",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BulkImportRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BulkImportRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -402,8 +393,8 @@
         "tags": [
           "Listings"
         ],
-        "description": "Export CSV file containing mapped channel catalog data",
-        "summary": "Export mapped Catalog details",
+        "description": "Downloading the list of mapped items in the channel catalog sheet. After mapping items you can see the number of products of one channel, which are present in the Master Catalogue.",
+        "summary": "Export Mapped",
         "operationId": "Export mapped",
         "produces": ["application/json"],
         "parameters": [],
@@ -425,8 +416,8 @@
         "tags": [
           "Listings"
         ],
-        "description": "Export CSV file containing un-mapped channel catalog data",
-        "summary": "Export unmapped Catalog details",
+        "description": "Downloading the list of unmapped items in the channel catalog sheet.",
+        "summary": "Export Unmapped",
         "operationId": "Export un-mapped",
         "produces": ["application/json"],
         "parameters": [],
@@ -448,8 +439,8 @@
         "tags": [
           "Listings"
         ],
-        "description": "Export sample CSV file for import listings",
-        "summary": "Export sample format to import listings",
+        "description": "Downloading a sample of the catalogue sheet.",
+        "summary": "Export sample",
         "operationId": "Export sample",
         "produces": ["application/json"],
         "parameters": [],
@@ -471,19 +462,18 @@
         "tags": [
           "Listings"
         ],
-        "description": "Map channel catalog to master catalog",
-        "summary": "Map channel Catalog to master Catalog",
+        "description": "The items which are to be linked",
+        "summary": "Map",
         "operationId": "Map",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MapRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/MapRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": ""
@@ -496,68 +486,67 @@
         "tags": [
           "Orders"
         ],
-        "description": "Get a JSON representation of all orders",
+        "description": "The ShipRocket API for getting all the orders of a single seller. In this API the product and shipment activities will have sub arrays for individual products and shipments. ",
         "summary": "Get all orders",
         "operationId": "Get all orders",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Page number of data to display"
-          }, {
-            "name": "per_page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of orders to get per request"
-          }, {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Sort type (DESC, ASC)"
-          }, {
-            "name": "sort_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to sort by"
-          }, {
-            "name": "to",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "To date"
-          }, {
-            "name": "from",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "From date"
-          }, {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Filter value"
-          }, {
-            "name": "filter_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to filter by"
-          }, {
-            "name": "search",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Search for AWB or Channel Order ID"
-          }
-        ],
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Page number of data to display"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of orders to get per request"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Sort type (DESC, ASC)"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to sort by"
+        }, {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "To date"
+        }, {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "From date"
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Filter value"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to filter by"
+        }, {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Search for AWB or Channel Order ID"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -638,14 +627,13 @@
         "operationId": "Get order",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "The order id"
-          }
-        ],
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The order id"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -661,8 +649,8 @@
         "tags": [
           "Orders"
         ],
-        "description": "Fetch orders from all channels",
-        "summary": "Fetch orders from channels",
+        "description": "Starts a background job which will fetch orders from all channels.",
+        "summary": "Fetch",
         "operationId": "Fetch orders",
         "produces": ["application/json"],
         "parameters": [],
@@ -681,8 +669,8 @@
         "tags": [
           "Orders"
         ],
-        "description": "Start order status sync from all channels",
-        "summary": "Get status of sync from channels",
+        "description": "This API runs a status sync which pulls out the changes in order status and syncs them with the panel",
+        "summary": "Sync status",
         "operationId": "Sync status",
         "produces": ["application/json"],
         "parameters": [],
@@ -701,19 +689,18 @@
         "tags": [
           "Orders"
         ],
-        "description": "Cancels orders with given order ids\nDo not use this end point to cancel the order if the order has awb assigned and/or is in pickup stage.\nFor such orders see /v1/external/cancel/labeled or /v1/external/cancel/manifested.",
+        "description": "This API cancels orders which are given",
         "summary": "Cancel an order",
         "operationId": "Cancel orders",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CancelOrdersRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/CancelOrdersRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": ""
@@ -731,14 +718,13 @@
         "operationId": "Fulfillment",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FulfillmentRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FulfillmentRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -762,14 +748,13 @@
         "operationId": "Mapping",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MappingRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/MappingRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -788,19 +773,18 @@
         "tags": [
           "Orders"
         ],
-        "description": "Generates invoice and returns the PDF url for given order ids",
+        "description": "Generates an invoice for an order through the order id. You can pass multiple order id’s as well, to generate their response",
         "summary": "Generate Invoice",
         "operationId": "Generate invoice",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenerateInvoiceRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GenerateInvoiceRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -824,63 +808,62 @@
         "operationId": "Track",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Page number of data to display"
-          }, {
-            "name": "per_page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of orders to get per request"
-          }, {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Sort type (DESC, ASC)"
-          }, {
-            "name": "sort_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to sort by"
-          }, {
-            "name": "to",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "To date"
-          }, {
-            "name": "from",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "From date"
-          }, {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Filter value"
-          }, {
-            "name": "filter_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to filter by"
-          }, {
-            "name": "search",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Search for AWB or Channel Order ID"
-          }
-        ],
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Page number of data to display"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of orders to get per request"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Sort type (DESC, ASC)"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to sort by"
+        }, {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "To date"
+        }, {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "From date"
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Filter value"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to filter by"
+        }, {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Search for AWB or Channel Order ID"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -896,19 +879,18 @@
         "tags": [
           "Orders"
         ],
-        "description": "Change customer address in order data",
-        "summary": "Update address for Order",
+        "description": "If you need to change the customer’s delivery address, you need to pass the order id and the API will show how to",
+        "summary": "Change address",
         "operationId": "Change address",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChangeAddressRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ChangeAddressRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": ""
@@ -921,7 +903,7 @@
         "tags": [
           "Orders"
         ],
-        "description": "Export CSV file containing company's Orders data",
+        "description": "Displays the URL of the CSV sheet of downloaded orders as a response",
         "operationId": "Export orders",
         "produces": ["application/json"],
         "parameters": [],
@@ -940,19 +922,18 @@
         "tags": [
           "Orders"
         ],
-        "description": "Get urls of manifests containing the given order ID",
-        "summary": "Get menifest for an order",
+        "description": "Prints the manifest of the order id on the assumption that the manifest is created",
+        "summary": "Get menifest",
         "operationId": "Get manifests",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetManifestsRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GetManifestsRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -971,24 +952,23 @@
         "tags": [
           "Custom Orders"
         ],
-        "description": "Create a linked order.",
+        "description": "Shows the details of the order which needs to be created",
         "summary": "Create Orders",
         "operationId": "Create linked order.",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateLinkedOrder.Request"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/CreateLinkedOrderRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/CreateLinkedOrder.Response"
+              "$ref": "#/definitions/CreateLinkedOrderResponse"
             }
           },
           "400": {
@@ -1007,19 +987,18 @@
         "tags": [
           "Custom Orders"
         ],
-        "description": "Import CSV containing orders data",
-        "summary": "Import orders in Bulk",
+        "description": "Mentions the order sheets into your panel. Should be a CSV file",
+        "summary": "Bulk Import",
         "operationId": "Bulk import2",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BulkImportRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/BulkImportRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1058,19 +1037,18 @@
         "tags": [
           "Custom Orders"
         ],
-        "description": "Create a quick order.",
+        "description": "Shows the details of the order which needs to be created",
         "summary": "Create quick orders",
         "operationId": "Create quick order",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateQuickOrderRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/CreateQuickOrderRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1085,19 +1063,19 @@
         }
       }
     },
-    "/v1/external/errors/{id}/check":{
-      "get":{
+    "/v1/external/errors/{id}/check": {
+      "get": {
         "tags": ["FIle Imports"],
         "summary": "Get file import results from Bulk order, products, listing imports.",
         "description": "Check Import Response",
         "parameters": [{
           "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
+          "in": "path",
+          "required": true,
+          "type": "string"
         }],
         "responses": {
-          "200":{
+          "200": {
             "description": "",
             "schema": {
               "$ref": "#definitions/fileImportResponse"
@@ -1116,31 +1094,30 @@
         "operationId": "Get all shipments",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Sort type (DESC, ASC)"
-          }, {
-            "name": "sort_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to sort by"
-          }, {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Filter value"
-          }, {
-            "name": "filter_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to filter by"
-          }
-        ],
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Sort type (DESC, ASC)"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to sort by"
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Filter value"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to filter by"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1161,14 +1138,13 @@
         "operationId": "Details",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "The shipment id"
-          }
-        ],
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The shipment id"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1184,38 +1160,37 @@
         "tags": [
           "Inventory"
         ],
-        "description": "Get a JSON representation of all products with their inventories",
+        "description": "Checks the availability of inventory according to the SKU",
         "summary": "Get Details of orders with inventories",
         "operationId": "Get inventories",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Page number of data to display"
-          }, {
-            "name": "per_page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of orders to get per request"
-          }, {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Sort type (DESC, ASC)"
-          }, {
-            "name": "sort_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to sort by"
-          }
-        ],
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number which is to be displayed"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of products in each page in an integer format"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Whether to arrange the items in ascending or descending order"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1231,8 +1206,8 @@
         "tags": [
           "Inventory"
         ],
-        "description": "Update inventory for a given product",
-        "summary": "Update Inventory for a specific product",
+        "description": "Through this API you can make changes to the inventory listings in your ShipRocket panel",
+        "summary": "Update Inventory",
         "operationId": "Update inventory",
         "produces": ["application/json"],
         "parameters": [{
@@ -1241,7 +1216,22 @@
             "required": true,
             "type": "integer",
             "format": "int32",
-            "description": "Product id"
+            "description": "You have to pass the product id of the inventory which is to be updated"
+          },
+          {
+            "name": "quantity",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The specific number which needs to be changed"
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Added = The number is added to the inventory\nReplace = The original number is replaced by the specific number\nRemove = The specific number is deducted from the opening number"
           }
         ],
         "responses": {
@@ -1259,7 +1249,7 @@
         "tags": [
           "Channels"
         ],
-        "description": "Get a list of all channels with details",
+        "description": "The ShipRocket API for getting the data of all integrated channels in the ShipRocket account. ",
         "summary": "Get all channels",
         "operationId": "Get all2",
         "produces": ["application/json"],
@@ -1268,7 +1258,7 @@
           "200": {
             "description": "",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/channelsRequest"
             }
           }
         }
@@ -1279,8 +1269,8 @@
         "tags": [
           "Couriers"
         ],
-        "description": "Get a JSON representation of serviceability of courier companies list with pricing.\nExample is here :- /v1/courier/serviceability?pickup_postcode=110058\u0026delivery_postcode=110030\u0026weight=1.00\u0026cod=0",
-        "summary": "Get serviceability of courier companies",
+        "description": "Shows the number of courier companies available for delivery from pickup point to customer delivery code, according to weight.",
+        "summary": "Check Serviceability",
         "operationId": "Check serviceability",
         "produces": ["application/json"],
         "parameters": [{
@@ -1289,40 +1279,49 @@
             "required": true,
             "type": "integer",
             "format": "int32",
-            "description": "Pickup postcode (must be 6 digits)"
+            "description": "The pincode of the location from where the shipment is supposed to be picked up, in an integer format"
           }, {
             "name": "delivery_postcode",
             "in": "query",
             "required": true,
             "type": "integer",
             "format": "int32",
-            "description": "Delivery postcode (must be 6 digits)"
+            "description": "The pincode of the location where the shipment is supposed to be delivered, in an integer format"
           }, {
             "name": "weight",
             "in": "query",
             "required": true,
             "type": "integer",
             "format": "int32",
-            "description": "Shipment weight (must be in KG Ex:- 0.50)"
+            "description": "Shipment weight, in kgs"
           }, {
             "name": "cod",
             "in": "query",
             "required": true,
             "type": "integer",
             "format": "int32",
-            "description": "payment method (Ex :- if cash on delivery then cod=1 ,for prepaid then cod=0)"
+            "description": "If cash on delivery is required or not. Required =1, Prepaid =0"
+          },
+          {
+            "name": "order_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Order id of the shipment"
           }
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "List of serviceable courier compnies along with pricing",
             "schema": {
               "$ref": "#/definitions/CheckServiceabilityResponse"
             }
           },
           "404": {
-            "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {}
+            "description": "Postcode is not serviceable by SHIPROCKET",
+            "schema": {
+              "$ref": "#/definitions/CheckServiceabilityError"
+            }
           }
         }
       }
@@ -1332,33 +1331,18 @@
         "tags": [
           "Couriers"
         ],
-        "description": "Get a JSON representation of courier awb response for single and bulk awb assignment. Note:- your courier priority must be set, if you are using bulk awb assign method.",
-        "summary": "Assgn AWB ",
-        "operationId": "Awb creation",
+        "description": "The ShipRocket API for generating the Air Waybill number for your shipment. You can get a single API or bulk API’s . It also gives you the option to reassign the AWB number",
+        "summary": "AWB Creeation",
+        "operationId": "Awb Creation",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "shipment_id",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {},
-            "description": "shipment id provided by SHIPROCKET in order api"
-          }, {
-            "name": "courier_id",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Courier company ids provided by SHIPROCKET in courier API (Required only in single awb assign request)"
-          }, {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AwbCreationRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/AwbCreationRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1366,9 +1350,11 @@
               "$ref": "#/definitions/AwbCreationResponse"
             }
           },
-          "default": {
-            "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {}
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AwbError500"
+            }
           }
         }
       }
@@ -1383,21 +1369,13 @@
         "operationId": "Pickup creation",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "shipment_id",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {},
-            "description": "shipment id provided by SHIPROCKET in order api"
-          }, {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PickupCreationRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/PickupCreationRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1405,7 +1383,7 @@
               "$ref": "#/definitions/PickupCreationResponse"
             }
           },
-          "default": {
+          "500": {
             "description": "Unexpected error in API call. See HTTP response body for details.",
             "schema": {}
           }
@@ -1422,21 +1400,13 @@
         "operationId": "Generate Label",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "shipment_id",
-            "in": "query",
-            "required": true,
-            "type": "array",
-            "items": {},
-            "description": "shipment id provided by SHIPROCKET in order api"
-          }, {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GenerateLabelRequest"
-            }
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GenerateLabelRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1461,21 +1431,20 @@
         "operationId": "AWB Tracking",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "awb_code",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "awb code"
-          }, {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AwbTrackingRequest"
-            }
+          "name": "awb_code",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "awb code"
+        }, {
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/AwbTrackingRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1500,21 +1469,20 @@
         "operationId": "Shipment Tracking",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "shipment_id",
-            "in": "path",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Shipment ID"
-          }, {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ShipmentTrackingRequest"
-            }
+          "name": "shipment_id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Shipment ID"
+        }, {
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ShipmentTrackingRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1559,46 +1527,45 @@
         "operationId": "Satement",
         "produces": ["application/json"],
         "parameters": [{
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Page number of data to display"
-          }, {
-            "name": "per_page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of orders to get per request"
-          }, {
-            "name": "to",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "To date"
-          }, {
-            "name": "from",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "From date"
-          }, {
-            "name": "search",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Search for AWB or Channel Order ID"
-          }, {
-            "name": "export",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "Export the data in csv format"
-          }
-        ],
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Page number of data to display"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of orders to get per request"
+        }, {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "To date"
+        }, {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "From date"
+        }, {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Search for AWB or Channel Order ID"
+        }, {
+          "name": "export",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Export the data in csv format"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -1617,10 +1584,12 @@
       "properties": {
         "email": {
           "type": "string",
+          "description": "Prompts the user to type their email id",
           "example": "abcd@xyz.com"
         },
         "password": {
           "type": "string",
+          "description": "Prompts the user to type their selected password",
           "example": "abcd1234"
         }
       },
@@ -1633,31 +1602,38 @@
         "id": {
           "type": "integer",
           "format": "int32",
+          "description": "user’s unique user id",
           "example": 1
         },
         "first_name": {
           "type": "string",
+          "description": "first name of the user",
           "example": "John"
         },
         "last_name": {
           "type": "string",
+          "description": "last name of the user",
           "example": "Doe"
         },
         "email": {
           "type": "string",
+          "description": "email of the user",
           "example": "abcd@xyz.com"
         },
         "company_id": {
           "type": "integer",
+          "description": "company id of the user",
           "format": "int32",
           "example": 12
         },
         "created_at": {
           "type": "string",
+          "description": "date of creation",
           "format": "dateTime"
         },
         "token": {
           "type": "string",
+          "description": "necessary token number",
           "example": "huiyd878y823hh2hdu232h"
         }
       },
@@ -1669,374 +1645,507 @@
       "properties": {
         "status": {
           "type": "integer",
+          "description": "Status of response from server",
           "format": "int32",
           "example": "200"
         },
         "data": {
           "type": "object",
-            "example": [{
-                  "id": 1,
-                  "name": "Afghanistan",
-                  "iso_code_2": "AF",
-                  "iso_code_3": "AFG",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 2,
-                  "name": "Albania",
-                  "iso_code_2": "AL",
-                  "iso_code_3": "ALB",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 3,
-                  "name": "Algeria",
-                  "iso_code_2": "DZ",
-                  "iso_code_3": "DZA",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 4,
-                  "name": "American Samoa",
-                  "iso_code_2": "AS",
-                  "iso_code_3": "ASM",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 5,
-                  "name": "Andorra",
-                  "iso_code_2": "AD",
-                  "iso_code_3": "AND",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 6,
-                  "name": "Angola",
-                  "iso_code_2": "AO",
-                  "iso_code_3": "AGO",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 7,
-                  "name": "Anguilla",
-                  "iso_code_2": "AI",
-                  "iso_code_3": "AIA",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 8,
-                  "name": "Antarctica",
-                  "iso_code_2": "AQ",
-                  "iso_code_3": "ATA",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 9,
-                  "name": "Antigua and Barbuda",
-                  "iso_code_2": "AG",
-                  "iso_code_3": "ATG",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 10,
-                  "name": "Argentina",
-                  "iso_code_2": "AR",
-                  "iso_code_3": "ARG",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 11,
-                  "name": "Armenia",
-                  "iso_code_2": "AM",
-                  "iso_code_3": "ARM",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 12,
-                  "name": "Aruba",
-                  "iso_code_2": "AW",
-                  "iso_code_3": "ABW",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 13,
-                  "name": "Australia",
-                  "iso_code_2": "AU",
-                  "iso_code_3": "AUS",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 14,
-                  "name": "Austria",
-                  "iso_code_2": "AT",
-                  "iso_code_3": "AUT",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 15,
-                  "name": "Azerbaijan",
-                  "iso_code_2": "AZ",
-                  "iso_code_3": "AZE",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 16,
-                  "name": "Bahamas",
-                  "iso_code_2": "BS",
-                  "iso_code_3": "BHS",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 17,
-                  "name": "Bahrain",
-                  "iso_code_2": "BH",
-                  "iso_code_3": "BHR",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 18,
-                  "name": "Bangladesh",
-                  "iso_code_2": "BD",
-                  "iso_code_3": "BGD",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 19,
-                  "name": "Barbados",
-                  "iso_code_2": "BB",
-                  "iso_code_3": "BRB",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 20,
-                  "name": "Belarus",
-                  "iso_code_2": "BY",
-                  "iso_code_3": "BLR",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 21,
-                  "name": "Belgium",
-                  "iso_code_2": "BE",
-                  "iso_code_3": "BEL",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 22,
-                  "name": "Belize",
-                  "iso_code_2": "BZ",
-                  "iso_code_3": "BLZ",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 23,
-                  "name": "Benin",
-                  "iso_code_2": "BJ",
-                  "iso_code_3": "BEN",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 24,
-                  "name": "Bermuda",
-                  "iso_code_2": "BM",
-                  "iso_code_3": "BMU",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 25,
-                  "name": "Bhutan",
-                  "iso_code_2": "BT",
-                  "iso_code_3": "BTN",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 26,
-                  "name": "Bolivia",
-                  "iso_code_2": "BO",
-                  "iso_code_3": "BOL",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 27,
-                  "name": "Bosnia and Herzegowina",
-                  "iso_code_2": "BA",
-                  "iso_code_3": "BIH",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 28,
-                  "name": "Botswana",
-                  "iso_code_2": "BW",
-                  "iso_code_3": "BWA",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 29,
-                  "name": "Bouvet Island",
-                  "iso_code_2": "BV",
-                  "iso_code_3": "BVT",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 30,
-                  "name": "Brazil",
-                  "iso_code_2": "BR",
-                  "iso_code_3": "BRA",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 31,
-                  "name": "British Indian Ocean Territory",
-                  "iso_code_2": "IO",
-                  "iso_code_3": "IOT",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 32,
-                  "name": "Brunei Darussalam",
-                  "iso_code_2": "BN",
-                  "iso_code_3": "BRN",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 33,
-                  "name": "Bulgaria",
-                  "iso_code_2": "BG",
-                  "iso_code_3": "BGR",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 34,
-                  "name": "Burkina Faso",
-                  "iso_code_2": "BF",
-                  "iso_code_3": "BFA",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 35,
-                  "name": "Burundi",
-                  "iso_code_2": "BI",
-                  "iso_code_3": "BDI",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 36,
-                  "name": "Cambodia",
-                  "iso_code_2": "KH",
-                  "iso_code_3": "KHM",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 37,
-                  "name": "Cameroon",
-                  "iso_code_2": "CM",
-                  "iso_code_3": "CMR",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 38,
-                  "name": "Canada",
-                  "iso_code_2": "CA",
-                  "iso_code_3": "CAN",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 39,
-                  "name": "Cape Verde",
-                  "iso_code_2": "CV",
-                  "iso_code_3": "CPV",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                },
-                {
-                  "id": 40,
-                  "name": "Cayman Islands",
-                  "iso_code_2": "KY",
-                  "iso_code_3": "CYM",
-                  "address_format": "",
-                  "postcode_required": 0,
-                  "status": 1
-                }]
+          "description": "Arrayed data",
+          "example": [{
+              "id": 1,
+              "name": "Afghanistan",
+              "iso_code_2": "AF",
+              "iso_code_3": "AFG",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 2,
+              "name": "Albania",
+              "iso_code_2": "AL",
+              "iso_code_3": "ALB",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 3,
+              "name": "Algeria",
+              "iso_code_2": "DZ",
+              "iso_code_3": "DZA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 4,
+              "name": "American Samoa",
+              "iso_code_2": "AS",
+              "iso_code_3": "ASM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 5,
+              "name": "Andorra",
+              "iso_code_2": "AD",
+              "iso_code_3": "AND",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 6,
+              "name": "Angola",
+              "iso_code_2": "AO",
+              "iso_code_3": "AGO",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 7,
+              "name": "Anguilla",
+              "iso_code_2": "AI",
+              "iso_code_3": "AIA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 8,
+              "name": "Antarctica",
+              "iso_code_2": "AQ",
+              "iso_code_3": "ATA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 9,
+              "name": "Antigua and Barbuda",
+              "iso_code_2": "AG",
+              "iso_code_3": "ATG",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 10,
+              "name": "Argentina",
+              "iso_code_2": "AR",
+              "iso_code_3": "ARG",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 11,
+              "name": "Armenia",
+              "iso_code_2": "AM",
+              "iso_code_3": "ARM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 12,
+              "name": "Aruba",
+              "iso_code_2": "AW",
+              "iso_code_3": "ABW",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 13,
+              "name": "Australia",
+              "iso_code_2": "AU",
+              "iso_code_3": "AUS",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 14,
+              "name": "Austria",
+              "iso_code_2": "AT",
+              "iso_code_3": "AUT",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 15,
+              "name": "Azerbaijan",
+              "iso_code_2": "AZ",
+              "iso_code_3": "AZE",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 16,
+              "name": "Bahamas",
+              "iso_code_2": "BS",
+              "iso_code_3": "BHS",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 17,
+              "name": "Bahrain",
+              "iso_code_2": "BH",
+              "iso_code_3": "BHR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 18,
+              "name": "Bangladesh",
+              "iso_code_2": "BD",
+              "iso_code_3": "BGD",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 19,
+              "name": "Barbados",
+              "iso_code_2": "BB",
+              "iso_code_3": "BRB",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 20,
+              "name": "Belarus",
+              "iso_code_2": "BY",
+              "iso_code_3": "BLR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 21,
+              "name": "Belgium",
+              "iso_code_2": "BE",
+              "iso_code_3": "BEL",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 22,
+              "name": "Belize",
+              "iso_code_2": "BZ",
+              "iso_code_3": "BLZ",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 23,
+              "name": "Benin",
+              "iso_code_2": "BJ",
+              "iso_code_3": "BEN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 24,
+              "name": "Bermuda",
+              "iso_code_2": "BM",
+              "iso_code_3": "BMU",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 25,
+              "name": "Bhutan",
+              "iso_code_2": "BT",
+              "iso_code_3": "BTN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 26,
+              "name": "Bolivia",
+              "iso_code_2": "BO",
+              "iso_code_3": "BOL",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 27,
+              "name": "Bosnia and Herzegowina",
+              "iso_code_2": "BA",
+              "iso_code_3": "BIH",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 28,
+              "name": "Botswana",
+              "iso_code_2": "BW",
+              "iso_code_3": "BWA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 29,
+              "name": "Bouvet Island",
+              "iso_code_2": "BV",
+              "iso_code_3": "BVT",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 30,
+              "name": "Brazil",
+              "iso_code_2": "BR",
+              "iso_code_3": "BRA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 31,
+              "name": "British Indian Ocean Territory",
+              "iso_code_2": "IO",
+              "iso_code_3": "IOT",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 32,
+              "name": "Brunei Darussalam",
+              "iso_code_2": "BN",
+              "iso_code_3": "BRN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 33,
+              "name": "Bulgaria",
+              "iso_code_2": "BG",
+              "iso_code_3": "BGR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 34,
+              "name": "Burkina Faso",
+              "iso_code_2": "BF",
+              "iso_code_3": "BFA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 35,
+              "name": "Burundi",
+              "iso_code_2": "BI",
+              "iso_code_3": "BDI",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 36,
+              "name": "Cambodia",
+              "iso_code_2": "KH",
+              "iso_code_3": "KHM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 37,
+              "name": "Cameroon",
+              "iso_code_2": "CM",
+              "iso_code_3": "CMR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 38,
+              "name": "Canada",
+              "iso_code_2": "CA",
+              "iso_code_3": "CAN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 39,
+              "name": "Cape Verde",
+              "iso_code_2": "CV",
+              "iso_code_3": "CPV",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 40,
+              "name": "Cayman Islands",
+              "iso_code_2": "KY",
+              "iso_code_3": "CYM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            }
+          ]
         }
       },
       "required": ["status", "data"]
+    },
+    "channelsRequest": {
+      "title": "get channels request",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "The respective channel id’s of the various channels which are to be integrated with the ShipRocket panel."
+              },
+              "name": {
+                "type": "string",
+                "description": ""
+              },
+              "status": {
+                "type": "string",
+                "description": ""
+              },
+              "settings": {
+                "type": "object",
+                "properties": {
+                  "dimensions": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "weight": {
+                    "type": "integer",
+                    "description": ""
+                  },
+                  "order_status": {
+                    "type": "string",
+                    "description": ""
+                  }
+                },
+                "description": ""
+              },
+              "auth": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": ""
+              },
+              "connections": {
+                "type": "integer",
+                "description": ""
+              },
+              "orders_sync": {
+                "type": "integer",
+                "description": ""
+              },
+              "inventory_sync": {
+                "type": "integer",
+                "description": ""
+              },
+              "orders_synced_on": {
+                "type": "string",
+                "description": ""
+              },
+              "inventory_synced_on": {
+                "type": "string",
+                "description": ""
+              },
+              "base_channel_code": {
+                "type": "string",
+                "description": "The two letter code for the respective channels. Please note that the “Manual” channel"
+              },
+              "base_channel": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": ""
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "logo": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "settings_sample": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": ""
+                      },
+                      "help": {
+                        "type": "string",
+                        "description": ""
+                      },
+                      "settings": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": ""
+                      }
+                    },
+                    "description": ""
+                  },
+                  "auth_sample": {
+                    "type": "object",
+                    "description": "The various keys required for the channel integration"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": ""
+                  }
+                },
+                "description": ""
+              }
+            }
+          }
+        }
+      }
     },
     "GetZonesResponse": {
       "title": "Get zones response",
@@ -2049,216 +2158,217 @@
         },
         "data": {
           "type": "object",
-            "example": [{
-                    "id": 1,
-                    "country_id": 1,
-                    "code": "BDS",
-                    "name": "Badakhshan",
-                    "status": 1
-                  },
-                  {
-                    "id": 2,
-                    "country_id": 1,
-                    "code": "BDG",
-                    "name": "Badghis",
-                    "status": 1
-                  },
-                  {
-                    "id": 3,
-                    "country_id": 1,
-                    "code": "BGL",
-                    "name": "Baghlan",
-                    "status": 1
-                  },
-                  {
-                    "id": 4,
-                    "country_id": 1,
-                    "code": "BAL",
-                    "name": "Balkh",
-                    "status": 1
-                  },
-                  {
-                    "id": 5,
-                    "country_id": 1,
-                    "code": "BAM",
-                    "name": "Bamian",
-                    "status": 1
-                  },
-                  {
-                    "id": 6,
-                    "country_id": 1,
-                    "code": "FRA",
-                    "name": "Farah",
-                    "status": 1
-                  },
-                  {
-                    "id": 7,
-                    "country_id": 1,
-                    "code": "FYB",
-                    "name": "Faryab",
-                    "status": 1
-                  },
-                  {
-                    "id": 8,
-                    "country_id": 1,
-                    "code": "GHA",
-                    "name": "Ghazni",
-                    "status": 1
-                  },
-                  {
-                    "id": 9,
-                    "country_id": 1,
-                    "code": "GHO",
-                    "name": "Ghowr",
-                    "status": 1
-                  },
-                  {
-                    "id": 10,
-                    "country_id": 1,
-                    "code": "HEL",
-                    "name": "Helmand",
-                    "status": 1
-                  },
-                  {
-                    "id": 11,
-                    "country_id": 1,
-                    "code": "HER",
-                    "name": "Herat",
-                    "status": 1
-                  },
-                  {
-                    "id": 12,
-                    "country_id": 1,
-                    "code": "JOW",
-                    "name": "Jowzjan",
-                    "status": 1
-                  },
-                  {
-                    "id": 13,
-                    "country_id": 1,
-                    "code": "KAB",
-                    "name": "Kabul",
-                    "status": 1
-                  },
-                  {
-                    "id": 14,
-                    "country_id": 1,
-                    "code": "KAN",
-                    "name": "Kandahar",
-                    "status": 1
-                  },
-                  {
-                    "id": 15,
-                    "country_id": 1,
-                    "code": "KAP",
-                    "name": "Kapisa",
-                    "status": 1
-                  },
-                  {
-                    "id": 16,
-                    "country_id": 1,
-                    "code": "KHO",
-                    "name": "Khost",
-                    "status": 1
-                  },
-                  {
-                    "id": 17,
-                    "country_id": 1,
-                    "code": "KNR",
-                    "name": "Konar",
-                    "status": 1
-                  },
-                  {
-                    "id": 18,
-                    "country_id": 1,
-                    "code": "KDZ",
-                    "name": "Kondoz",
-                    "status": 1
-                  },
-                  {
-                    "id": 19,
-                    "country_id": 1,
-                    "code": "LAG",
-                    "name": "Laghman",
-                    "status": 1
-                  },
-                  {
-                    "id": 20,
-                    "country_id": 1,
-                    "code": "LOW",
-                    "name": "Lowgar",
-                    "status": 1
-                  },
-                  {
-                    "id": 21,
-                    "country_id": 1,
-                    "code": "NAN",
-                    "name": "Nangrahar",
-                    "status": 1
-                  },
-                  {
-                    "id": 22,
-                    "country_id": 1,
-                    "code": "NIM",
-                    "name": "Nimruz",
-                    "status": 1
-                  },
-                  {
-                    "id": 23,
-                    "country_id": 1,
-                    "code": "NUR",
-                    "name": "Nurestan",
-                    "status": 1
-                  },
-                  {
-                    "id": 24,
-                    "country_id": 1,
-                    "code": "ORU",
-                    "name": "Oruzgan",
-                    "status": 1
-                  },
-                  {
-                    "id": 25,
-                    "country_id": 1,
-                    "code": "PIA",
-                    "name": "Paktia",
-                    "status": 1
-                  },
-                  {
-                    "id": 26,
-                    "country_id": 1,
-                    "code": "PKA",
-                    "name": "Paktika",
-                    "status": 1
-                  },
-                  {
-                    "id": 27,
-                    "country_id": 1,
-                    "code": "PAR",
-                    "name": "Parwan",
-                    "status": 1
-                  },
-                  {
-                    "id": 28,
-                    "country_id": 1,
-                    "code": "SAM",
-                    "name": "Samangan",
-                    "status": 1
-                  },
-                  {
-                    "id": 29,
-                    "country_id": 1,
-                    "code": "SAR",
-                    "name": "Sar-e Pol",
-                    "status": 1
-                  },
-                  {
-                    "id": 30,
-                    "country_id": 1,
-                    "code": "TAK",
-                    "name": "Takhar",
-                    "status": 1
-                  }]
+          "example": [{
+              "id": 1,
+              "country_id": 1,
+              "code": "BDS",
+              "name": "Badakhshan",
+              "status": 1
+            },
+            {
+              "id": 2,
+              "country_id": 1,
+              "code": "BDG",
+              "name": "Badghis",
+              "status": 1
+            },
+            {
+              "id": 3,
+              "country_id": 1,
+              "code": "BGL",
+              "name": "Baghlan",
+              "status": 1
+            },
+            {
+              "id": 4,
+              "country_id": 1,
+              "code": "BAL",
+              "name": "Balkh",
+              "status": 1
+            },
+            {
+              "id": 5,
+              "country_id": 1,
+              "code": "BAM",
+              "name": "Bamian",
+              "status": 1
+            },
+            {
+              "id": 6,
+              "country_id": 1,
+              "code": "FRA",
+              "name": "Farah",
+              "status": 1
+            },
+            {
+              "id": 7,
+              "country_id": 1,
+              "code": "FYB",
+              "name": "Faryab",
+              "status": 1
+            },
+            {
+              "id": 8,
+              "country_id": 1,
+              "code": "GHA",
+              "name": "Ghazni",
+              "status": 1
+            },
+            {
+              "id": 9,
+              "country_id": 1,
+              "code": "GHO",
+              "name": "Ghowr",
+              "status": 1
+            },
+            {
+              "id": 10,
+              "country_id": 1,
+              "code": "HEL",
+              "name": "Helmand",
+              "status": 1
+            },
+            {
+              "id": 11,
+              "country_id": 1,
+              "code": "HER",
+              "name": "Herat",
+              "status": 1
+            },
+            {
+              "id": 12,
+              "country_id": 1,
+              "code": "JOW",
+              "name": "Jowzjan",
+              "status": 1
+            },
+            {
+              "id": 13,
+              "country_id": 1,
+              "code": "KAB",
+              "name": "Kabul",
+              "status": 1
+            },
+            {
+              "id": 14,
+              "country_id": 1,
+              "code": "KAN",
+              "name": "Kandahar",
+              "status": 1
+            },
+            {
+              "id": 15,
+              "country_id": 1,
+              "code": "KAP",
+              "name": "Kapisa",
+              "status": 1
+            },
+            {
+              "id": 16,
+              "country_id": 1,
+              "code": "KHO",
+              "name": "Khost",
+              "status": 1
+            },
+            {
+              "id": 17,
+              "country_id": 1,
+              "code": "KNR",
+              "name": "Konar",
+              "status": 1
+            },
+            {
+              "id": 18,
+              "country_id": 1,
+              "code": "KDZ",
+              "name": "Kondoz",
+              "status": 1
+            },
+            {
+              "id": 19,
+              "country_id": 1,
+              "code": "LAG",
+              "name": "Laghman",
+              "status": 1
+            },
+            {
+              "id": 20,
+              "country_id": 1,
+              "code": "LOW",
+              "name": "Lowgar",
+              "status": 1
+            },
+            {
+              "id": 21,
+              "country_id": 1,
+              "code": "NAN",
+              "name": "Nangrahar",
+              "status": 1
+            },
+            {
+              "id": 22,
+              "country_id": 1,
+              "code": "NIM",
+              "name": "Nimruz",
+              "status": 1
+            },
+            {
+              "id": 23,
+              "country_id": 1,
+              "code": "NUR",
+              "name": "Nurestan",
+              "status": 1
+            },
+            {
+              "id": 24,
+              "country_id": 1,
+              "code": "ORU",
+              "name": "Oruzgan",
+              "status": 1
+            },
+            {
+              "id": 25,
+              "country_id": 1,
+              "code": "PIA",
+              "name": "Paktia",
+              "status": 1
+            },
+            {
+              "id": 26,
+              "country_id": 1,
+              "code": "PKA",
+              "name": "Paktika",
+              "status": 1
+            },
+            {
+              "id": 27,
+              "country_id": 1,
+              "code": "PAR",
+              "name": "Parwan",
+              "status": 1
+            },
+            {
+              "id": 28,
+              "country_id": 1,
+              "code": "SAM",
+              "name": "Samangan",
+              "status": 1
+            },
+            {
+              "id": 29,
+              "country_id": 1,
+              "code": "SAR",
+              "name": "Sar-e Pol",
+              "status": 1
+            },
+            {
+              "id": 30,
+              "country_id": 1,
+              "code": "TAK",
+              "name": "Takhar",
+              "status": 1
+            }
+          ]
         }
       },
       "required": ["status", "data"]
@@ -2269,126 +2379,125 @@
       "properties": {
         "data": {
           "type": "object",
-            "example": [{
-                    "id": 395,
-                    "sku": "1234",
-                    "HSN": "hcjcx1221s",
-                    "name": "product2",
-                    "description": "",
-                    "category_code": "default",
-                    "category_name": "Default Category",
-                    "category_tax_code": "default",
-                    "image": "",
-                    "weight": "0.5 kg",
-                    "size": "",
-                    "cost_price": "0.00",
-                    "mrp": "0.00",
-                    "tax_code": "5",
-                    "low_stock": 0,
-                    "ean": "",
-                    "upc": "",
-                    "isbn": "",
-                    "created_at": "27 Sep 2016 05:46 PM",
-                    "updated_at": "4 Oct 2016 10:53 PM",
-                    "quantity": 60,
-                    "color": "",
-                    "brand": "",
-                    "dimensions": "10 x 10 x 10 cm",
-                    "status": "ACTIVE",
-                    "type": "Single"
-                  },
-                  {
-                    "id": 394,
-                    "sku": "1234567",
-                    "HSN": "hbhqgst663",
-                    "name": "product1",
-                    "description": "",
-                    "category_code": "default",
-                    "category_name": "Default Category",
-                    "category_tax_code": "default",
-                    "image": "",
-                    "weight": "0.5 kg",
-                    "size": "",
-                    "cost_price": "0.00",
-                    "mrp": "0.00",
-                    "tax_code": "12_5",
-                    "low_stock": 0,
-                    "ean": "",
-                    "upc": "",
-                    "isbn": "",
-                    "created_at": "27 Sep 2016 05:45 PM",
-                    "updated_at": "27 Sep 2016 05:45 PM",
-                    "quantity": 77,
-                    "color": "",
-                    "brand": "",
-                    "dimensions": "10 x 10 x 10 cm",
-                    "status": "ACTIVE",
-                    "type": "Single"
-                  },
-                  {
-                    "id": 393,
-                    "sku": "123456",
-                    "HSN": "gyt67g72g",
-                    "name": "Product1",
-                    "description": "",
-                    "category_code": "default",
-                    "category_name": "Default Category",
-                    "category_tax_code": "default",
-                    "image": "",
-                    "weight": "0.5 kg",
-                    "size": "",
-                    "cost_price": "0.00",
-                    "mrp": "0.00",
-                    "tax_code": "12_5",
-                    "low_stock": 0,
-                    "ean": "",
-                    "upc": "",
-                    "isbn": "",
-                    "created_at": "27 Sep 2016 05:43 PM",
-                    "updated_at": "27 Sep 2016 05:43 PM",
-                    "quantity": 178,
-                    "color": "",
-                    "brand": "",
-                    "dimensions": "10 x 10 x 10 cm",
-                    "status": "ACTIVE",
-                    "type": "Single"
-            }]
+          "example": [{
+              "id": 395,
+              "sku": "1234",
+              "HSN": "hcjcx1221s",
+              "name": "product2",
+              "description": "",
+              "category_code": "default",
+              "category_name": "Default Category",
+              "category_tax_code": "default",
+              "image": "",
+              "weight": "0.5 kg",
+              "size": "",
+              "cost_price": "0.00",
+              "mrp": "0.00",
+              "tax_code": "5",
+              "low_stock": 0,
+              "ean": "",
+              "upc": "",
+              "isbn": "",
+              "created_at": "27 Sep 2016 05:46 PM",
+              "updated_at": "4 Oct 2016 10:53 PM",
+              "quantity": 60,
+              "color": "",
+              "brand": "",
+              "dimensions": "10 x 10 x 10 cm",
+              "status": "ACTIVE",
+              "type": "Single"
+            },
+            {
+              "id": 394,
+              "sku": "1234567",
+              "HSN": "hbhqgst663",
+              "name": "product1",
+              "description": "",
+              "category_code": "default",
+              "category_name": "Default Category",
+              "category_tax_code": "default",
+              "image": "",
+              "weight": "0.5 kg",
+              "size": "",
+              "cost_price": "0.00",
+              "mrp": "0.00",
+              "tax_code": "12_5",
+              "low_stock": 0,
+              "ean": "",
+              "upc": "",
+              "isbn": "",
+              "created_at": "27 Sep 2016 05:45 PM",
+              "updated_at": "27 Sep 2016 05:45 PM",
+              "quantity": 77,
+              "color": "",
+              "brand": "",
+              "dimensions": "10 x 10 x 10 cm",
+              "status": "ACTIVE",
+              "type": "Single"
+            },
+            {
+              "id": 393,
+              "sku": "123456",
+              "HSN": "gyt67g72g",
+              "name": "Product1",
+              "description": "",
+              "category_code": "default",
+              "category_name": "Default Category",
+              "category_tax_code": "default",
+              "image": "",
+              "weight": "0.5 kg",
+              "size": "",
+              "cost_price": "0.00",
+              "mrp": "0.00",
+              "tax_code": "12_5",
+              "low_stock": 0,
+              "ean": "",
+              "upc": "",
+              "isbn": "",
+              "created_at": "27 Sep 2016 05:43 PM",
+              "updated_at": "27 Sep 2016 05:43 PM",
+              "quantity": 178,
+              "color": "",
+              "brand": "",
+              "dimensions": "10 x 10 x 10 cm",
+              "status": "ACTIVE",
+              "type": "Single"
+            }
+          ]
         },
         "meta": {
           "type": "object",
-          "example": [
-          	{
-          		"pagination": {
-          			"type": "object",
-          			"example": [{
-          				"total": {
-          					"type": "integer",
-          					"example": 3
-          				},
-          				"count": {
-          					"type": "integer",
-          					"example": 3
-          				},
-          				"per_page": {
-          					"type": "integer",
-          					"example": 100
-          				},
-          				"current_page": {
-          					"type": "integer",
-          					"example": 1
-          				},
-          				"total_pages": {
-          					"type": "integer",
-          					"example": 2
-          				},
-          				"links": {
-          					"type": "array",
-          					"items": []
-          				}
-          			}]
-          		}
-          	}
-          ]
+          "example": [{
+            "pagination": {
+              "type": "object",
+              "example": [{
+                "total": {
+                  "type": "integer",
+                  "example": 3
+                },
+                "count": {
+                  "type": "integer",
+                  "example": 3
+                },
+                "per_page": {
+                  "type": "integer",
+                  "example": 100
+                },
+                "current_page": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "total_pages": {
+                  "type": "integer",
+                  "example": 2
+                },
+                "links": {
+                  "type": "array",
+                  "items": []
+                }
+              }]
+            }
+          }]
         }
       },
       "required": ["data", "meta"]
@@ -2399,106 +2508,128 @@
       "properties": {
         "sku": {
           "type": "string",
+          "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)",
           "example": "Toys"
         },
         "HSN": {
           "type": "string",
+          "description": "Harmonised System Nomenclature. A code number used to classify goods for taxation purposes. Done to determine which category of taxes do the goods come under",
           "example": "1234cdhc"
-        },
-        "HSN": {
-          "type": "string"
         },
         "name": {
           "type": "string",
+          "description": "Name of the product",
           "example": "SuperMan"
         },
         "tax_code": {
           "type": "string",
+          "description": "The percentage of tax which is to be imposed",
           "example": "default"
         },
         "type": {
           "type": "string",
+          "description": "If there is only one product or multiple types of products",
           "example": "Single"
         },
         "qty": {
           "type": "integer",
+          "description": "Total Quantity of the products to be shipped",
           "example": 10
         },
         "low_stock": {
           "type": "string",
+          "description": "Specifies when the low stock notification should come on",
           "example": ""
         },
         "category_code": {
           "type": "string",
+          "description": "You can add a category code to your ShipRocket account from “add category”",
           "example": "default"
         },
         "description": {
           "type": "string",
+          "description": "Gives a description of the product",
           "example": ""
         },
         "brand": {
           "type": "string",
+          "description": "The product brand name",
           "example": ""
         },
         "size": {
           "type": "integer",
+          "description": "",
           "example": ""
         },
         "weight": {
           "type": "integer",
+          "description": "Total weight of the products",
           "example": ""
         },
         "length": {
           "type": "integer",
+          "description": "Product Dimensions",
           "example": ""
         },
         "width": {
           "type": "integer",
+          "description": "Product Dimensions",
           "example": ""
         },
         "height": {
           "type": "integer",
+          "description": "Product Dimensions",
           "example": ""
         },
         "ean": {
           "type": "string",
+          "description": "European Article Number - A barcode for product identification (which helps manufacturers identify how many products have been sold once a sale is made) It is 13 digits long and required for international selling",
           "example": ""
         },
         "upc": {
           "type": "string",
+          "description": "Universal Product Code – Barcode for product identification which is used across the world. It is 12 digits long ",
           "example": ""
         },
         "isbn": {
           "type": "string",
+          "description": "International Standard Book Number – Identification barcode for books, magazines, e-books and other published media. It is 10 digits long",
           "example": ""
         },
         "color": {
           "type": "string",
+          "description": "The colour of the product",
           "example": ""
         },
         "imei_serialnumber": {
           "type": "string",
+          "description": "The International Mobile Equipment Identity Number, which is used by  a network to identify valid devices. Eg if two iphones have to be shipped they will have 2 Imei’s",
           "example": ""
         },
         "cost_price": {
           "type": "integer",
+          "description": "How much it cost to make the product",
           "example": ""
         },
         "mrp": {
           "type": "string",
+          "description": "Maximum Retail Price. How much is the maximum price which the product can be sold at",
           "example": ""
         },
         "status": {
           "type": "integer",
+          "description": "In Boolean, if the product details have been successfully or unsuccessfully added",
           "format": "int32",
           "example": 1
         },
         "image_url": {
           "type": "string",
+          "description": "Shows the url of the product images which have been uploaded",
           "example": ""
         },
         "components": {
           "type": "array",
+          "description": "An arrayed display of all the components",
           "items": {
             "type": "string"
           }
@@ -2511,7 +2642,8 @@
       "type": "object",
       "properties": {
         "data": {
-          "type": "object"
+          "type": "object",
+          "description": "The data is represented in an json format"
         }
       },
       "required": ["data"]
@@ -2532,8 +2664,19 @@
       "properties": {
         "data": {
           "type": "array",
+          "description": "",
           "items": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "order_product_id": {
+                "type": "integer",
+                "description": "Shows the rank of the product id "
+              },
+              "imei": {
+                "type": "string",
+                "description": "Shows the IMEI number of the particular model"
+              }
+            }
           }
         }
       },
@@ -2561,11 +2704,17 @@
       "properties": {
         "product_id": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The item in the Master Catalogue"
         },
         "listing_id": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The item in the Channel Catalogue"
+        },
+        "ID": {
+          "type": "integer",
+          "description": "Same id as placed in their respective GET codes"
         }
       },
       "required": ["product_id", "listing_id"]
@@ -2666,6 +2815,7 @@
     "CancelOrdersRequest": {
       "title": "Cancel orders request",
       "type": "object",
+      "description": "Mentions the ids of the orders which are to be cancelled. If there are multiple orders then you can cancel them by just entering them in multiple lines",
       "properties": {
         "ids": {
           "type": "array",
@@ -2745,6 +2895,7 @@
       "properties": {
         "ids": {
           "type": "array",
+          "description": "Mentions the ids of the orders which are to be invoiced. If there are multiple orders then you can cancel them by just entering them in multiple lines",
           "items": {
             "type": "integer",
             "format": "int32"
@@ -2758,13 +2909,16 @@
       "type": "object",
       "properties": {
         "is_invoice_created": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Mentions the response to if the invoice is created by the system or not"
         },
         "invoice_url": {
-          "type": "string"
+          "type": "string",
+          "description": "If the answer to the aforementioned question is true, then it displays the url of a pdf file with the order invoice"
         },
         "not_created": {
           "type": "array",
+          "description": "If the invoice is not created then it shows this fact",
           "items": {
             "type": "string"
           }
@@ -2789,36 +2943,45 @@
       "required": ["data", "meta"]
     },
     "ChangeAddressRequest": {
-      "title": "Change address request",
+      "title": "Shows the address which needs to be updated",
       "type": "object",
       "properties": {
         "order_id": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Order of the customer whose address details need to be changed"
         },
         "shipping_customer_name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the customer whose details need to be changed"
         },
         "shipping_phone": {
-          "type": "string"
+          "type": "string",
+          "description": "The customer’s phone number"
         },
         "shipping_address": {
-          "type": "string"
+          "type": "string",
+          "description": "1st line of the address"
         },
         "shipping_address_2": {
-          "type": "string"
+          "type": "string",
+          "description": "2nd line of the address"
         },
         "shipping_city": {
-          "type": "string"
+          "type": "string",
+          "description": "The city where it is to be shipped"
         },
         "shipping_state": {
-          "type": "string"
+          "type": "string",
+          "description": "The state where it is to be shipped"
         },
         "shipping_country": {
-          "type": "string"
+          "type": "string",
+          "description": "The country where it is to be shipped"
         },
         "shipping_pincode": {
           "type": "integer",
+          "description": "The pincode of the customer",
           "format": "int32"
         }
       },
@@ -2830,6 +2993,7 @@
       "properties": {
         "order_ids": {
           "type": "array",
+          "description": "Mentions the ids of the orders whose manifest is to be printed",
           "items": {
             "type": "integer",
             "format": "int32"
@@ -2846,136 +3010,187 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "description": "Displays the url of a pdf file with the manifest"
         }
       },
       "required": ["data"]
     },
-    "CreateLinkedOrder.Request": {
+    "CreateLinkedOrderRequest": {
       "title": "Create linked order. request",
       "type": "object",
       "properties": {
         "order_id": {
-          "type": "string"
+          "type": "string",
+          "description": "Creates the order id"
         },
         "order_date": {
-          "type": "string"
+          "type": "string",
+          "description": "Mentions the date and time when the order was created"
         },
         "channel_id": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The id of the channel where the order is placed"
         },
         "billing_customer_name": {
-          "type": "string"
+          "type": "string",
+          "description": "The customer’s name"
         },
         "billing_last_name": {
-          "type": "string"
+          "type": "string",
+          "description": "The customer’s last name"
         },
         "billing_address": {
-          "type": "string"
+          "type": "string",
+          "description": "The first two address lines of the customer"
         },
         "billing_address_2": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_city": {
-          "type": "string"
+          "type": "string",
+          "description": "Geographical details of the customer’s adress"
         },
         "billing_state": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_country": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_pincode": {
-          "type": "string"
+          "type": "string",
+          "description": "Customer’s pincode"
         },
         "billing_email": {
-          "type": "string"
+          "type": "string",
+          "description": "Customer’s email id"
         },
         "billing_phone": {
-          "type": "string"
+          "type": "string",
+          "description": "Customer’s phone numberThe name of the person to whom the package is being shipped"
         },
         "shipping_is_billing": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": ""
         },
         "shipping_customer_name": {
-          "type": "string"
+          "type": "string",
+          "description": "The name of the person to whom the package is being shipped"
         },
         "shipping_last_name": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_address": {
-          "type": "string"
+          "type": "string",
+          "description": "Address of the person to whom the package is being shipped to"
         },
         "shipping_address_2": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_city": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_country": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_pincode": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_state": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_email": {
-          "type": "string"
+          "type": "string",
+          "description": "Email id of the person whom the package is being shipped to"
         },
         "shipping_phone": {
-          "type": "string"
+          "type": "string",
+          "description": "Phone number of the person whom the package is being shipped to"
         },
         "order_items": {
           "type": "array",
           "items": {
-            "type": "object"},
-            "example": [
-                  {
-                    "sku": {
-                      "type": "string"
-                    },
-                    "units":{
-                      "type": "integer"
-                    },
-                    "selling_price": {
-                      "type": "integer"
-                    },
-                    "discount": {
-                      "type": "integer"
-                    },
-                    "HSN": {
-                      "type": "string"
-                    }
-                  }
-            ]
+            "type": "object",
+            "properties": {
+              "sku": {
+                "type": "string",
+                "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)"
+              },
+              "units": {
+                "type": "integer",
+                "description": "Total number of units being shipped"
+              },
+              "selling_price": {
+                "type": "integer",
+                "description": "Price at which it is being sold"
+              },
+              "discount": {
+                "type": "integer",
+                "description": ""
+              },
+              "HSN": {
+                "type": "string",
+                "description": "Harmonised System Nomenclature. A code number used to classify goods for taxation purposes. Done to determine which category of taxes do the goods come under"
+              }
+            }
+          }
         },
         "payment_method": {
-          "type": "string"
+          "type": "string",
+          "description": "Specifies the payment method"
         },
         "shipping_charges": {
-          "type": "string"
+          "type": "string",
+          "description": "Mentions the shipping charges"
         },
         "giftwrap_charges": {
-          "type": "string"
+          "type": "string",
+          "description": "Mentions the charges for giftwrapping"
         },
         "transaction_charges": {
-          "type": "string"
+          "type": "string",
+          "description": "Mentions the charges for the total transaction"
         },
         "total_discount": {
-          "type": "string"
+          "type": "string",
+          "description": "Mentions the total discount offered"
         },
         "sub_total": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Mentions the total after these deductions"
+        },
+        "length": {
+          "type": "integer",
+          "description": "Mentions the product dimensions"
+        },
+        "breadth": {
+          "type": "integer",
+          "description": ""
+        },
+        "height": {
+          "type": "integer",
+          "description": ""
+        },
+        "width": {
+          "type": "integer",
+          "description": ""
         }
       },
       "required": ["order_id", "order_date", "channel_id", "billing_customer_name", "billing_last_name", "billing_address", "billing_address_2", "billing_city", "billing_state", "billing_country", "billing_pincode", "billing_email", "billing_phone", "shipping_is_billing", "shipping_customer_name", "shipping_last_name", "shipping_address", "shipping_address_2", "shipping_city", "shipping_country", "shipping_pincode", "shipping_state", "shipping_email", "shipping_phone", "order_items", "payment_method", "shipping_charges", "giftwrap_charges", "transaction_charges", "total_discount", "sub_total"]
     },
-    "CreateLinkedOrder.Response": {
+    "CreateLinkedOrderResponse": {
       "title": "Create linked order. response",
       "type": "object",
       "properties": {
@@ -2989,133 +3204,171 @@
       "required": ["status", "status_code"]
     },
     "CreateQuickOrderRequest": {
-      "title": "Create quick order request",
       "type": "object",
       "properties": {
         "order_id": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "order_date": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "channel_id": {
           "type": "integer",
-          "format": "int32"
+          "description": ""
         },
         "billing_customer_name": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_last_name": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_address": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_address_2": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_city": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_state": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_country": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_pincode": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_email": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "billing_phone": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_is_billing": {
-          "type": "integer",
-          "format": "int32"
+          "type": "boolean",
+          "description": ""
         },
         "shipping_customer_name": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_last_name": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_address": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_address_2": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_city": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_country": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_pincode": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_state": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_email": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_phone": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "order_items": {
-          "type": "array",
-          "items": {
-            "type": "object"
+          "type": "object",
+          "properties": {
+            "sku": {
+              "type": "string",
+              "description": ""
+            },
+            "units": {
+              "type": "string",
+              "description": ""
+            },
+            "selling_price": {
+              "type": "string",
+              "description": ""
+            },
+            "discount": {
+              "type": "string",
+              "description": ""
+            },
+            "hsn": {
+              "type": "string",
+              "description": ""
+            }
           },
-          "example": [
-                  {
-                    "sku": {
-                      "type": "string"
-                    },
-                    "units":{
-                      "type": "integer"
-                    },
-                    "selling_price": {
-                      "type": "integer"
-                    },
-                    "discount": {
-                      "type": "integer"
-                    },
-                    "HSN": {
-                      "type": "string"
-                    }
-                  }
-            ]
+          "description": ""
         },
         "payment_method": {
-          "type": "string"
+          "type": "string",
+          "description": ""
         },
         "shipping_charges": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string",
+          "description": ""
         },
         "giftwrap_charges": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string",
+          "description": ""
         },
         "transaction_charges": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string",
+          "description": ""
         },
         "total_discount": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string",
+          "description": ""
         },
         "sub_total": {
           "type": "integer",
-          "format": "int32"
+          "description": ""
+        },
+        "length": {
+          "type": "string",
+          "description": ""
+        },
+        "breadth": {
+          "type": "integer",
+          "description": ""
+        },
+        "height": {
+          "type": "integer",
+          "description": ""
+        },
+        "weight": {
+          "type": "integer",
+          "description": ""
         }
-      },
-      "required": ["order_id", "order_date", "channel_id", "billing_customer_name", "billing_last_name", "billing_address", "billing_address_2", "billing_city", "billing_state", "billing_country", "billing_pincode", "billing_email", "billing_phone", "shipping_is_billing", "shipping_customer_name", "shipping_last_name", "shipping_address", "shipping_address_2", "shipping_city", "shipping_country", "shipping_pincode", "shipping_state", "shipping_email", "shipping_phone", "order_items", "payment_method", "shipping_charges", "giftwrap_charges", "transaction_charges", "total_discount", "sub_total"]
+      }
     },
     "CreateQuickOrderResponse": {
       "title": "Create quick order response",
@@ -3130,399 +3383,625 @@
       },
       "required": ["status", "status_code"]
     },
-    "DetailsResponse": {
-      "title": "Details response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object"
-        }
-      },
-      "required": ["data"]
+  "DetailsResponse": {
+    "title": "Details response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "object"
+      }
     },
-    "GetInventoriesResponse": {
-      "title": "Get inventories response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "meta": {
-          "type": "object"
-        }
-      },
-      "required": ["data", "meta"]
-    },
-    "UpdateInventoryResponse": {
-      "title": "Update inventory response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object"
-        }
-      },
-      "required": ["data"]
-    },
-    "CheckServiceabilityResponse": {
-      "title": "Check serviceability response",
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        }
-      },
-      "required": ["status", "data"]
-    },
-    "PickupAvailabilityResponse": {
-      "title": "Pickup availability response",
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        }
-      },
-      "required": ["status", "data"]
-    },
-    "DeliveryAvailabilityResponse": {
-      "title": "Delivery availability response",
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
+    "required": ["data"]
+  },
+  "GetInventoriesResponse": {
+    "title": "Get inventories response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "The product id"
+            },
+            "sku": {
+              "type": "string",
+              "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)"
+            },
+            "category_name": {
+              "type": "string",
+              "description": "If the product comes under a certain specified category or not. If not, then it will be named as default"
+            },
+            "is_combo": {
+              "type": "integer",
+              "description": ""
+            },
+            "name": {
+              "type": "string",
+              "description": "Product name"
+            },
+            "type": {
+              "type": "string",
+              "description": "Mention of the type of product"
+            },
+            "color": {
+              "type": "string",
+              "description": "Mentions the product color"
+            },
+            "brand": {
+              "type": "string",
+              "description": "Mentions the brand of the product."
+            },
+            "total_quantity": {
+              "type": "integer",
+              "description": "Shows the total number of pieces of the product as listed"
+            },
+            "available_quantity": {
+              "type": "integer",
+              "description": "Shows the quantity which can be shipped"
+            },
+            "blocked_quantity": {
+              "type": "integer",
+              "description": "Shows the number of product pieces which cannot be shipped"
+            },
+            "updated_on": {
+              "type": "string",
+              "description": "Displays the time of inventory updation"
+            }
           }
         }
       },
-      "required": ["status", "data"]
+      "meta": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "integer",
+                "description": "Shows the total number of products whose inventories were checked in the paginated page"
+              },
+              "count": {
+                "type": "integer",
+                "description": "Show the results for that paginated page"
+              },
+              "per_page": {
+                "type": "integer",
+                "description": "Shows the number of products which are listd per page"
+              },
+              "current_page": {
+                "type": "integer",
+                "description": "Shows the current page of the total number of pages"
+              },
+              "total_pages": {
+                "type": "integer",
+                "description": "Shows the total number of pages"
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Lists the links to the inventories"
+              }
+            }
+          }
+        }
+      }
     },
-    "SetCouriersPreferencesRequest": {
-      "title": "Set couriers preferences request",
-      "type": "object",
-      "properties": {
-        "courier_id": {
-          "type": "array",
-          "items": {
+    "required": ["data", "meta"]
+  },
+  "UpdateInventoryResponse": {
+    "title": "Update inventory response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "object",
+        "properties": {
+          "available_quantity": {
             "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "required": ["courier_id"]
-    },
-    "SetCouriersPreferencesResponse": {
-      "title": "Set couriers preferences response",
-      "type": "object",
-      "properties": {
-        "courier_name": {
-          "type": "string"
-        },
-        "courier_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "preference_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "address_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "company_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "date": {
-          "type": "string"
-        }
-      },
-      "required": ["courier_name", "courier_id", "preference_id", "address_id", "company_id", "date"]
-    },
-    "GetCouriersListResponse": {
-      "title": "Get couriers list response",
-      "type": "object",
-      "properties": {
-        "couriers": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        }
-      },
-      "required": ["couriers"]
-    },
-    "SetCouriersPriorityRequest": {
-      "title": "Set couriers priority request",
-      "type": "object",
-      "properties": {
-        "courier_id": {
-          "type": "array",
-          "items": {
+            "description": "Shows the quantity which can be shipped"
+          },
+          "blocked_quantity": {
             "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "required": ["courier_id"]
-    },
-    "SetCouriersPriorityResponse": {
-      "title": "Set couriers priority response",
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "required": ["status"]
-    },
-    "GetCouriersPreferencesResponse": {
-      "title": "Get couriers preferences response",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "preference_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "courier_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "courier_name": {
-          "type": "string"
-        }
-      },
-      "required": ["id", "preference_id", "courier_id", "courier_name"]
-    },
-    "AwbCreationRequest": {
-      "title": "Awb creation request",
-      "type": "object",
-      "properties": {
-        "shipment_id": {
-          "type": "array",
-          "items": {
+            "description": "Shows the number of product pieces which cannot be shipped"
+          },
+          "total_quantity": {
             "type": "integer",
-            "format": "int32"
+            "description": "Shows the total number of pieces of the product as listed"
           }
-        },
-        "courier_id": {
+        }
+      }
+    },
+    "required": ["data"]
+  },
+  "CheckServiceabilityError": {
+    "title": "PINCODE is not serviceable",
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string",
+        "description": "Postcode is not secviceable by SHIPROCKET"
+      },
+      "status_code": {
+        "type": "string",
+        "description": "HTTP status of request"
+      }
+    }
+  },
+  "CheckServiceabilityResponse": {
+    "title": "Check serviceability response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["status", "data"]
+  },
+  "PickupAvailabilityResponse": {
+    "title": "Pickup availability response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["status", "data"]
+  },
+  "DeliveryAvailabilityResponse": {
+    "title": "Delivery availability response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["status", "data"]
+  },
+  "SetCouriersPreferencesRequest": {
+    "title": "Set couriers preferences request",
+    "type": "object",
+    "properties": {
+      "courier_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "required": ["courier_id"]
+  },
+  "SetCouriersPreferencesResponse": {
+    "title": "Set couriers preferences response",
+    "type": "object",
+    "properties": {
+      "courier_name": {
+        "type": "string"
+      },
+      "courier_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "preference_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "address_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "company_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "date": {
+        "type": "string"
+      }
+    },
+    "required": ["courier_name", "courier_id", "preference_id", "address_id", "company_id", "date"]
+  },
+  "GetCouriersListResponse": {
+    "title": "Get couriers list response",
+    "type": "object",
+    "properties": {
+      "couriers": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["couriers"]
+  },
+  "SetCouriersPriorityRequest": {
+    "title": "Set couriers priority request",
+    "type": "object",
+    "properties": {
+      "courier_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "required": ["courier_id"]
+  },
+  "SetCouriersPriorityResponse": {
+    "title": "Set couriers priority response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "required": ["status"]
+  },
+  "GetCouriersPreferencesResponse": {
+    "title": "Get couriers preferences response",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "preference_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "courier_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "courier_name": {
+        "type": "string"
+      }
+    },
+    "required": ["id", "preference_id", "courier_id", "courier_name"]
+  },
+  "AwbCreationRequest": {
+    "title": "Awb creation request",
+    "type": "object",
+    "properties": {
+      "shipment_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The shipment id as generated in the shipment section"
+        }
+      },
+      "courier_id": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The courier id from above"
+      },
+      "weight": {
+        "type": "string",
+        "description": "The total weight of the package"
+      },
+      "manifest_id": {
+        "type": "integer",
+        "description": "The manifest id as generated earlier"
+      },
+      "channel_order_id": {
+        "type": "integer",
+        "description": "Channel order id as provided by ShipRocket orders API"
+      },
+      "status": {
+        "type": "string",
+        "description": "Status of the activity"
+      }
+    },
+    "required": ["shipment_id"]
+  },
+  "AwbCreationResponse": {
+    "title": "Awb creation response",
+    "type": "object",
+    "properties": {
+      "awb_assign_status": {
+        "type": "integer",
+        "format": "int32",
+        "description": "It will be 1, implying that the status has been assigned"
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "courier_company_id": {
+                "type": "integer",
+                "description": "id of the courier company"
+              },
+              "awb_code": {
+                "type": "string",
+                "description": "The AWB code generated"
+              },
+              "cod": {
+                "type": "integer",
+                "description": "If there is COD then response =1, else it will be 0"
+              },
+              "order_id": {
+                "type": "integer",
+                "description": "Order id as generated earlier"
+              },
+              "shipment_id": {
+                "type": "integer",
+                "description": "Shipment id as generated in the shipment section"
+              },
+              "freight_percentage": {
+                "type": "string",
+                "description": ""
+              },
+              "flat_charges": {
+                "type": "string",
+                "description": ""
+              },
+              "awb_code_status": {
+                "type": "integer",
+                "description": ""
+              },
+              "assigned_date_time": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "timezone_type": {
+                    "type": "integer",
+                    "description": ""
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "description": ""
+                  }
+                },
+                "description": ""
+              },
+              "applied_weight": {
+                "type": "string",
+                "description": ""
+              },
+              "company_id": {
+                "type": "integer",
+                "description": ""
+              },
+              "company_address_id": {
+                "type": "integer",
+                "description": ""
+              },
+              "id": {
+                "type": "integer",
+                "description": ""
+              },
+              "applied_weight_amount": {
+                "type": "integer",
+                "description": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "required": ["awb_assign_status", "response"]
+  },
+  "AwbError500": {
+    "title": "Awb creation error 500",
+    "type": "object",
+    "properties": {
+      "awb_assign_status": {
+        "type": "string",
+        "description": "Status if the code has been generated or not. In this case it would be a 0"
+      },
+      "data": {
+        "type": "string",
+        "description": "Passes a statement saying it is not possible"
+      }
+    },
+    "required": ["awb_assign_status"]
+  },
+  "PickupCreationRequest": {
+    "title": "Pickup creation request",
+    "type": "object",
+    "properties": {
+      "shipment_id": {
+        "type": "array",
+        "items": {
           "type": "integer",
           "format": "int32"
         }
       },
-      "required": ["shipment_id", "courier_id"]
+      "manifest_id": {
+        "type": "integer",
+        "description": ""
+      },
+      "status": {
+        "type": "string",
+        "description": ""
+      }
     },
-    "AwbCreationResponse": {
-      "title": "Awb creation response",
-      "type": "object",
-      "properties": {
-        "awb_assign_status": {
+    "required": ["shipment_id"]
+  },
+  "PickupCreationResponse": {
+    "title": "Pickup creation response",
+    "type": "object",
+    "properties": {
+      "pickup_status": {
+        "type": "integer",
+        "format": "int32",
+        "description": "Status if the package has been picked up or not"
+      },
+      "message": {
+        "type": "string",
+        "description": ""
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "manifest_url": {
+        "type": "string",
+        "description": "Url of the pdf file which shows the pickup manifest which has been created"
+      }
+    }
+  },
+  "GenerateLabelRequest": {
+    "title": "Generate Label request",
+    "type": "object",
+    "properties": {
+      "shipment_id": {
+        "type": "array",
+        "items": {
           "type": "integer",
           "format": "int32"
-        },
-        "response": {
+        }
+      }
+    },
+    "required": ["shipment_id"]
+  },
+  "GenerateLabelResponse": {
+    "title": "Generate Label response",
+    "type": "object",
+    "properties": {
+      "label_created": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "label_url": {
+        "type": "string"
+      },
+      "response": {
+        "type": "string"
+      }
+    }
+  },
+  "AwbTrackingRequest": {
+    "title": "AWB Tracking request",
+    "type": "object",
+    "properties": {
+      "awb_code": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "required": ["awb_code"]
+  },
+  "AwbTrackingResponse": {
+    "title": "AWB Tracking response",
+    "type": "object",
+    "properties": {
+      "tracking_data": {
+        "type": "object"
+      }
+    },
+    "required": ["tracking_data"]
+  },
+  "ShipmentTrackingRequest": {
+    "title": "Shipment Tracking request",
+    "type": "object",
+    "properties": {
+      "shipment_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "required": ["shipment_id"]
+  },
+  "ShipmentTrackingResponse": {
+    "title": "Shipment Tracking response",
+    "type": "object",
+    "properties": {
+      "tracking_data": {
+        "type": "object"
+      }
+    },
+    "required": ["tracking_data"]
+  },
+  "DiscrepancyResponse": {
+    "title": "Discrepancy response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "data": {
+        "type": "object"
+      },
+      "upper_fold_text": {
+        "type": "string"
+      },
+      "lower_fild_text": {
+        "type": "string"
+      }
+    },
+    "required": ["status", "data", "upper_fold_text", "lower_fild_text"]
+  },
+  "fileImportResponse": {
+    "title": "Import Response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["data"]
+  },
+  "SatementResponse": {
+    "title": "Satement response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "array",
+        "items": {
           "type": "object"
         }
       },
-      "required": ["awb_assign_status", "response"]
-    },
-    "AwbCreationRequest51": {
-      "title": "Awb creation request51",
-      "type": "object",
-      "properties": {
-        "shipment_id": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "required": ["shipment_id"]
-    },
-    "PickupCreationRequest": {
-      "title": "Pickup creation request",
-      "type": "object",
-      "properties": {
-        "shipment_id": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "required": ["shipment_id"]
-    },
-    "PickupCreationResponse": {
-      "title": "Pickup creation response",
-      "type": "object",
-      "properties": {
-        "pickup_status": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "response": {
-          "type": "object"
-        },
-        "manifest_url": {
-          "type": "string"
-        }
-      },
-      "required": ["pickup_status", "response", "manifest_url"]
-    },
-    "GenerateLabelRequest": {
-      "title": "Generate Label request",
-      "type": "object",
-      "properties": {
-        "shipment_id": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "required": ["shipment_id"]
-    },
-    "GenerateLabelResponse": {
-      "title": "Generate Label response",
-      "type": "object",
-      "properties": {
-        "label_created": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "label_url": {
-          "type": "string"
-        },
-        "response": {
-          "type": "string"
-        }
-      },
-      "required": ["label_created", "label_url", "response"]
-    },
-    "AwbTrackingRequest": {
-      "title": "AWB Tracking request",
-      "type": "object",
-      "properties": {
-        "awb_code": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "required": ["awb_code"]
-    },
-    "AwbTrackingResponse": {
-      "title": "AWB Tracking response",
-      "type": "object",
-      "properties": {
-        "tracking_data": {
-          "type": "object"
-        }
-      },
-      "required": ["tracking_data"]
-    },
-    "ShipmentTrackingRequest": {
-      "title": "Shipment Tracking request",
-      "type": "object",
-      "properties": {
-        "shipment_id": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "required": ["shipment_id"]
-    },
-    "ShipmentTrackingResponse": {
-      "title": "Shipment Tracking response",
-      "type": "object",
-      "properties": {
-        "tracking_data": {
-          "type": "object"
-        }
-      },
-      "required": ["tracking_data"]
-    },
-    "DiscrepancyResponse": {
-      "title": "Discrepancy response",
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string"
-        },
-        "data": {
-          "type": "object"
-        },
-        "upper_fold_text": {
-          "type": "string"
-        },
-        "lower_fild_text": {
-          "type": "string"
-        }
-      },
-      "required": ["status", "data", "upper_fold_text", "lower_fild_text"]
-    },
-    "fileImportResponse":{
-      "title": "Import Response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        }
-      },
-        "required": ["data"]
-    },
-    "SatementResponse": {
-      "title": "Satement response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "meta": {
-          "type": "object"
-        }
-      },
-      "required": ["data", "meta"]
+      "meta": {
+        "type": "object"
+      }
     }
   }
+}
 }
