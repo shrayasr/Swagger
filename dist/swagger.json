@@ -37,6 +37,18 @@
             "schema": {
               "$ref": "#/definitions/GetTokenResponse"
             }
+          },
+          "400": {
+            "description": "Invalid request",
+            "schema": {
+              "$ref": "#/definitions/400Error"
+            }
+          },
+          "422": {
+            "description": "No input is defined",
+            "schema": {
+              "$ref": "#/definitions/login422Error"
+            }
           }
         }
       }
@@ -56,6 +68,12 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/GetCountriesResponse"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -83,6 +101,12 @@
             "description": "Name of the specific zone",
             "schema": {
               "$ref": "#/definitions/GetZonesResponse"
+            }
+          },
+          "404": {
+            "description": "404 not found",
+            "schema": {
+              "$ref": "#/definitions/404Error"
             }
           }
         }
@@ -142,6 +166,12 @@
             "schema": {
               "$ref": "#/definitions/GetProductsResponse"
             }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/401Error"
+            }
           }
         }
       },
@@ -164,11 +194,12 @@
         "responses": {
           "200": {
             "description": "",
+            "schema": {}
+            },
+          "422": {
+            "description": "invalid data",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/addProduct422"
             }
           }
         }
@@ -196,6 +227,18 @@
             "schema": {
               "$ref": "#/definitions/ShowResponse"
             }
+          },
+          "400": {
+            "description": "invalid product id",
+            "schema": {
+              "$ref": "#/definitions/show400"
+            }
+          },
+          "404": {
+            "description": "no id provided",
+            "schema": {
+              "$ref": "#/definitions/404Error"
+            }
           }
         }
       }
@@ -208,23 +251,27 @@
         "description": "This section shows the API for exporting the data of all your product and inventory details from the ShipRocket panel.",
         "summary": "Bulk import",
         "operationId": "Bulk import",
+        "consumes": [
+          "multipart/form-data"
+        ],
         "produces": ["application/json"],
         "parameters": [{
-          "name": "body",
-          "in": "body",
+          "name": "file",
+          "in": "formData",
           "required": true,
-          "schema": {
-            "$ref": "#/definitions/BulkImportRequest"
-          }
+          "type": "file"
         }],
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/productImportResponse"
+            }
+          },
+          "403": {
+            "description": "bad request",
+            "schema": {
+              "$ref": "#/definitions/import403"
             }
           }
         }
@@ -272,30 +319,6 @@
                 "type": "string"
               }
             }
-          }
-        }
-      }
-    },
-    "/v1/external/products/update/imei": {
-      "patch": {
-        "tags": [
-          "Products"
-        ],
-        "description": "This section shows the API for updating IMEI numbers. In case you have two mobile phones of the same model, it could be an option for differentiating them.",
-        "summary": "Update IMEI",
-        "operationId": "Update IMEI",
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/UpdateImeiRequest"
-          }
-        }],
-        "responses": {
-          "200": {
-            "description": ""
           }
         }
       }
@@ -366,24 +389,18 @@
         "description": "Import CSV containing channel catalog to master catalog mappings",
         "summary": "Import Catalog mappings",
         "operationId": "Bulk import1",
+        "consumes": ["multipart/form-data"],
         "produces": ["application/json"],
         "parameters": [{
-          "name": "body",
-          "in": "body",
+          "name": "file",
+          "in": "formData",
           "required": true,
-          "schema": {
-            "$ref": "#/definitions/BulkImportRequest"
-          }
+          "type": "file"
         }],
         "responses": {
           "200": {
             "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
+            "schema": {}
           }
         }
       }
@@ -990,24 +1007,18 @@
         "description": "Mentions the order sheets into your panel. Should be a CSV file",
         "summary": "Bulk Import",
         "operationId": "Bulk import2",
+        "consumes": ["multipart/form-data"],
         "produces": ["application/json"],
         "parameters": [{
-          "name": "body",
-          "in": "body",
+          "name": "file",
+          "in": "formData",
           "required": true,
-          "schema": {
-            "$ref": "#/definitions/BulkImportRequest"
-          }
+          "type": "file"
         }],
         "responses": {
           "200": {
             "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
+            "schema": {}
           }
         }
       }
@@ -1595,6 +1606,53 @@
       },
       "required": ["email", "password"]
     },
+    "400Error": {
+      "title": "400 error Bad Request",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "These credentials do not match our records."
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 400
+        }
+      }
+    },
+    "login422Error": {
+      "title": "422 error unprocessable input",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Error in input"
+        },
+        "errors": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "The email field is required."
+              }
+            },
+            "password": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "The password field is required."
+              }
+            }
+          }
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 422
+        }
+      }
+    },
     "GetTokenResponse": {
       "title": "Get token response",
       "type": "object",
@@ -1638,6 +1696,14 @@
         }
       },
       "required": ["id", "first_name", "last_name", "email", "company_id", "created_at", "token"]
+    },
+    "405Error": {
+      "title": "Post method instead of Get or vice versa",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "method not allowed"},
+        "status_code": {"type": "integer", "example": 405}
+      }
     },
     "GetCountriesResponse": {
       "title": "Get countries response",
@@ -2147,6 +2213,29 @@
         }
       }
     },
+    "404Error": {
+      "title": "404 not found",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "404 not found"},
+        "status_code": {"type": "integer", "example": 404}
+      }
+    },
+    "productImportResponse": {
+      "title": "import success",
+      "type": "object",
+      "properties": {
+        "id": {"type": "integer", "example": 12}
+      }
+    },
+    "import403": {
+      "title": "incorrect format",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "403 bad request"},
+        "status_code": {"type": "integer", "example": 403}
+      }
+    },
     "GetZonesResponse": {
       "title": "Get zones response",
       "type": "object",
@@ -2373,21 +2462,94 @@
       },
       "required": ["status", "data"]
     },
+    "401Error": {
+      "title": "Invalid token",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Token Signature could not be verified."
+        },
+        "status_code":  {
+          "type": "integer",
+          "example": 401
+        }
+      }
+    },
     "GetProductsResponse": {
       "title": "Get products response",
       "type": "object",
       "properties": {
         "data": {
-          "type": "object",
-          "example": [{
-              "id": 395,
-              "sku": "1234",
-              "HSN": "hcjcx1221s",
-              "name": "product2",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "integer"},
+              "sku": {"type": "string"},
+              "hsn": {"type": "string"},
+              "name": {"type": "string"},
+              "description": {"type": "string"},
+              "category_code": {"type": "string"},
+              "category_name": {"type": "string"},
+              "image": {"type": "string"},
+              "weight": {"type": "string"},
+              "size": {"type": "string"},
+              "cost_price": {"type": "string"},
+              "mrp": {"type": "string"},
+              "tax_code": {"type": "string"},
+              "low_stock": {"type": "integer"},
+              "ean": {"type": "string"},
+              "upc": {"type": "string"},
+              "isbn": {"type": "string"},
+              "created_at": {"type": "string"},
+              "updated_at": {"type": "string"},
+              "quantity": {"type": "integer"},
+              "color": {"type": "string"},
+              "brand": {"type": "string"},
+              "dimensions": {"type": "string"},
+              "status": {"type": "string"},
+              "type": {"type": "string"}
+            }
+          },
+          "example": [
+              {
+              "id": 319134,
+              "sku": "inactive",
+              "hsn": "",
+              "name": "inactive",
               "description": "",
               "category_code": "default",
               "category_name": "Default Category",
               "category_tax_code": "default",
+              "image": "",
+              "weight": "0.5 kg",
+              "size": "",
+              "cost_price": "0.00",
+              "mrp": "0.00",
+              "tax_code": "default",
+              "low_stock": 0,
+              "ean": "",
+              "upc": "",
+              "isbn": "",
+              "created_at": "23 Jun 2017 02:17 PM",
+              "updated_at": "23 Jun 2017 02:17 PM",
+              "quantity": 11,
+              "color": "",
+              "brand": "",
+              "dimensions": "10 x 10 x 10 cm",
+              "status": "INACTIVE",
+              "type": "Single"
+          },
+          {
+              "id": 318862,
+              "sku": "sanity",
+              "hsn": "",
+              "name": "sanity",
+              "description": "",
+              "category_code": "new",
+              "category_name": "new",
+              "category_tax_code": "5",
               "image": "",
               "weight": "0.5 kg",
               "size": "",
@@ -2398,65 +2560,9 @@
               "ean": "",
               "upc": "",
               "isbn": "",
-              "created_at": "27 Sep 2016 05:46 PM",
-              "updated_at": "4 Oct 2016 10:53 PM",
-              "quantity": 60,
-              "color": "",
-              "brand": "",
-              "dimensions": "10 x 10 x 10 cm",
-              "status": "ACTIVE",
-              "type": "Single"
-            },
-            {
-              "id": 394,
-              "sku": "1234567",
-              "HSN": "hbhqgst663",
-              "name": "product1",
-              "description": "",
-              "category_code": "default",
-              "category_name": "Default Category",
-              "category_tax_code": "default",
-              "image": "",
-              "weight": "0.5 kg",
-              "size": "",
-              "cost_price": "0.00",
-              "mrp": "0.00",
-              "tax_code": "12_5",
-              "low_stock": 0,
-              "ean": "",
-              "upc": "",
-              "isbn": "",
-              "created_at": "27 Sep 2016 05:45 PM",
-              "updated_at": "27 Sep 2016 05:45 PM",
-              "quantity": 77,
-              "color": "",
-              "brand": "",
-              "dimensions": "10 x 10 x 10 cm",
-              "status": "ACTIVE",
-              "type": "Single"
-            },
-            {
-              "id": 393,
-              "sku": "123456",
-              "HSN": "gyt67g72g",
-              "name": "Product1",
-              "description": "",
-              "category_code": "default",
-              "category_name": "Default Category",
-              "category_tax_code": "default",
-              "image": "",
-              "weight": "0.5 kg",
-              "size": "",
-              "cost_price": "0.00",
-              "mrp": "0.00",
-              "tax_code": "12_5",
-              "low_stock": 0,
-              "ean": "",
-              "upc": "",
-              "isbn": "",
-              "created_at": "27 Sep 2016 05:43 PM",
-              "updated_at": "27 Sep 2016 05:43 PM",
-              "quantity": 178,
+              "created_at": "23 Jun 2017 01:13 PM",
+              "updated_at": "23 Jun 2017 01:13 PM",
+              "quantity": 8,
               "color": "",
               "brand": "",
               "dimensions": "10 x 10 x 10 cm",
@@ -2467,40 +2573,56 @@
         },
         "meta": {
           "type": "object",
-          "example": [{
+          "properties": {
             "pagination": {
               "type": "object",
-              "example": [{
-                "total": {
-                  "type": "integer",
-                  "example": 3
-                },
-                "count": {
-                  "type": "integer",
-                  "example": 3
-                },
-                "per_page": {
-                  "type": "integer",
-                  "example": 100
-                },
-                "current_page": {
-                  "type": "integer",
-                  "example": 1
-                },
-                "total_pages": {
-                  "type": "integer",
-                  "example": 2
-                },
+              "properties": {
+                "total": {"type": "integer"},
+                "count": {"type": "integer"},
+                "per_page": {"type": "integer"},
+                "current_page": {"type": "integer"},
+                "total_pages": {"type": "integer"},
                 "links": {
                   "type": "array",
-                  "items": []
+                  "items": {
+                    "type": "string"
+                  }
                 }
-              }]
+              }
             }
-          }]
+          },
+          "example": [
+            "pagination": {
+            "total": 7,
+            "count": 7,
+            "per_page": 15,
+            "current_page": 1,
+            "total_pages": 1,
+            "links": []
+            }
+          ]
         }
       },
       "required": ["data", "meta"]
+    },
+    "addProduct422": {
+      "title": "unprocessable data",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "There were errors in adding new product!"},
+        "errors": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "array", "items": {"type": "string"}, "example": "The name field is required."},
+            "type": {"type": "array", "items": {"type": "string"}, "example": "The type field is required."},
+            "sku": {"type": "array", "items": {"type": "string"}, "example": "The sku field is required."}
+          }
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 422
+        }
+      }
     },
     "AddRequest": {
       "title": "Add request",
@@ -2631,7 +2753,8 @@
           "type": "array",
           "description": "An arrayed display of all the components",
           "items": {
-            "type": "string"
+            "type": "string",
+            "example": []
           }
         }
       },
@@ -2643,20 +2766,50 @@
       "properties": {
         "data": {
           "type": "object",
-          "description": "The data is represented in an json format"
+          "properties": {
+            "id": {"type": "integer"},
+            "sku": {"type": "string"},
+            "hsn": {"type": "string"},
+            "name": {"type": "string"},
+            "description": {"type": "string"},
+            "category_code": {"type": "string"},
+            "category_name": {"type": "string"},
+            "image": {"type": "string"},
+            "weight": {"type": "string"},
+            "size": {"type": "string"},
+            "cost_price": {"type": "string"},
+            "mrp": {"type": "string"},
+            "tax_code": {"type": "string"},
+            "low_stock": {"type": "integer"},
+            "ean": {"type": "string"},
+            "upc": {"type": "string"},
+            "isbn": {"type": "string"},
+            "created_at": {"type": "string"},
+            "updated_at": {"type": "string"},
+            "quantity": {"type": "integer"},
+            "color": {"type": "string"},
+            "brand": {"type": "string"},
+            "dimensions": {"type": "string"},
+            "status": {"type": "string"},
+            "type": {"type": "string"}
+          }
         }
       },
       "required": ["data"]
     },
-    "BulkImportRequest": {
-      "title": "Bulk import request",
+    "show400": {
+      "title": "invalid product id",
       "type": "object",
       "properties": {
-        "file": {
-          "type": "string"
+        "message": {
+          "type": "string",
+          "example": "This product is either inactive or does not exist"
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 400
         }
-      },
-      "required": ["file"]
+      }
     },
     "UpdateImeiRequest": {
       "title": "Update IMEI request",
@@ -4001,6 +4154,24 @@
       "meta": {
         "type": "object"
       }
+    }
+  },
+  "bulkExportResponse": {
+    "title": "export all products",
+    "type": "object",
+    "properties": {
+      "download_url": {
+        "type": "string",
+        "example": "https://s3-ap-southeast-1.amazonaws.com/kr-shipmultichannel/imports/c_21642/export-2017-08-28.csv"
+      }
+    }
+  },
+  "export401":{
+    "title": "unauthorized access",
+    "type": "object",
+    "properties": {
+      "message": {"type": "string", "example": "Failed to authenticate because of bad credentials or an invalid authorization header."},
+      "status_code": {"type": "integer", "example": 401}
     }
   }
 }
