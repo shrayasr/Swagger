@@ -289,12 +289,15 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Sample file containing required data in format",
+            "description": "import succes",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
             }
           }
         }
@@ -2842,11 +2845,86 @@
         "data": {
           "type": "array",
           "items": {
-            "type": "object"
-          }
+            "type": "object",
+            "properties": {
+              "id": {"type": "integer"},
+              "title": {"type": "string"},
+              "image": {"type": "string"},
+              "price": {"type": "string"},
+              "quantity": {"type": "integer"},
+              "sku": {"type": "string"},
+              "channel_sku": {"type": "string"},
+              "channel_id": {"type": "integer"},
+              "channel_name": {"type": "string"},
+              "base_channel_code": {"type": "string"},
+              "channel_product_id": {"type": "string"},
+              "inventory": {"type": "integer"},
+              "synced_on": {"type": "string"}
+            }
+          },
+          "example": [
+            {
+                "id": 416474,
+                "title": "product2",
+                "image": "",
+                "price": "500.00",
+                "quantity": -4,
+                "sku": "shopify",
+                "channel_sku": "product2",
+                "channel_id": 23423,
+                "channel_name": "SHOPIFY",
+                "base_channel_code": "SH",
+                "channel_product_id": "10808202516",
+                "inventory": 18,
+                "synced_on": "8 Jun 2017 01:15 PM"
+            },
+            {
+                "id": 416475,
+                "title": "product",
+                "image": "",
+                "price": "400.00",
+                "quantity": -1,
+                "sku": "Iphone5s",
+                "channel_sku": "product",
+                "channel_id": 23423,
+                "channel_name": "SHOPIFY",
+                "base_channel_code": "SH",
+                "channel_product_id": "10807289684",
+                "inventory": 0,
+                "synced_on": "5 Jun 2017 03:27 PM"
+            }
+          ]
         },
         "meta": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total": {"type": "integer"},
+                "count": {"type": "integer"},
+                "per_page": {"type": "integer"},
+                "current_page": {"type": "integer"},
+                "total_pages": {"type": "integer"},
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "example": [
+            "pagination": {
+            "total": 7,
+            "count": 7,
+            "per_page": 15,
+            "current_page": 1,
+            "total_pages": 1,
+            "links": []
+            }
+          ]
         }
       },
       "required": ["data", "meta"]
