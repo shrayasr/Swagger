@@ -10,7 +10,15 @@
     }
   },
   "host": "krmct001.kartrocket.com",
-  "schemes": ["http"],
+  "schemes": ["https"],
+  "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "description": "The api token provided by login api",
+            "in": "header"
+        }
+    },
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
