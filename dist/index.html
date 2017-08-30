@@ -46,13 +46,13 @@
             if (url && url.length > 1) {
                 url = decodeURIComponent(url[1]);
             } else {
-				url = "https://raw.githubusercontent.com/deepaksharma208/Swagger/master/dist/swagger.json";
+                url = "https://raw.githubusercontent.com/deepaksharma208/swagger/master/dist/swagger.json";
             }
 
             window.swaggerUi = new SwaggerUi({
                 url: url,
                 dom_id: "swagger-ui-container",
-                supportedSubmitMethods: [],
+                supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
                 onComplete: function (swaggerApi, swaggerUi) {
                     if (typeof initOAuth == "function") {
 
@@ -88,19 +88,21 @@
 
             function addApiKeyAuthorization() {
                 var key = encodeURIComponent($('#input_apiKey')[0].value);
+                var storedKey = window.localStorage.getItem('apiKey');
+                if (!key && storedKey) {
+                    key = storedKey;
+                    $('#input_apiKey').val(key);
+                }
                 if (key && key.trim() != "") {
-                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", "Bearer " + key, "header");
-                    window.swaggerUi.api.clientAuthorizations.add("key", apiKeyAuth);
+                    // TODO: make these values dynamic
+                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", 'Bearer ' + key, "header");
+                    window.swaggerUi.api.clientAuthorizations.add("token", apiKeyAuth);
+                    window.localStorage.setItem('apiKey', key);
                     log("added key " + key);
                 }
             }
 
             $('#input_apiKey').change(addApiKeyAuthorization);
-            // if you have an apiKey you would like to pre-populate on the page for demonstration purposes...
-            /*
-             var apiKey = "myApiKeyXXXX123456789";
-             $('#input_apiKey').val(apiKey);
-             */
 
             window.swaggerUi.load();
 
