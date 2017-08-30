@@ -96,7 +96,7 @@
                 if (key && key.trim() != "") {
                     // TODO: make these values dynamic
                     var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", 'Bearer ' + key, "header");
-                    window.swaggerUi.api.clientAuthorizations.add("Bearer", apiKeyAuth);
+                    window.swaggerUi.api.clientAuthorizations.add("Authorization", apiKeyAuth);
                     window.localStorage.setItem('apiKey', key);
                     log("added key " + key);
                 }
