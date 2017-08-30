@@ -95,8 +95,8 @@
                 }
                 if (key && key.trim() != "") {
                     // TODO: make these values dynamic
-                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEzMjEsImlzcyI6Imh0dHBzOlwvXC9rcm1jdDAwMS5rYXJ0cm9ja2V0LmNvbVwvdjFcL2F1dGhcL2xvZ2luIiwiaWF0IjoxNTA0MDkzMTY5LCJleHAiOjE1MDQxNzk1NjksIm5iZiI6MTUwNDA5MzE2OSwianRpIjoiZmNkNmZlYTVhZjg5MTM2ZDE5NGRiYTE2ZTJkNmNjNDkifQ.Ac1Vuz8MYXsE_ilfJWpN8QrSbf7n9Mr7QgXbWd2HXBU');
-                    window.swaggerUi.api.clientAuthorizations.add("token", apiKeyAuth);
+                    var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", 'Bearer ' + key, "header");
+                    window.swaggerUi.api.clientAuthorizations.add("Bearer", apiKeyAuth);
                     window.localStorage.setItem('apiKey', key);
                     log("added key " + key);
                 }
