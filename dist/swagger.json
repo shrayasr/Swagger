@@ -13,7 +13,7 @@
   "schemes": ["https"],
   "securityDefinitions": {
         "Bearer": {
-            "type": "apiKey",
+            "type": "http",
             "name": "Authorization",
             "description": "The api token provided by login api",
             "in": "header"
