@@ -22,7 +22,7 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/v1/external/auth/login": {
+    "/v1/auth/login": {
       "post": {
         "tags": [
           "Authentication"
@@ -61,7 +61,7 @@
         }
       }
     },
-    "/v1/external/countries": {
+    "/v1/countries": {
       "get": {
         "tags": [
           "Countries"
@@ -87,7 +87,7 @@
         }
       }
     },
-    "/v1/external/countries/show/{id}": {
+    "/v1/countries/show/{id}": {
       "get": {
         "tags": [
           "Countries"
@@ -120,7 +120,7 @@
         }
       }
     },
-    "/v1/external/products": {
+    "/v1/products": {
       "get": {
         "tags": [
           "Products"
@@ -129,6 +129,11 @@
         "summary": "Get Products",
         "operationId": "Get products",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "page",
           "in": "query",
@@ -191,6 +196,11 @@
         "summary": "Add new Products",
         "operationId": "Add",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "body",
           "in": "body",
@@ -213,7 +223,7 @@
         }
       }
     },
-    "/v1/external/products/show/{id}": {
+    "/v1/products/show/{id}": {
       "get": {
         "tags": [
           "Products"
@@ -222,6 +232,11 @@
         "summary": "Show",
         "operationId": "Show",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "id",
           "in": "path",
@@ -251,7 +266,7 @@
         }
       }
     },
-    "/v1/external/products/import": {
+    "/v1/products/import": {
       "post": {
         "tags": [
           "Products"
@@ -261,6 +276,11 @@
         "operationId": "Bulk import",
         "consumes": [
           "multipart/form-data"
+        ],
+        "security": [
+            {
+                "Bearer": []
+            }
         ],
         "produces": ["application/json"],
         "parameters": [{
@@ -285,7 +305,7 @@
         }
       }
     },
-    "/v1/external/products/export": {
+    "/v1/products/export": {
       "get": {
         "tags": [
           "Products"
@@ -294,6 +314,11 @@
         "summary": "Bulk Sample",
         "operationId": "Bulk export",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -311,7 +336,7 @@
         }
       }
     },
-    "/v1/external/products/sample": {
+    "/v1/products/sample": {
       "get": {
         "tags": [
           "Products"
@@ -320,6 +345,11 @@
         "summary": "Get a sample format to Import Products",
         "operationId": "Bulk sample",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -334,7 +364,7 @@
         }
       }
     },
-    "/v1/external/listings": {
+    "/v1/listings": {
       "get": {
         "tags": [
           "Listings"
@@ -342,6 +372,11 @@
         "description": "Get a JSON representation of all listings",
         "summary": "Get all Listings",
         "operationId": "Get all",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "page",
@@ -392,7 +427,7 @@
         }
       }
     },
-    "/v1/external/listings/import": {
+    "/v1/listings/import": {
       "post": {
         "tags": [
           "Listings"
@@ -401,6 +436,11 @@
         "summary": "Import Catalog mappings",
         "operationId": "Bulk import1",
         "consumes": ["multipart/form-data"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "file",
@@ -416,7 +456,7 @@
         }
       }
     },
-    "/v1/external/listings/export/mapped": {
+    "/v1/listings/export/mapped": {
       "get": {
         "tags": [
           "Listings"
@@ -425,6 +465,11 @@
         "summary": "Export Mapped",
         "operationId": "Export mapped",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -439,7 +484,7 @@
         }
       }
     },
-    "/v1/external/listings/export/unmapped": {
+    "/v1/listings/export/unmapped": {
       "get": {
         "tags": [
           "Listings"
@@ -448,6 +493,11 @@
         "summary": "Export Unmapped",
         "operationId": "Export un-mapped",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -462,7 +512,7 @@
         }
       }
     },
-    "/v1/external/listings/export/sample": {
+    "/v1/listings/export/sample": {
       "get": {
         "tags": [
           "Listings"
@@ -471,6 +521,11 @@
         "summary": "Export sample",
         "operationId": "Export sample",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -485,7 +540,7 @@
         }
       }
     },
-    "/v1/external/listings/link": {
+    "/v1/listings/link": {
       "post": {
         "tags": [
           "Listings"
@@ -493,6 +548,11 @@
         "description": "The items which are to be linked",
         "summary": "Map",
         "operationId": "Map",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "body",
@@ -509,7 +569,7 @@
         }
       }
     },
-    "/v1/external/orders": {
+    "/v1/orders": {
       "get": {
         "tags": [
           "Orders"
@@ -518,6 +578,11 @@
         "summary": "Get all orders",
         "operationId": "Get all orders",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "page",
           "in": "query",
@@ -585,7 +650,7 @@
         }
       }
     },
-    "/v1/external/orders/unprocessable": {
+    "/v1/orders/unprocessable": {
       "get": {
         "tags": [
           "Orders"
@@ -594,6 +659,11 @@
         "summary": "Get all unprocessable orders",
         "operationId": "Get all unprocessable orders",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -614,6 +684,11 @@
         "summary": "Get orders in Processing",
         "operationId": "Get all processing orders",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -625,7 +700,7 @@
         }
       }
     },
-    "/v1/external/orders/manifested": {
+    "/v1/orders/manifested": {
       "get": {
         "tags": [
           "Orders"
@@ -634,6 +709,11 @@
         "summary": "Get manifested orders",
         "operationId": "Get all manifested orders",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -645,7 +725,7 @@
         }
       }
     },
-    "/v1/external/orders/show/{id}": {
+    "/v1/orders/show/{id}": {
       "get": {
         "tags": [
           "Orders"
@@ -653,6 +733,11 @@
         "description": "Get order and shipment details",
         "summary": "Get order Details",
         "operationId": "Get order",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "id",
@@ -672,7 +757,7 @@
         }
       }
     },
-    "/v1/external/orders/fetch": {
+    "/v1/orders/fetch": {
       "get": {
         "tags": [
           "Orders"
@@ -681,6 +766,11 @@
         "summary": "Fetch",
         "operationId": "Fetch orders",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -692,7 +782,7 @@
         }
       }
     },
-    "/v1/external/orders/status": {
+    "/v1/orders/status": {
       "get": {
         "tags": [
           "Orders"
@@ -701,6 +791,11 @@
         "summary": "Sync status",
         "operationId": "Sync status",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -712,7 +807,7 @@
         }
       }
     },
-    "/v1/external/orders/cancel": {
+    "/v1/orders/cancel": {
       "post": {
         "tags": [
           "Orders"
@@ -721,6 +816,11 @@
         "summary": "Cancel an order",
         "operationId": "Cancel orders",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "body",
           "in": "body",
@@ -736,7 +836,7 @@
         }
       }
     },
-    "/v1/external/orders/fulfill": {
+    "/v1/orders/fulfill": {
       "post": {
         "tags": [
           "Orders"
@@ -745,6 +845,11 @@
         "summary": "Add inventory for order product",
         "operationId": "Fulfillment",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "body",
           "in": "body",
@@ -766,7 +871,7 @@
         }
       }
     },
-    "/v1/external/orders/mapping": {
+    "/v1/orders/mapping": {
       "post": {
         "tags": [
           "Orders"
@@ -775,6 +880,11 @@
         "summary": "Map orders products",
         "operationId": "Mapping",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "body",
           "in": "body",
@@ -796,7 +906,7 @@
         }
       }
     },
-    "/v1/external/orders/print/invoice": {
+    "/v1/orders/print/invoice": {
       "post": {
         "tags": [
           "Orders"
@@ -805,6 +915,11 @@
         "summary": "Generate Invoice",
         "operationId": "Generate invoice",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "body",
           "in": "body",
@@ -826,7 +941,7 @@
         }
       }
     },
-    "/v1/external/orders/track": {
+    "/v1/orders/track": {
       "get": {
         "tags": [
           "Orders"
@@ -835,6 +950,11 @@
         "summary": "Get tracking Details",
         "operationId": "Track",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "page",
           "in": "query",
@@ -902,7 +1022,7 @@
         }
       }
     },
-    "/v1/external/orders/address/update": {
+    "/v1/orders/address/update": {
       "post": {
         "tags": [
           "Orders"
@@ -911,6 +1031,11 @@
         "summary": "Change address",
         "operationId": "Change address",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "body",
           "in": "body",
@@ -926,7 +1051,7 @@
         }
       }
     },
-    "/v1/external/orders/export": {
+    "/v1/orders/export": {
       "get": {
         "tags": [
           "Orders"
@@ -934,6 +1059,11 @@
         "description": "Displays the URL of the CSV sheet of downloaded orders as a response",
         "operationId": "Export orders",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -945,7 +1075,7 @@
         }
       }
     },
-    "/v1/external/orders/print/manifest": {
+    "/v1/orders/print/manifest": {
       "post": {
         "tags": [
           "Orders"
@@ -953,6 +1083,11 @@
         "description": "Prints the manifest of the order id on the assumption that the manifest is created",
         "summary": "Get menifest",
         "operationId": "Get manifests",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "body",
@@ -975,7 +1110,7 @@
         }
       }
     },
-    "/v1/external/orders/create": {
+    "/v1/orders/create": {
       "post": {
         "tags": [
           "Custom Orders"
@@ -984,6 +1119,11 @@
         "summary": "Create Orders",
         "operationId": "Create linked order.",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "body",
           "in": "body",
@@ -1010,7 +1150,7 @@
         }
       }
     },
-    "/v1/external/orders/import": {
+    "/v1/orders/import": {
       "post": {
         "tags": [
           "Custom Orders"
@@ -1019,6 +1159,11 @@
         "summary": "Bulk Import",
         "operationId": "Bulk import2",
         "consumes": ["multipart/form-data"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "file",
@@ -1034,7 +1179,7 @@
         }
       }
     },
-    "/v1/external/orders/sample": {
+    "/v1/orders/sample": {
       "get": {
         "tags": [
           "Custom Orders"
@@ -1043,6 +1188,11 @@
         "summary": "Get sample format for Orders Import",
         "operationId": "Bulk sample1",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1054,7 +1204,7 @@
         }
       }
     },
-    "/v1/external/orders/create/adhoc": {
+    "/v1/orders/create/adhoc": {
       "post": {
         "tags": [
           "Custom Orders"
@@ -1062,6 +1212,11 @@
         "description": "Shows the details of the order which needs to be created",
         "summary": "Create quick orders",
         "operationId": "Create quick order",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "body",
@@ -1085,11 +1240,16 @@
         }
       }
     },
-    "/v1/external/errors/{id}/check": {
+    "/v1/errors/{id}/check": {
       "get": {
         "tags": ["FIle Imports"],
         "summary": "Get file import results from Bulk order, products, listing imports.",
         "description": "Check Import Response",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [{
           "name": "id",
           "in": "path",
@@ -1106,7 +1266,7 @@
         }
       }
     },
-    "/v1/external/shipments": {
+    "/v1/shipments": {
       "get": {
         "tags": [
           "Shipments"
@@ -1114,6 +1274,11 @@
         "description": "Get all shipments",
         "summary": "Get shipment Details",
         "operationId": "Get all shipments",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "sort",
@@ -1150,7 +1315,7 @@
         }
       }
     },
-    "/v1/external/shipments/{id}": {
+    "/v1/shipments/{id}": {
       "get": {
         "tags": [
           "Shipments"
@@ -1158,6 +1323,11 @@
         "description": "Get shipment details",
         "summary": "Get shipment Details of specific orders",
         "operationId": "Details",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "id",
@@ -1177,7 +1347,7 @@
         }
       }
     },
-    "/v1/external/inventory": {
+    "/v1/inventory": {
       "get": {
         "tags": [
           "Inventory"
@@ -1185,6 +1355,11 @@
         "description": "Checks the availability of inventory according to the SKU",
         "summary": "Get Details of orders with inventories",
         "operationId": "Get inventories",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "page",
@@ -1223,7 +1398,7 @@
         }
       }
     },
-    "/v1/external/inventory/{id}/update": {
+    "/v1/inventory/{id}/update": {
       "put": {
         "tags": [
           "Inventory"
@@ -1231,6 +1406,11 @@
         "description": "Through this API you can make changes to the inventory listings in your ShipRocket panel",
         "summary": "Update Inventory",
         "operationId": "Update inventory",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
             "name": "id",
@@ -1266,7 +1446,7 @@
         }
       }
     },
-    "/v1/external/channels": {
+    "/v1/channels": {
       "get": {
         "tags": [
           "Channels"
@@ -1275,6 +1455,11 @@
         "summary": "Get all channels",
         "operationId": "Get all2",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1294,6 +1479,11 @@
         "description": "Shows the number of courier companies available for delivery from pickup point to customer delivery code, according to weight.",
         "summary": "Check Serviceability",
         "operationId": "Check serviceability",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
             "name": "pickup_postcode",
@@ -1348,7 +1538,7 @@
         }
       }
     },
-    "/v1/external/courier/assign/awb": {
+    "/v1/courier/assign/awb": {
       "post": {
         "tags": [
           "Couriers"
@@ -1356,6 +1546,11 @@
         "description": "The ShipRocket API for generating the Air Waybill number for your shipment. You can get a single API or bulk API’s . It also gives you the option to reassign the AWB number",
         "summary": "AWB Creeation",
         "operationId": "Awb Creation",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "body",
@@ -1381,7 +1576,7 @@
         }
       }
     },
-    "/v1/external/courier/generate/pickup": {
+    "/v1/courier/generate/pickup": {
       "post": {
         "tags": [
           "Couriers"
@@ -1389,6 +1584,11 @@
         "description": "Get a JSON representation of pickup response for single and bulk requests.",
         "summary": "Get Pickup Details",
         "operationId": "Pickup creation",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "body",
@@ -1420,6 +1620,11 @@
         "description": "Get a label URL. Note:- For label URL, AWB code must be assigned on shipment id.",
         "summary": "Generate Label",
         "operationId": "Generate Label",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "body",
@@ -1451,6 +1656,11 @@
         "description": "Get a JSON of tracking data by AWB.",
         "summary": "Get AWB tracking Details",
         "operationId": "AWB Tracking",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "awb_code",
@@ -1489,6 +1699,11 @@
         "description": "Get a JSON of tracking data by Shipment id.",
         "summary": "Get shipment Tracking Details",
         "operationId": "Shipment Tracking",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "shipment_id",
@@ -1519,7 +1734,7 @@
         }
       }
     },
-    "/v1/external/billing/discrepancy": {
+    "/v1/billing/discrepancy": {
       "get": {
         "tags": [
           "Discrepancy"
@@ -1528,6 +1743,11 @@
         "summary": "Get discrepancy Details",
         "operationId": "Discrepancy",
         "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -1547,6 +1767,11 @@
         "description": "Get statements data",
         "summary": "Get shipment Details",
         "operationId": "Satement",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
         "produces": ["application/json"],
         "parameters": [{
           "name": "page",
