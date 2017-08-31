@@ -60,6 +60,109 @@
           }
         }
       }
+    },
+    "/v1/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Shows all the details of all the products that a ShipRocket user has. This can be filtered according to details like number of products per page, ascending or descending order sorting order. ",
+        "summary": "Get Products",
+        "operationId": "Get products",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number which is to be displayed"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of products in each page"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Whether to arrange the items in ascending or descending order(DESC, ASC)"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Value by which the results will be filtered"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Validation of filtered value (data to be matched)"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetProductsResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/401Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Add new product",
+        "summary": "Add new Products",
+        "operationId": "Add",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/AddRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {}
+            },
+          "422": {
+            "description": "invalid data",
+            "schema": {
+              "$ref": "#/definitions/addProduct422"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -177,6 +280,161 @@
       "properties": {
         "message": {"type": "string", "example": "method not allowed"},
         "status_code": {"type": "integer", "example": 405}
+      }
+    },
+    "AddRequest": {
+      "title": "Add request",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string",
+          "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)",
+          "example": "Toys"
+        },
+        "HSN": {
+          "type": "string",
+          "description": "Harmonised System Nomenclature. A code number used to classify goods for taxation purposes. Done to determine which category of taxes do the goods come under",
+          "example": "1234cdhc"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the product",
+          "example": "SuperMan"
+        },
+        "tax_code": {
+          "type": "string",
+          "description": "The percentage of tax which is to be imposed",
+          "example": "default"
+        },
+        "type": {
+          "type": "string",
+          "description": "If there is only one product or multiple types of products",
+          "example": "Single"
+        },
+        "qty": {
+          "type": "integer",
+          "description": "Total Quantity of the products to be shipped",
+          "example": 10
+        },
+        "low_stock": {
+          "type": "string",
+          "description": "Specifies when the low stock notification should come on",
+          "example": ""
+        },
+        "category_code": {
+          "type": "string",
+          "description": "You can add a category code to your ShipRocket account from “add category”",
+          "example": "default"
+        },
+        "description": {
+          "type": "string",
+          "description": "Gives a description of the product",
+          "example": ""
+        },
+        "brand": {
+          "type": "string",
+          "description": "The product brand name",
+          "example": ""
+        },
+        "size": {
+          "type": "integer",
+          "description": "",
+          "example": ""
+        },
+        "weight": {
+          "type": "integer",
+          "description": "Total weight of the products",
+          "example": ""
+        },
+        "length": {
+          "type": "integer",
+          "description": "Product Dimensions",
+          "example": ""
+        },
+        "width": {
+          "type": "integer",
+          "description": "Product Dimensions",
+          "example": ""
+        },
+        "height": {
+          "type": "integer",
+          "description": "Product Dimensions",
+          "example": ""
+        },
+        "ean": {
+          "type": "string",
+          "description": "European Article Number - A barcode for product identification (which helps manufacturers identify how many products have been sold once a sale is made) It is 13 digits long and required for international selling",
+          "example": ""
+        },
+        "upc": {
+          "type": "string",
+          "description": "Universal Product Code – Barcode for product identification which is used across the world. It is 12 digits long ",
+          "example": ""
+        },
+        "isbn": {
+          "type": "string",
+          "description": "International Standard Book Number – Identification barcode for books, magazines, e-books and other published media. It is 10 digits long",
+          "example": ""
+        },
+        "color": {
+          "type": "string",
+          "description": "The colour of the product",
+          "example": ""
+        },
+        "imei_serialnumber": {
+          "type": "string",
+          "description": "The International Mobile Equipment Identity Number, which is used by  a network to identify valid devices. Eg if two iphones have to be shipped they will have 2 Imei’s",
+          "example": ""
+        },
+        "cost_price": {
+          "type": "integer",
+          "description": "How much it cost to make the product",
+          "example": ""
+        },
+        "mrp": {
+          "type": "string",
+          "description": "Maximum Retail Price. How much is the maximum price which the product can be sold at",
+          "example": ""
+        },
+        "status": {
+          "type": "integer",
+          "description": "In Boolean, if the product details have been successfully or unsuccessfully added",
+          "format": "int32",
+          "example": 1
+        },
+        "image_url": {
+          "type": "string",
+          "description": "Shows the url of the product images which have been uploaded",
+          "example": ""
+        },
+        "components": {
+          "type": "array",
+          "description": "An arrayed display of all the components",
+          "items": {
+            "type": "string",
+            "example": []
+          }
+        }
+      },
+      "required": ["sku", "name", "tax_code", "type", "qty", "low_stock", "category_code", "description", "brand", "size", "weight", "length", "width", "height", "ean", "upc", "isbn", "color", "imei_serialnumber", "cost_price", "mrp", "status", "image_url", "components"]
+    },
+    "addProduct422": {
+      "title": "unprocessable data",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "There were errors in adding new product!"},
+        "errors": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "array", "items": {"type": "string"}, "example": "The name field is required."},
+            "type": {"type": "array", "items": {"type": "string"}, "example": "The type field is required."},
+            "sku": {"type": "array", "items": {"type": "string"}, "example": "The sku field is required."}
+          }
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 422
+        }
       }
     }
   }
