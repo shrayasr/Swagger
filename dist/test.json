@@ -436,6 +436,147 @@
           "example": 422
         }
       }
+    },
+    "GetProductsResponse": {
+      "title": "Get products response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "integer"},
+              "sku": {"type": "string"},
+              "hsn": {"type": "string"},
+              "name": {"type": "string"},
+              "description": {"type": "string"},
+              "category_code": {"type": "string"},
+              "category_name": {"type": "string"},
+              "image": {"type": "string"},
+              "weight": {"type": "string"},
+              "size": {"type": "string"},
+              "cost_price": {"type": "string"},
+              "mrp": {"type": "string"},
+              "tax_code": {"type": "string"},
+              "low_stock": {"type": "integer"},
+              "ean": {"type": "string"},
+              "upc": {"type": "string"},
+              "isbn": {"type": "string"},
+              "created_at": {"type": "string"},
+              "updated_at": {"type": "string"},
+              "quantity": {"type": "integer"},
+              "color": {"type": "string"},
+              "brand": {"type": "string"},
+              "dimensions": {"type": "string"},
+              "status": {"type": "string"},
+              "type": {"type": "string"}
+            }
+          },
+          "example": [
+              {
+              "id": 319134,
+              "sku": "inactive",
+              "hsn": "",
+              "name": "inactive",
+              "description": "",
+              "category_code": "default",
+              "category_name": "Default Category",
+              "category_tax_code": "default",
+              "image": "",
+              "weight": "0.5 kg",
+              "size": "",
+              "cost_price": "0.00",
+              "mrp": "0.00",
+              "tax_code": "default",
+              "low_stock": 0,
+              "ean": "",
+              "upc": "",
+              "isbn": "",
+              "created_at": "23 Jun 2017 02:17 PM",
+              "updated_at": "23 Jun 2017 02:17 PM",
+              "quantity": 11,
+              "color": "",
+              "brand": "",
+              "dimensions": "10 x 10 x 10 cm",
+              "status": "INACTIVE",
+              "type": "Single"
+          },
+          {
+              "id": 318862,
+              "sku": "sanity",
+              "hsn": "",
+              "name": "sanity",
+              "description": "",
+              "category_code": "new",
+              "category_name": "new",
+              "category_tax_code": "5",
+              "image": "",
+              "weight": "0.5 kg",
+              "size": "",
+              "cost_price": "0.00",
+              "mrp": "0.00",
+              "tax_code": "5",
+              "low_stock": 0,
+              "ean": "",
+              "upc": "",
+              "isbn": "",
+              "created_at": "23 Jun 2017 01:13 PM",
+              "updated_at": "23 Jun 2017 01:13 PM",
+              "quantity": 8,
+              "color": "",
+              "brand": "",
+              "dimensions": "10 x 10 x 10 cm",
+              "status": "ACTIVE",
+              "type": "Single"
+            }
+          ]
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total": {"type": "integer"},
+                "count": {"type": "integer"},
+                "per_page": {"type": "integer"},
+                "current_page": {"type": "integer"},
+                "total_pages": {"type": "integer"},
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "total": 7,
+                "count": 7,
+                "per_page": 15,
+                "current_page": 1,
+                "total_pages": 1,
+                "links": []
+              }
+            }
+          }
+        }
+      },
+      "required": ["data", "meta"]
+    },
+    "401Error": {
+      "title": "Invalid token",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Token Signature could not be verified."
+        },
+        "status_code":  {
+          "type": "integer",
+          "example": 401
+        }
+      }
     }
   }
 }
