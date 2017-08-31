@@ -274,14 +274,6 @@
       },
       "required": ["id", "first_name", "last_name", "email", "company_id", "created_at", "token"]
     },
-    "405Error": {
-      "title": "Post method instead of Get or vice versa",
-      "type": "object",
-      "properties": {
-        "message": {"type": "string", "example": "method not allowed"},
-        "status_code": {"type": "integer", "example": 405}
-      }
-    },
     "AddRequest": {
       "title": "Add request",
       "type": "object",
@@ -561,8 +553,7 @@
             }
           }
         }
-      },
-      "required": ["data", "meta"]
+      }
     },
     "401Error": {
       "title": "Invalid token",
