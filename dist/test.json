@@ -1,0 +1,183 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "ShiprocketAPI",
+    "description": "A common dashboard to manage your entire business on various Marketplaces.",
+    "license": {
+      "name": "MIT",
+      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+    }
+  },
+  "host": "krmct001.kartrocket.com",
+  "schemes": ["https"],
+  "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "The api token provided by login api"
+        }
+    },
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1/auth/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "description": "The token is the key that you need to pass before accessing any section in the ShipRocket API (Except the “get countries” and “get codes”). Generating the token is an extremely simple process. Simply type in your email id (alternate id for the ShipRocket API) and all your details will be generated.",
+        "summary": "Access Token",
+        "operationId": "Get token",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GetTokenRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetTokenResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "schema": {
+              "$ref": "#/definitions/400Error"
+            }
+          },
+          "422": {
+            "description": "No input is defined",
+            "schema": {
+              "$ref": "#/definitions/login422Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GetTokenRequest": {
+      "title": "Get token request",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Prompts the user to type their email id",
+          "example": "abcd@xyz.com"
+        },
+        "password": {
+          "type": "string",
+          "description": "Prompts the user to type their selected password",
+          "example": "abcd1234"
+        }
+      },
+      "required": ["email", "password"]
+    },
+    "400Error": {
+      "title": "400 error Bad Request",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "These credentials do not match our records."
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 400
+        }
+      }
+    },
+    "login422Error": {
+      "title": "422 error unprocessable input",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Error in input"
+        },
+        "errors": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "The email field is required."
+              }
+            },
+            "password": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "The password field is required."
+              }
+            }
+          }
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 422
+        }
+      }
+    },
+    "GetTokenResponse": {
+      "title": "Get token response",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "user’s unique user id",
+          "example": 1
+        },
+        "first_name": {
+          "type": "string",
+          "description": "first name of the user",
+          "example": "John"
+        },
+        "last_name": {
+          "type": "string",
+          "description": "last name of the user",
+          "example": "Doe"
+        },
+        "email": {
+          "type": "string",
+          "description": "email of the user",
+          "example": "abcd@xyz.com"
+        },
+        "company_id": {
+          "type": "integer",
+          "description": "company id of the user",
+          "format": "int32",
+          "example": 12
+        },
+        "created_at": {
+          "type": "string",
+          "description": "date of creation",
+          "format": "dateTime"
+        },
+        "token": {
+          "type": "string",
+          "description": "necessary token number",
+          "example": "huiyd878y823hh2hdu232h"
+        }
+      },
+      "required": ["id", "first_name", "last_name", "email", "company_id", "created_at", "token"]
+    },
+    "405Error": {
+      "title": "Post method instead of Get or vice versa",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "method not allowed"},
+        "status_code": {"type": "integer", "example": 405}
+      }
+    }
+  }
+}
