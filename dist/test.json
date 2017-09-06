@@ -185,6 +185,47 @@
         }
       }
     },
+    "/v1/products/show/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Shows individual product details",
+        "summary": "Show",
+        "operationId": "Show",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id = The product id which is to be shown and the input should be in an integer format",
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShowResponse"
+            }
+          },
+          "400": {
+            "description": "{\n  \"message\": \"This product is either inactive or does not exist\",\n  \"status_code\": 400\n}",
+            "schema": {
+              "$ref": "#/definitions/show400"
+            }
+          },
+          "404": {
+            "description": "{\n  \"message\": \"404 not found.\",\n  \"status_code\": 404\n}",
+            "schema": {}
+          }
+        }
+      }
+    },
     "/v1/countries": {
       "get": {
         "tags": [
@@ -1367,6 +1408,57 @@
         }
       },
       "required": ["status", "data"]
+    },
+    "ShowResponse": {
+      "title": "Show response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "integer"},
+            "sku": {"type": "string"},
+            "hsn": {"type": "string"},
+            "name": {"type": "string"},
+            "description": {"type": "string"},
+            "category_code": {"type": "string"},
+            "category_name": {"type": "string"},
+            "image": {"type": "string"},
+            "weight": {"type": "string"},
+            "size": {"type": "string"},
+            "cost_price": {"type": "string"},
+            "mrp": {"type": "string"},
+            "tax_code": {"type": "string"},
+            "low_stock": {"type": "integer"},
+            "ean": {"type": "string"},
+            "upc": {"type": "string"},
+            "isbn": {"type": "string"},
+            "created_at": {"type": "string"},
+            "updated_at": {"type": "string"},
+            "quantity": {"type": "integer"},
+            "color": {"type": "string"},
+            "brand": {"type": "string"},
+            "dimensions": {"type": "string"},
+            "status": {"type": "string"},
+            "type": {"type": "string"}
+          }
+        }
+      },
+      "required": ["data"]
+    },
+    "show400": {
+      "title": "invalid product id",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "This product is either inactive or does not exist"
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 400
+        }
+      }
     }
   }
 }
