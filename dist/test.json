@@ -210,6 +210,43 @@
           }
         }
       }
+    },
+    "/v1/countries/show/{id}": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "description": "Shows all the zones which are present within a country.",
+        "summary": "Get all zones",
+        "operationId": "Get zones",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The specific id of the country in integer format"
+        }],
+        "responses": {
+          "200": {
+            "description": "Name of the specific zone",
+            "schema": {
+              "$ref": "#/definitions/GetZonesResponse"
+            }
+          },
+          "401": {
+            "description": "{\n  \"message\": \"Failed to authenticate because of bad credentials or an invalid authorization header.\",\n  \"status_code\": 401\n}",
+            "schema": {
+              "$ref": "#/definitions/401Error"
+            }
+          },
+          "404": {
+            "description": "{\n  \"message\": \"404 not found.\",\n  \"status_code\": 404\n}",
+            "schema": {}
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1104,6 +1141,232 @@
         "message": {"type": "string", "example": "method not allowed"},
         "status_code": {"type": "integer", "example": 405}
       }
+    },
+    "GetZonesResponse": {
+      "title": "Get zones response",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "data": {
+          "type": "object",
+          "example": [{
+              "id": 1,
+              "country_id": 1,
+              "code": "BDS",
+              "name": "Badakhshan",
+              "status": 1
+            },
+            {
+              "id": 2,
+              "country_id": 1,
+              "code": "BDG",
+              "name": "Badghis",
+              "status": 1
+            },
+            {
+              "id": 3,
+              "country_id": 1,
+              "code": "BGL",
+              "name": "Baghlan",
+              "status": 1
+            },
+            {
+              "id": 4,
+              "country_id": 1,
+              "code": "BAL",
+              "name": "Balkh",
+              "status": 1
+            },
+            {
+              "id": 5,
+              "country_id": 1,
+              "code": "BAM",
+              "name": "Bamian",
+              "status": 1
+            },
+            {
+              "id": 6,
+              "country_id": 1,
+              "code": "FRA",
+              "name": "Farah",
+              "status": 1
+            },
+            {
+              "id": 7,
+              "country_id": 1,
+              "code": "FYB",
+              "name": "Faryab",
+              "status": 1
+            },
+            {
+              "id": 8,
+              "country_id": 1,
+              "code": "GHA",
+              "name": "Ghazni",
+              "status": 1
+            },
+            {
+              "id": 9,
+              "country_id": 1,
+              "code": "GHO",
+              "name": "Ghowr",
+              "status": 1
+            },
+            {
+              "id": 10,
+              "country_id": 1,
+              "code": "HEL",
+              "name": "Helmand",
+              "status": 1
+            },
+            {
+              "id": 11,
+              "country_id": 1,
+              "code": "HER",
+              "name": "Herat",
+              "status": 1
+            },
+            {
+              "id": 12,
+              "country_id": 1,
+              "code": "JOW",
+              "name": "Jowzjan",
+              "status": 1
+            },
+            {
+              "id": 13,
+              "country_id": 1,
+              "code": "KAB",
+              "name": "Kabul",
+              "status": 1
+            },
+            {
+              "id": 14,
+              "country_id": 1,
+              "code": "KAN",
+              "name": "Kandahar",
+              "status": 1
+            },
+            {
+              "id": 15,
+              "country_id": 1,
+              "code": "KAP",
+              "name": "Kapisa",
+              "status": 1
+            },
+            {
+              "id": 16,
+              "country_id": 1,
+              "code": "KHO",
+              "name": "Khost",
+              "status": 1
+            },
+            {
+              "id": 17,
+              "country_id": 1,
+              "code": "KNR",
+              "name": "Konar",
+              "status": 1
+            },
+            {
+              "id": 18,
+              "country_id": 1,
+              "code": "KDZ",
+              "name": "Kondoz",
+              "status": 1
+            },
+            {
+              "id": 19,
+              "country_id": 1,
+              "code": "LAG",
+              "name": "Laghman",
+              "status": 1
+            },
+            {
+              "id": 20,
+              "country_id": 1,
+              "code": "LOW",
+              "name": "Lowgar",
+              "status": 1
+            },
+            {
+              "id": 21,
+              "country_id": 1,
+              "code": "NAN",
+              "name": "Nangrahar",
+              "status": 1
+            },
+            {
+              "id": 22,
+              "country_id": 1,
+              "code": "NIM",
+              "name": "Nimruz",
+              "status": 1
+            },
+            {
+              "id": 23,
+              "country_id": 1,
+              "code": "NUR",
+              "name": "Nurestan",
+              "status": 1
+            },
+            {
+              "id": 24,
+              "country_id": 1,
+              "code": "ORU",
+              "name": "Oruzgan",
+              "status": 1
+            },
+            {
+              "id": 25,
+              "country_id": 1,
+              "code": "PIA",
+              "name": "Paktia",
+              "status": 1
+            },
+            {
+              "id": 26,
+              "country_id": 1,
+              "code": "PKA",
+              "name": "Paktika",
+              "status": 1
+            },
+            {
+              "id": 27,
+              "country_id": 1,
+              "code": "PAR",
+              "name": "Parwan",
+              "status": 1
+            },
+            {
+              "id": 28,
+              "country_id": 1,
+              "code": "SAM",
+              "name": "Samangan",
+              "status": 1
+            },
+            {
+              "id": 29,
+              "country_id": 1,
+              "code": "SAR",
+              "name": "Sar-e Pol",
+              "status": 1
+            },
+            {
+              "id": 30,
+              "country_id": 1,
+              "code": "TAK",
+              "name": "Takhar",
+              "status": 1
+            }
+          ]
+        }
+      },
+      "required": ["status", "data"]
     }
   }
 }
