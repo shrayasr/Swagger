@@ -719,7 +719,6 @@
         }
       }
     },
-    ,
     "GetCountriesResponse": {
       "title": "Get countries response",
       "type": "object",
