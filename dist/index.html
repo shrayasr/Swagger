@@ -42,12 +42,12 @@
 
     <script type="text/javascript">
         $(function () {
-            var url = window.location.search.match(/url=([^&]+)/);
-            if (url && url.length > 1) {
-                url = decodeURIComponent(url[1]);
-            } else {
-                url = "https://raw.githubusercontent.com/deepaksharma208/swagger/master/dist/test.json";
-            }
+            var url = "https://raw.githubusercontent.com/deepaksharma208/swagger/master/dist/test.json";
+            // if (url && url.length > 1) {
+            //     url = decodeURIComponent(url[1]);
+            // } else {
+            //     url = "https://raw.githubusercontent.com/deepaksharma208/swagger/master/dist/test.json";
+            // }
 
             window.swaggerUi = new SwaggerUi({
                 url: url,
@@ -96,7 +96,7 @@
                 if (key && key.trim() != "") {
                     // TODO: make these values dynamic
                     var apiKeyAuth = new SwaggerClient.ApiKeyAuthorization("Authorization", 'Bearer ' + key, "header");
-                    window.swaggerUi.api.clientAuthorizations.add("Authorization", apiKeyAuth);
+                    window.swaggerUi.api.clientAuthorizations.add("token", apiKeyAuth);
                     window.localStorage.setItem('apiKey', key);
                     console.log("added key " + key);
                 }

@@ -10,35 +10,45 @@
     }
   },
   "host": "krmct001.kartrocket.com",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
-        "Bearer": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header",
-            "description": "The api token provided by login api"
-        }
-    },
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "The api token provided by login api"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/v1/auth/login": {
       "post": {
         "tags": [
           "Authentication"
         ],
-        "description": "The token is the key that you need to pass before accessing any section in the ShipRocket API (Except the “get countries” and “get codes”). Generating the token is an extremely simple process. Simply type in your email id (alternate id for the ShipRocket API) and all your details will be generated.",
+      "description": "**Error Tables:** \n  Error Code  | Description   |  Response Syntax\n  ------------- | ------------- | -------------\n  400  | Invalid request  | {}\n  422  | No Input is given  | {}",
         "summary": "Access Token",
         "operationId": "Get token",
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/GetTokenRequest"
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetTokenRequest"
+            }
           }
-        }],
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -66,54 +76,63 @@
         "tags": [
           "Products"
         ],
-        "description": "Shows all the details of all the products that a ShipRocket user has. This can be filtered according to details like number of products per page, ascending or descending order sorting order. ",
+        "description": "Shows all the details of all the products that a ShipRocket user has. This can be filtered according to details like number of products per page, ascending or descending order sorting order. \n|Response Code",
         "summary": "Get Products",
         "operationId": "Get products",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "page",
-          "in": "query",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The page number which is to be displayed"
-        }, {
-          "name": "per_page",
-          "in": "query",
-          "required": false,
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of products in each page"
-        }, {
-          "name": "sort",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Whether to arrange the items in ascending or descending order(DESC, ASC)"
-        }, {
-          "name": "sort_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
-        }, {
-          "name": "filter",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Value by which the results will be filtered"
-        }, {
-          "name": "filter_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Validation of filtered value (data to be matched)"
-        }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The page number which is to be displayed"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The total number of products in each page"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Whether to arrange the items in ascending or descending order(DESC, ASC)"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Value by which the results will be filtered"
+          },
+          {
+            "name": "filter_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Validation of filtered value (data to be matched)"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -136,25 +155,29 @@
         "description": "Add new product",
         "summary": "Add new Products",
         "operationId": "Add",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/AddRequest"
+        "security": [
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
             "schema": {}
-            },
+          },
           "422": {
             "description": "invalid data",
             "schema": {
@@ -181,7 +204,10 @@
           "example": "abcd1234"
         }
       },
-      "required": ["email", "password"]
+      "required": [
+        "email",
+        "password"
+      ]
     },
     "400Error": {
       "title": "400 error Bad Request",
@@ -272,7 +298,15 @@
           "example": "huiyd878y823hh2hdu232h"
         }
       },
-      "required": ["id", "first_name", "last_name", "email", "company_id", "created_at", "token"]
+      "required": [
+        "id",
+        "first_name",
+        "last_name",
+        "email",
+        "company_id",
+        "created_at",
+        "token"
+      ]
     },
     "AddRequest": {
       "title": "Add request",
@@ -408,19 +442,65 @@
           }
         }
       },
-      "required": ["sku", "name", "tax_code", "type", "qty", "low_stock", "category_code", "description", "brand", "size", "weight", "length", "width", "height", "ean", "upc", "isbn", "color", "imei_serialnumber", "cost_price", "mrp", "status", "image_url", "components"]
+      "required": [
+        "sku",
+        "name",
+        "tax_code",
+        "type",
+        "qty",
+        "low_stock",
+        "category_code",
+        "description",
+        "brand",
+        "size",
+        "weight",
+        "length",
+        "width",
+        "height",
+        "ean",
+        "upc",
+        "isbn",
+        "color",
+        "imei_serialnumber",
+        "cost_price",
+        "mrp",
+        "status",
+        "image_url",
+        "components"
+      ]
     },
     "addProduct422": {
       "title": "unprocessable data",
       "type": "object",
       "properties": {
-        "message": {"type": "string", "example": "There were errors in adding new product!"},
+        "message": {
+          "type": "string",
+          "example": "There were errors in adding new product!"
+        },
         "errors": {
           "type": "object",
           "properties": {
-            "name": {"type": "array", "items": {"type": "string"}, "example": "The name field is required."},
-            "type": {"type": "array", "items": {"type": "string"}, "example": "The type field is required."},
-            "sku": {"type": "array", "items": {"type": "string"}, "example": "The sku field is required."}
+            "name": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": "The name field is required."
+            },
+            "type": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": "The type field is required."
+            },
+            "sku": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": "The sku field is required."
+            }
           }
         },
         "status_code": {
@@ -438,35 +518,85 @@
           "items": {
             "type": "object",
             "properties": {
-              "id": {"type": "integer"},
-              "sku": {"type": "string"},
-              "hsn": {"type": "string"},
-              "name": {"type": "string"},
-              "description": {"type": "string"},
-              "category_code": {"type": "string"},
-              "category_name": {"type": "string"},
-              "image": {"type": "string"},
-              "weight": {"type": "string"},
-              "size": {"type": "string"},
-              "cost_price": {"type": "string"},
-              "mrp": {"type": "string"},
-              "tax_code": {"type": "string"},
-              "low_stock": {"type": "integer"},
-              "ean": {"type": "string"},
-              "upc": {"type": "string"},
-              "isbn": {"type": "string"},
-              "created_at": {"type": "string"},
-              "updated_at": {"type": "string"},
-              "quantity": {"type": "integer"},
-              "color": {"type": "string"},
-              "brand": {"type": "string"},
-              "dimensions": {"type": "string"},
-              "status": {"type": "string"},
-              "type": {"type": "string"}
+              "id": {
+                "type": "integer"
+              },
+              "sku": {
+                "type": "string"
+              },
+              "hsn": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "category_code": {
+                "type": "string"
+              },
+              "category_name": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "weight": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "cost_price": {
+                "type": "string"
+              },
+              "mrp": {
+                "type": "string"
+              },
+              "tax_code": {
+                "type": "string"
+              },
+              "low_stock": {
+                "type": "integer"
+              },
+              "ean": {
+                "type": "string"
+              },
+              "upc": {
+                "type": "string"
+              },
+              "isbn": {
+                "type": "string"
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "color": {
+                "type": "string"
+              },
+              "brand": {
+                "type": "string"
+              },
+              "dimensions": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
             }
           },
           "example": [
-              {
+            {
               "id": 319134,
               "sku": "inactive",
               "hsn": "",
@@ -493,8 +623,8 @@
               "dimensions": "10 x 10 x 10 cm",
               "status": "INACTIVE",
               "type": "Single"
-          },
-          {
+            },
+            {
               "id": 318862,
               "sku": "sanity",
               "hsn": "",
@@ -530,11 +660,21 @@
             "pagination": {
               "type": "object",
               "properties": {
-                "total": {"type": "integer"},
-                "count": {"type": "integer"},
-                "per_page": {"type": "integer"},
-                "current_page": {"type": "integer"},
-                "total_pages": {"type": "integer"},
+                "total": {
+                  "type": "integer"
+                },
+                "count": {
+                  "type": "integer"
+                },
+                "per_page": {
+                  "type": "integer"
+                },
+                "current_page": {
+                  "type": "integer"
+                },
+                "total_pages": {
+                  "type": "integer"
+                },
                 "links": {
                   "type": "array",
                   "items": {
@@ -563,7 +703,7 @@
           "type": "string",
           "example": "Token Signature could not be verified."
         },
-        "status_code":  {
+        "status_code": {
           "type": "integer",
           "example": 401
         }
