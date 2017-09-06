@@ -277,7 +277,7 @@
         }
       }
     },
-    "/v1/products/export": {
+    "/v1/products/sample": {
       "get": {
         "tags": [
           "Products"
