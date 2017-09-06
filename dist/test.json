@@ -219,9 +219,91 @@
               "$ref": "#/definitions/show400"
             }
           },
+          "401": {
+            "description": "{\n  \"message\": \"Failed to authenticate because of bad credentials or an invalid authorization header.\",\n  \"status_code\": 401\n}",
+            "schema": {
+              "$ref": "#/definitions/401Error"
+            }
+          },
           "404": {
             "description": "{\n  \"message\": \"404 not found.\",\n  \"status_code\": 404\n}",
             "schema": {}
+          }
+        }
+      }
+    },
+    "/v1/products/import": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "description": "This section shows the API for exporting the data of all your product and inventory details from the ShipRocket panel.",
+        "summary": "Bulk import",
+        "operationId": "Bulk import",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "file",
+          "in": "formData",
+          "required": true,
+          "type": "file"
+        }],
+        "responses": {
+          "200": {
+            "description": "Import success",
+            "schema": {
+              "$ref": "#/definitions/productImportResponse"
+            }
+          },
+          "403": {
+            "description": "{\n  \"message\": \"403 bad request\",\n  \"status_code\": 403\n}",
+            "schema": {
+              "$ref": "#/definitions/import403"
+            }
+          },
+          "401": {
+            "description": "{\n  \"message\": \"Failed to authenticate because of bad credentials or an invalid authorization header.\",\n  \"status_code\": 401\n}",
+            "schema": {
+              "$ref": "#/definitions/401Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/products/export": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "description": "The particular sample which is to be downloaded",
+        "summary": "Bulk Sample",
+        "operationId": "Bulk export",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Export success",
+            "schema": {
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "{\n  \"message\": \"Failed to authenticate because of bad credentials or an invalid authorization header.\",\n  \"status_code\": 401\n}",
+            "schema": {
+              "$ref": "#/definitions/401Error"
+            }
           }
         }
       }
@@ -1459,6 +1541,31 @@
           "example": 400
         }
       }
+    },
+      "productImportResponse": {
+      "title": "import success",
+      "type": "object",
+      "properties": {
+        "id": {"type": "integer", "example": 12}
+      }
+    },
+    "import403": {
+      "title": "incorrect format",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "403 bad request"},
+        "status_code": {"type": "integer", "example": 403}
+      }
+    },
+    "bulkExportResponse": {
+    "title": "export all products",
+    "type": "object",
+    "properties": {
+      "download_url": {
+        "type": "string",
+        "example": "https://s3-ap-southeast-1.amazonaws.com/kr-shipmultichannel/imports/c_21642/export-2017-08-28.csv"
+      }
     }
+  }
   }
 }
