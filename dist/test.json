@@ -57,13 +57,13 @@
             }
           },
           "400": {
-            "description": "**Invalid request**   {\"message\": \"These credentials do not match our records.\",  \"status_code\": 400 }",
+            "description": "{\"message\": \"These credentials do not match our records.\",\n  \"status_code\": 400 }",
             "schema": {
               "$ref": "#/definitions/400Error"
             }
           },
           "422": {
-            "description": "**No Input is given**   {\"message\": \"Error in input\", \"errors\": {  \"email\": [  \"The email field is required.\"  ], \"password\": [ \"The password field is required.\" ] }, \"status_code\": 400 }",
+            "description": "{\"message\": \"Error in input\",\n \"errors\": {  \"email\": [  \"The email field is required.\"  ], \"password\": [ \"The password field is required.\" ] }, \"status_code\": 400 }",
             "schema": {
               "$ref": "#/definitions/login422Error"
             }
