@@ -33,7 +33,7 @@
         "tags": [
           "Authentication"
         ],
-      "description": "**Error Tables:** \n  Error Code  | Description   |  Response Syntax\n  ------------- | ------------- | -------------\n  400  | Invalid request  | {}\n  422  | No Input is given  | {}",
+        "description": "The token is the key that you need to pass before accessing any section in the ShipRocket API (Except the “get countries” and “get codes”). Generating the token is an extremely simple process. Simply type in your email id (alternate id for the ShipRocket API) and all your detais will be generated.",
         "summary": "Access Token",
         "operationId": "Get token",
         "produces": [
@@ -57,13 +57,13 @@
             }
           },
           "400": {
-            "description": "Invalid request",
+            "description": "**Invalid request**   {\"message\": \"These credentials do not match our records.\",  \"status_code\": 400 }",
             "schema": {
               "$ref": "#/definitions/400Error"
             }
           },
           "422": {
-            "description": "No input is defined",
+            "description": "**No Input is given**   {\"message\": \"Error in input\", \"errors\": {  \"email\": [  \"The email field is required.\"  ], \"password\": [ \"The password field is required.\" ] }, \"status_code\": 400 }",
             "schema": {
               "$ref": "#/definitions/login422Error"
             }
