@@ -277,13 +277,13 @@
         }
       }
     },
-    "/v1/products/sample": {
+    "/v1/products/export/all": {
       "get": {
         "tags": [
           "Products"
         ],
         "description": "The particular sample which is to be downloaded",
-        "summary": "Bulk Sample",
+        "summary": "Bulk Export",
         "operationId": "Bulk export",
         "produces": ["application/json"],
         "security": [
@@ -294,15 +294,43 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Export success",
+            "description": "import succes",
             "schema": {
               "$ref": "#/definitions/bulkExportResponse"
             }
           },
           "401": {
-            "description": "{\n  \"message\": \"Failed to authenticate because of bad credentials or an invalid authorization header.\",\n  \"status_code\": 401\n}",
+            "description": "unauthorized access",
             "schema": {
-              "$ref": "#/definitions/401Error"
+              "$ref": "#/definitions/export401"
+            }
+          }
+        }
+      }
+    },
+    "/v1/products/sample": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Export a sample CSV file for importing",
+        "summary": "Product Sample",
+        "operationId": "Bulk sample",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
