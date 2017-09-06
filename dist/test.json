@@ -51,16 +51,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Access Token generated",
+            "description": "successfully token fetched",
             "schema": {
               "$ref": "#/definitions/GetTokenResponse"
             }
           },
           "400": {
             "description": "{\"message\": \"These credentials do not match our records.\",\n  \"status_code\": 400 }",
-            "schema": {
-              "$ref": "#/definitions/400Error"
-            }
+            "schema": {}
           },
           "422": {
             "description": "{\"message\": \"Error in input\",\n \"errors\": {  \"email\": [  \"The email field is required.\"  ], \"password\": [ \"The password field is required.\" ] }, \"status_code\": 400 }",
@@ -141,7 +139,7 @@
             }
           },
           "401": {
-            "description": "unauthorized access",
+            "description": "{\n  \"message\": \"Token Signature could not be verified.\",\n  \"status_code\": 401\n}",
             "schema": {
               "$ref": "#/definitions/401Error"
             }
@@ -175,11 +173,11 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Success",
             "schema": {}
           },
           "422": {
-            "description": "invalid data",
+            "description": "{\n  \"message\": \"There were errors in adding new product!\",\n  \"errors\": {\n    \"name\": \"The name field is required.\",\n    \"type\": \"The type field is required.\",\n    \"sku\": \"The sku field is required.\"\n  },\n  \"status_code\": 422\n}",
             "schema": {
               "$ref": "#/definitions/addProduct422"
             }
@@ -208,20 +206,6 @@
         "email",
         "password"
       ]
-    },
-    "400Error": {
-      "title": "400 error Bad Request",
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string",
-          "example": "These credentials do not match our records."
-        },
-        "status_code": {
-          "type": "integer",
-          "example": 400
-        }
-      }
     },
     "login422Error": {
       "title": "422 error unprocessable input",
