@@ -184,6 +184,32 @@
           }
         }
       }
+    },
+    "/v1/countries": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "description": "Shows all the countries which are present in the ShipRocket database. ShipRocket API provides ISO Code 2 and ISO Code 3 country options and has a total of 44 countries in its database. This allows you to use these countries in your own dropdown menu.",
+        "summary": "Countries",
+        "operationId": "Get countries",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetCountriesResponse"
+            }
+          },
+          "405": {
+            "description": "{\n  \"message\": \"method not allowed\",\n  \"status_code\": 405\n}",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -691,6 +717,393 @@
           "type": "integer",
           "example": 401
         }
+      }
+    },
+    ,
+    "GetCountriesResponse": {
+      "title": "Get countries response",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "description": "Status of response from server",
+          "format": "int32",
+          "example": "200"
+        },
+        "data": {
+          "type": "object",
+          "description": "Arrayed data",
+          "example": [{
+              "id": 1,
+              "name": "Afghanistan",
+              "iso_code_2": "AF",
+              "iso_code_3": "AFG",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 2,
+              "name": "Albania",
+              "iso_code_2": "AL",
+              "iso_code_3": "ALB",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 3,
+              "name": "Algeria",
+              "iso_code_2": "DZ",
+              "iso_code_3": "DZA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 4,
+              "name": "American Samoa",
+              "iso_code_2": "AS",
+              "iso_code_3": "ASM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 5,
+              "name": "Andorra",
+              "iso_code_2": "AD",
+              "iso_code_3": "AND",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 6,
+              "name": "Angola",
+              "iso_code_2": "AO",
+              "iso_code_3": "AGO",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 7,
+              "name": "Anguilla",
+              "iso_code_2": "AI",
+              "iso_code_3": "AIA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 8,
+              "name": "Antarctica",
+              "iso_code_2": "AQ",
+              "iso_code_3": "ATA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 9,
+              "name": "Antigua and Barbuda",
+              "iso_code_2": "AG",
+              "iso_code_3": "ATG",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 10,
+              "name": "Argentina",
+              "iso_code_2": "AR",
+              "iso_code_3": "ARG",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 11,
+              "name": "Armenia",
+              "iso_code_2": "AM",
+              "iso_code_3": "ARM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 12,
+              "name": "Aruba",
+              "iso_code_2": "AW",
+              "iso_code_3": "ABW",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 13,
+              "name": "Australia",
+              "iso_code_2": "AU",
+              "iso_code_3": "AUS",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 14,
+              "name": "Austria",
+              "iso_code_2": "AT",
+              "iso_code_3": "AUT",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 15,
+              "name": "Azerbaijan",
+              "iso_code_2": "AZ",
+              "iso_code_3": "AZE",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 16,
+              "name": "Bahamas",
+              "iso_code_2": "BS",
+              "iso_code_3": "BHS",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 17,
+              "name": "Bahrain",
+              "iso_code_2": "BH",
+              "iso_code_3": "BHR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 18,
+              "name": "Bangladesh",
+              "iso_code_2": "BD",
+              "iso_code_3": "BGD",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 19,
+              "name": "Barbados",
+              "iso_code_2": "BB",
+              "iso_code_3": "BRB",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 20,
+              "name": "Belarus",
+              "iso_code_2": "BY",
+              "iso_code_3": "BLR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 21,
+              "name": "Belgium",
+              "iso_code_2": "BE",
+              "iso_code_3": "BEL",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 22,
+              "name": "Belize",
+              "iso_code_2": "BZ",
+              "iso_code_3": "BLZ",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 23,
+              "name": "Benin",
+              "iso_code_2": "BJ",
+              "iso_code_3": "BEN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 24,
+              "name": "Bermuda",
+              "iso_code_2": "BM",
+              "iso_code_3": "BMU",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 25,
+              "name": "Bhutan",
+              "iso_code_2": "BT",
+              "iso_code_3": "BTN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 26,
+              "name": "Bolivia",
+              "iso_code_2": "BO",
+              "iso_code_3": "BOL",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 27,
+              "name": "Bosnia and Herzegowina",
+              "iso_code_2": "BA",
+              "iso_code_3": "BIH",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 28,
+              "name": "Botswana",
+              "iso_code_2": "BW",
+              "iso_code_3": "BWA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 29,
+              "name": "Bouvet Island",
+              "iso_code_2": "BV",
+              "iso_code_3": "BVT",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 30,
+              "name": "Brazil",
+              "iso_code_2": "BR",
+              "iso_code_3": "BRA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 31,
+              "name": "British Indian Ocean Territory",
+              "iso_code_2": "IO",
+              "iso_code_3": "IOT",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 32,
+              "name": "Brunei Darussalam",
+              "iso_code_2": "BN",
+              "iso_code_3": "BRN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 33,
+              "name": "Bulgaria",
+              "iso_code_2": "BG",
+              "iso_code_3": "BGR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 34,
+              "name": "Burkina Faso",
+              "iso_code_2": "BF",
+              "iso_code_3": "BFA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 35,
+              "name": "Burundi",
+              "iso_code_2": "BI",
+              "iso_code_3": "BDI",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 36,
+              "name": "Cambodia",
+              "iso_code_2": "KH",
+              "iso_code_3": "KHM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 37,
+              "name": "Cameroon",
+              "iso_code_2": "CM",
+              "iso_code_3": "CMR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 38,
+              "name": "Canada",
+              "iso_code_2": "CA",
+              "iso_code_3": "CAN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 39,
+              "name": "Cape Verde",
+              "iso_code_2": "CV",
+              "iso_code_3": "CPV",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 40,
+              "name": "Cayman Islands",
+              "iso_code_2": "KY",
+              "iso_code_3": "CYM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            }
+          ]
+        }
+      },
+      "required": ["status", "data"]
+    },
+    "405Error": {
+      "title": "Post method instead of Get or vice versa",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "method not allowed"},
+        "status_code": {"type": "integer", "example": 405}
       }
     }
   }
