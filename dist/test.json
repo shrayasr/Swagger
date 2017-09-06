@@ -51,7 +51,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
+            "description": "Access Token generated",
             "schema": {
               "$ref": "#/definitions/GetTokenResponse"
             }
