@@ -185,6 +185,12 @@
             "schema": {
               "$ref": "#/definitions/401Error"
             }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/404Error"
+            }
           }
         }
       },
@@ -423,6 +429,18 @@
             "schema": {
               "$ref": "#/definitions/GetAllResponse"
             }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
           }
         }
       }
@@ -452,6 +470,18 @@
           "200": {
             "description": "",
             "schema": {}
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "400": {
+            "description": "File required",
+            "schema": {
+              "$ref": "#/definitions/listing400"
+            }
           }
         }
       }
@@ -475,10 +505,19 @@
           "200": {
             "description": "",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -503,16 +542,25 @@
           "200": {
             "description": "",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
       }
     },
-    "/v1/listings/export/sample": {
+    "/v1/listings/sample": {
       "get": {
         "tags": [
           "Listings"
@@ -531,10 +579,19 @@
           "200": {
             "description": "",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -563,8 +620,28 @@
           }
         }],
         "responses": {
-          "200": {
-            "description": ""
+          "204": {
+            "description": "Linking success",
+            "schema": {
+            }
+          },
+          "400": {
+            "description": "Input not Defined",
+            "schema": {
+              "$ref": "#/definitions/400Error"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
           }
         }
       }
@@ -644,7 +721,19 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GetAllOrdersResponse"
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -669,7 +758,19 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GetAllUnprocessableOrdersResponse"
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -694,7 +795,19 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GetAllProcessingOrdersResponse"
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -719,7 +832,19 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GetAllManifestedOrdersResponse"
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -753,6 +878,18 @@
             "schema": {
               "$ref": "#/definitions/GetOrderResponse"
             }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
           }
         }
       }
@@ -773,12 +910,22 @@
         ],
         "parameters": [],
         "responses": {
-          "200": {
+          "204": {
             "description": "",
+            "schema": {}
+          },
+          "401": {
+            "description": "unauthorized access",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/export401"
             }
-          }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          } 
         }
       }
     },
@@ -798,10 +945,20 @@
         ],
         "parameters": [],
         "responses": {
-          "200": {
+          "204": {
             "description": "",
+            "schema": {}
+          },
+          "401": {
+            "description": "unauthorized access",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -831,13 +988,34 @@
         }],
         "responses": {
           "200": {
-            "description": ""
+            "description": "Order cancel request taken",
+            "schema": {
+              "$ref": "#/definitions/CancelOrdersResponse"
+            }
+          },
+          "204": {
+            "description": "unprocessable input"
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "#/definitions/login422Error"
           }
         }
       }
     },
     "/v1/orders/fulfill": {
-      "post": {
+      "patch": {
         "tags": [
           "Orders"
         ],
@@ -867,12 +1045,27 @@
                 "$ref": "#/definitions/FulfillmentResponse"
               }
             }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "#/definitions/login422Error"
           }
         }
       }
     },
     "/v1/orders/mapping": {
-      "post": {
+      "patch": {
         "tags": [
           "Orders"
         ],
@@ -902,6 +1095,21 @@
                 "$ref": "#/definitions/MappingResponse"
               }
             }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "#/definitions/login422Error"
           }
         }
       }
@@ -937,6 +1145,21 @@
                 "$ref": "#/definitions/GenerateInvoiceResponse"
               }
             }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "#/definitions/login422Error"
           }
         }
       }
@@ -965,7 +1188,7 @@
         }, {
           "name": "per_page",
           "in": "query",
-          "required": false,
+          "required": true,
           "type": "integer",
           "format": "int32",
           "description": "Number of orders to get per request"
@@ -1016,8 +1239,23 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/TrackResponse"
+              "$ref": "#/definitions/GetOrderResponse"
             }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "#/definitions/login422Error"
           }
         }
       }
@@ -1045,14 +1283,15 @@
           }
         }],
         "responses": {
-          "200": {
-            "description": ""
+          "202": {
+            "description": "Address updated",
+            "schema": {}
           }
         }
       }
     },
     "/v1/orders/export": {
-      "get": {
+      "post": {
         "tags": [
           "Orders"
         ],
@@ -1069,7 +1308,19 @@
           "200": {
             "description": "",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -1105,6 +1356,24 @@
               "items": {
                 "$ref": "#/definitions/GetManifestsResponse"
               }
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/404Error"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
             }
           }
         }
@@ -1145,7 +1414,7 @@
           },
           "403": {
             "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {}
+            "schema": {"$ref": "#/definitions/import403"}
           }
         }
       }
@@ -1235,7 +1504,7 @@
           },
           "403": {
             "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {}
+            "schema": {"$ref": "#/definitions/import403"}
           }
         }
       }
@@ -3195,38 +3464,6 @@
       },
       "required": ["data", "meta"]
     },
-    "GetAllUnprocessableOrdersResponse": {
-      "title": "Get all unprocessable orders response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "meta": {
-          "type": "object"
-        }
-      },
-      "required": ["data", "meta"]
-    },
-    "GetAllProcessingOrdersResponse": {
-      "title": "Get all processing orders response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "meta": {
-          "type": "object"
-        }
-      },
-      "required": ["data", "meta"]
-    },
     "GetAllManifestedOrdersResponse": {
       "title": "Get all manifested orders response",
       "type": "object",
@@ -3267,7 +3504,91 @@
       "type": "object",
       "properties": {
         "data": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+              "id": {"type": "integer","example": 123},
+              "channel_id": {"type": "integer","example": 456},
+              "channel_name": {"type": "string","example": "My Channel"},
+              "base_channel_code": {"type": "string","example": "MC"},
+              "channel_order_id": {"type": "string","example": "Test1504508157347"},
+              "customer_name": {"type": "string","example": "first last"},
+              "customer_email": {"type": "string","example": "test@gmail.com"},
+              "customer_phone": {"type": "string","example": "9876543210"},
+              "payment_status": {"type": "string","example": "Pending"},
+              "total": {"type": "string","example": "100.00"},
+              "tax": {"type": "string","example": "0.00"},
+              "sla": {"type": "string","example": "2 days"},
+              "shipping_method": {"type": "string","example": "SR"},
+              "expedited": {"type": "string","example": "0"},
+              "status": {"type": "string","example": "NEW"},
+              "status_code": {"type": "integer","example": 1},
+              "payment_method": {"type": "string","example": "Prepaid"},
+              "is_international": {"type": "integer","example": 0},
+              "purpose_of_shipment": {"type": "integer","example": 0},
+              "channel_created_at": {"type": "string","example": "4 Sep 2017, 12:26 PM"},
+              "created_at": {"type": "string","example": "4 Sep 2017, 12:26 PM"},
+              "products": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "integer","example": 123},
+                    "channel_order_product_id": {"type": "integer","example": 456},
+                    "name": {"type": "string","example": "test product"},
+                    "channel_sku": {"type": "string","example": "ABCD1234"},
+                    "quantity": {"type": "integer","example": 1},
+                    "product_id": {"type": "integer","example": 123},
+                    "available": {"type": "string","example": "0"},
+                    "status": {"type": "string","example": "UNDEFINED"},
+                    "hsn": {"type": "string","example": "54673478"}
+                  }
+                }
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "integer","example": 123},
+                    "isd_code": {"type": "string","example": "+91"},
+                    "courier": {"type": "string","example": "FedEx"},
+                    "weight": {"type": "string","example": "0.5"},
+                    "dimensions": {"type": "string","example": "10x10x10"},
+                    "awb": {"type": "string","example": "123"},
+                    "return_awb": {"type": "string","example": "321"},
+                    "volumetric_weight": {"type": "string","example": "0.5"}
+                    }
+                  }
+                },
+              "activities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "ORDER_CREATED"
+                  }
+              }
+          }
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total": {"type": "integer","example": 123},
+                "count": {"type": "integer","example": 1},
+                "per_page": {"type": "integer","example": 12},
+                "current_page": {"type": "integer","example": 1},
+                "total_pages": {"type": "integer","example": 32},
+                "links": {
+                  "type": "object",
+                  "properties": {
+                    "next": {"type": "string", "example": "https://krmct001.kartrocket.com/v1/orders?page=2"}
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "required": ["data"]
@@ -3287,6 +3608,20 @@
       },
       "required": ["ids"]
     },
+    "CancelOrdersResponse": {
+      "title": "Order Cancel request",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": "200"
+        },
+        "message": {
+          "type": "string",
+          "example": "Your request to cancel order id order6 has been taken. Since the AWB has already been assigned,  the freight amount against that order is blocked and it will be added back automatically in to your balance in 3-4 working days after the verification by the concerned team."
+        }
+      }
+    },
     "FulfillmentRequest": {
       "title": "Fulfillment request",
       "type": "object",
@@ -3294,7 +3629,13 @@
         "data": {
           "type": "array",
           "items": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "order_id": {"type": "integer","example": 123},
+              "order_product_id": {"type": "integer","example": 321},
+              "quantity": {"type": "string","example": "1"},
+              "action": {"type": "string","example": "add"}
+            }
           }
         }
       },
@@ -3305,7 +3646,13 @@
       "type": "object",
       "properties": {
         "data": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "order_id": {"type": "integer","example": 123},
+            "order_product_id": {"type": "integer","example": 321},
+            "quantity": {"type": "string","example": "1"},
+            "action": {"type": "string","example": "add"}
+          }
         },
         "success": {
           "type": "boolean"
@@ -3323,7 +3670,12 @@
         "data": {
           "type": "array",
           "items": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "order_id": {"type": "integer","example": 123},
+              "order_product_id": {"type": "integer","example": 321},
+              "master_sku": {"type": "string","example": "H3HEDE"}
+            }
           }
         }
       },
@@ -3331,20 +3683,31 @@
     },
     "MappingResponse": {
       "title": "Mapping response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object"
-        },
-        "status_code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "success": {
-          "type": "boolean"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "order_id": {"type": "integer","example": 123},
+              "order_product_id": {"type": "integer","example": 321},
+              "master_sku": {"type": "string","example": "H3HEDE"}
+            }
+          },
+          "status_code": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "message": {
+            "type": "string",
+            "example": "No product found matching this master sku"
+          },
+          "success": {
+            "type": "boolean",
+            "example": false
+          }
         }
       },
       "required": ["data", "status_code", "message", "success"]
@@ -3380,27 +3743,12 @@
           "type": "array",
           "description": "If the invoice is not created then it shows this fact",
           "items": {
-            "type": "string"
+            "type": "string",
+            "example": ""
           }
         }
       },
       "required": ["is_invoice_created", "invoice_url", "not_created"]
-    },
-    "TrackResponse": {
-      "title": "Track response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "meta": {
-          "type": "object"
-        }
-      },
-      "required": ["data", "meta"]
     },
     "ChangeAddressRequest": {
       "title": "Shows the address which needs to be updated",
@@ -3469,7 +3817,8 @@
         "data": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "example": "https://s3-ap-southeast-1.amazonaws.com/kr-multichannel/1/manifest/MAN-00212.pdf"
           },
           "description": "Displays the url of a pdf file with the manifest"
         }
@@ -3643,7 +3992,7 @@
           "type": "integer",
           "description": ""
         },
-        "width": {
+        "weight": {
           "type": "integer",
           "description": ""
         }
@@ -3654,14 +4003,23 @@
       "title": "Create linked order. response",
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string"
+        "order_id": {
+          "type": "string",
+          "example": "12345"
         },
         "status_code": {
-          "type": "string"
+          "type": "string",
+          "example": "1"
+        },
+        "shipment_id": {
+          "type": "string",
+          "example": "1234"
+        },
+        "status": {
+          "type": "string",
+          "example": "NEW"
         }
-      },
-      "required": ["status", "status_code"]
+      }
     },
     "CreateQuickOrderRequest": {
       "type": "object",
@@ -3765,6 +4123,10 @@
         "order_items": {
           "type": "object",
           "properties": {
+            "name": {
+              "type": "string",
+              "example": "test"
+            },
             "sku": {
               "type": "string",
               "description": ""
@@ -3834,11 +4196,25 @@
       "title": "Create quick order response",
       "type": "object",
       "properties": {
+        "order_id": {
+          "type": "integer",
+          "example": 123
+        },
+        "shipment_id": {
+          "type": "integer",
+          "example": 546
+        },
         "status": {
-          "type": "string"
+          "type": "string",
+          "example": "NEW"
         },
         "status_code": {
-          "type": "string"
+          "type": "integer",
+          "example": 1
+        },
+        "onboarding_completed_now": {
+          "type": "integer",
+          "example": 0
         }
       },
       "required": ["status", "status_code"]
@@ -4479,6 +4855,14 @@
     "properties": {
       "message": {"type": "string", "example": "Failed to authenticate because of bad credentials or an invalid authorization header."},
       "status_code": {"type": "integer", "example": 401}
+    }
+  },
+  "listing400": {
+    "title": "no file provided",
+    "type": "object",
+    "properties": {
+      "message": {"type": "string","example": "FIle required"},
+      "status_code": {"type": "integer","example": 400}
     }
   }
 }
