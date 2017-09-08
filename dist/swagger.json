@@ -53,7 +53,7 @@
             }
           },
           "422": {
-            "description": "No input is defined",
+            "description": "invalid input",
             "schema": {
               "$ref": "#/definitions/login422Error"
             }
@@ -1009,7 +1009,10 @@
             }
           },
           "422": {
-            "description": "#/definitions/login422Error"
+            "description": "Invalid parameters",
+            "schema": {
+              "$ref": "#/definitions/login422Error"
+            }
           }
         }
       }
