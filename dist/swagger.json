@@ -3,11 +3,8 @@
   "info": {
     "version": "1.0",
     "title": "ShiprocketAPI",
-    "description": "A common dashboard to manage your entire business on various Marketplaces.",
-    "license": {
-      "name": "MIT",
-      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
-    }
+    "description": "Welcome to ShipRocket’s API Documentation. Get a clear understanding of all the sections and codes that are used in ShipRocket’s API. ShipRocket API uses the JSON syntax. First you need to register with ShipRocket and create an account. After being a ShipRocket user you have to provide an alternate email id which would be for the purpose of using the ShipRocket API.
+"
   },
   "host": "krmct001.kartrocket.com",
   "schemes": ["https"],
