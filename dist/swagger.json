@@ -4,29 +4,19 @@
     "version": "1.0",
     "title": "ShiprocketAPI",
     "description": "Welcome to ShipRocket’s API Documentation. Get a clear understanding of all the sections and codes that are used in ShipRocket’s API. ShipRocket API uses the JSON syntax. \n First you need to register with ShipRocket and create an account. Simply click on this [link](https://app.shiprocket.in/register) to complete the simple sign up process.\n After being a ShipRocket user you have to provide an alternate email id which would be for the purpose of using the ShipRocket API. \n  Code Number | Descrition\n  ----- | -----\n  1 | New\n  2 | Invoiced\n  3 | Ready To Ship\n  4 | Pickup Scheduled\n  5 | Cancelled\n  6 | Shipped\n  7 | Delivered\n  8 | e-Payment Failed\n  9 | Returned\n  10 | Unmapped\n  11 | Out of Stock\n  12 | Pickup Queued\n  13 | Pickup Rescheduled\n  14 | Pickup error// Created when there is an error on pickup schedule\n  15 | RTO initiated\n  16 | RTO delivered\n  17 | RTO Acknowledged\n  18 | Cancellation Request\n  19 | Out for Delivery\n  20 | In Transit",
-    "license": {
-      "name": "MIT",
-      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
-    }
   },
   "host": "krmct001.kartrocket.com",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "securityDefinitions": {
-    "Bearer": {
-      "type": "apiKey",
-      "name": "Authorization",
-      "in": "header",
-      "description": "The api token provided by login api"
-    }
-  },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "The api token provided by login api"
+        }
+    },
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/v1/auth/login": {
       "post": {
@@ -36,19 +26,15 @@
         "description": "The token is the key that you need to pass before accessing any section in the ShipRocket API (Except the “get countries” and “get codes”). Generating the token is an extremely simple process. Simply type in your email id (alternate id for the ShipRocket API) and all your details will be generated.",
         "summary": "Access Token",
         "operationId": "Get token",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetTokenRequest"
-            }
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GetTokenRequest"
           }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -63,9 +49,68 @@
             }
           },
           "422": {
-            "description": "No input is defined",
+            "description": "invalid input",
             "schema": {
               "$ref": "#/definitions/login422Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/countries": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "description": "Shows all the countries which are present in the ShipRocket database. ShipRocket API provides ISO Code 2 and ISO Code 3 country options and has a total of 44 countries in its database. This allows you to use these countries in your own dropdown menu.",
+        "summary": "Countries",
+        "operationId": "Get countries",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetCountriesResponse"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/countries/show/{id}": {
+      "get": {
+        "tags": [
+          "Countries"
+        ],
+        "description": "Shows all the zones which are present within a country.",
+        "summary": "Get all zones",
+        "operationId": "Get zones",
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The specific id of the country in integer format"
+        }],
+        "responses": {
+          "200": {
+            "description": "Name of the specific zone",
+            "schema": {
+              "$ref": "#/definitions/GetZonesResponse"
+            }
+          },
+          "404": {
+            "description": "404 not found",
+            "schema": {
+              "$ref": "#/definitions/404Error"
             }
           }
         }
@@ -79,60 +124,51 @@
         "description": "Shows all the details of all the products that a ShipRocket user has. This can be filtered according to details like number of products per page, ascending or descending order sorting order. ",
         "summary": "Get Products",
         "operationId": "Get products",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "security": [
-          {
-            "Bearer": []
-          }
+            {
+                "Bearer": []
+            }
         ],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "The page number which is to be displayed"
-          },
-          {
-            "name": "per_page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "description": "The total number of products in each page"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Whether to arrange the items in ascending or descending order(DESC, ASC)"
-          },
-          {
-            "name": "sort_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Value by which the results will be filtered"
-          },
-          {
-            "name": "filter_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Validation of filtered value (data to be matched)"
-          }
-        ],
+        "parameters": [{
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number which is to be displayed"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of products in each page"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Whether to arrange the items in ascending or descending order(DESC, ASC)"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Value by which the results will be filtered"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Validation of filtered value (data to be matched)"
+        }],
         "responses": {
           "200": {
             "description": "",
@@ -145,6 +181,12 @@
             "schema": {
               "$ref": "#/definitions/401Error"
             }
+          },
+          "404": {
+            "description": "Not found",
+            "schema": {
+              "$ref": "#/definitions/404Error"
+            }
           }
         }
       },
@@ -155,33 +197,1895 @@
         "description": "Add new product",
         "summary": "Add new Products",
         "operationId": "Add",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "security": [
-          {
-            "Bearer": []
-          }
+            {
+                "Bearer": []
+            }
         ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/AddRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {}
+            },
+          "422": {
+            "description": "invalid data",
             "schema": {
-              "$ref": "#/definitions/AddRequest"
+              "$ref": "#/definitions/addProduct422"
             }
           }
+        }
+      }
+    },
+    "/v1/products/show/{id}": {
+      "get": {
+        "tags": [
+          "Products"
         ],
+        "description": "Shows individual product details",
+        "summary": "Show",
+        "operationId": "Show",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id = The product id which is to be shown and the input should be in an integer format",
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShowResponse"
+            }
+          },
+          "400": {
+            "description": "invalid product id",
+            "schema": {
+              "$ref": "#/definitions/show400"
+            }
+          },
+          "404": {
+            "description": "no id provided",
+            "schema": {
+              "$ref": "#/definitions/404Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/products/import": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "description": "This section shows the API for exporting the data of all your product and inventory details from the ShipRocket panel.",
+        "summary": "Bulk import",
+        "operationId": "Bulk import",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "file",
+          "in": "formData",
+          "required": true,
+          "type": "file"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/productImportResponse"
+            }
+          },
+          "403": {
+            "description": "bad request",
+            "schema": {
+              "$ref": "#/definitions/import403"
+            }
+          }
+        }
+      }
+    },
+    "/v1/products/export": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "description": "The particular sample which is to be downloaded",
+        "summary": "Bulk Sample",
+        "operationId": "Bulk export",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "import succes",
+            "schema": {
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          }
+        }
+      }
+    },
+    "/v1/products/sample": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "description": "Export a sample CSV file for importing",
+        "summary": "Get a sample format to Import Products",
+        "operationId": "Bulk sample",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/listings": {
+      "get": {
+        "tags": [
+          "Listings"
+        ],
+        "description": "Get a JSON representation of all listings",
+        "summary": "Get all Listings",
+        "operationId": "Get all",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Page number of the data which is to be displayed"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of channel orders listed in each page"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "The order in which the listings should be sorted"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Value by which the results will be filtered"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Validation of filtered value (data to be matched)"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetAllResponse"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          }
+        }
+      }
+    },
+    "/v1/listings/import": {
+      "post": {
+        "tags": [
+          "Listings"
+        ],
+        "description": "Import CSV containing channel catalog to master catalog mappings",
+        "summary": "Import Catalog mappings",
+        "operationId": "Bulk import1",
+        "consumes": ["multipart/form-data"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "file",
+          "in": "formData",
+          "required": true,
+          "type": "file"
+        }],
         "responses": {
           "200": {
             "description": "",
             "schema": {}
           },
-          "422": {
-            "description": "invalid data",
+          "401": {
+            "description": "unauthorized access",
             "schema": {
-              "$ref": "#/definitions/addProduct422"
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "400": {
+            "description": "File required",
+            "schema": {
+              "$ref": "#/definitions/listing400"
+            }
+          }
+        }
+      }
+    },
+    "/v1/listings/export/mapped": {
+      "get": {
+        "tags": [
+          "Listings"
+        ],
+        "description": "Downloading the list of mapped items in the channel catalog sheet. After mapping items you can see the number of products of one channel, which are present in the Master Catalogue.",
+        "summary": "Export Mapped",
+        "operationId": "Export mapped",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/listings/export/unmapped": {
+      "get": {
+        "tags": [
+          "Listings"
+        ],
+        "description": "Downloading the list of unmapped items in the channel catalog sheet.",
+        "summary": "Export Unmapped",
+        "operationId": "Export un-mapped",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/listings/sample": {
+      "get": {
+        "tags": [
+          "Listings"
+        ],
+        "description": "Downloading a sample of the catalogue sheet.",
+        "summary": "Export sample",
+        "operationId": "Export sample",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/listings/link": {
+      "post": {
+        "tags": [
+          "Listings"
+        ],
+        "description": "The items which are to be linked",
+        "summary": "Map",
+        "operationId": "Map",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/MapRequest"
+          }
+        }],
+        "responses": {
+          "204": {
+            "description": "Linking success",
+            "schema": {
+            }
+          },
+          "400": {
+            "description": "Input not Defined",
+            "schema": {
+              "$ref": "#/definitions/400Error"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "The ShipRocket API for getting all the orders of a single seller. In this API the product and shipment activities will have sub arrays for individual products and shipments. ",
+        "summary": "Get all orders",
+        "operationId": "Get all orders",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Page number of data to display"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of orders to get per request"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Sort type (DESC, ASC)"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to sort by"
+        }, {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "To date"
+        }, {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "From date"
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Filter value"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to filter by"
+        }, {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Search for AWB or Channel Order ID"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/unprocessable": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Get a JSON representation of all unprocessable orders",
+        "summary": "Get all unprocessable orders",
+        "operationId": "Get all unprocessable orders",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/orders/processing": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Get a JSON representation of orders in processing",
+        "summary": "Get orders in Processing",
+        "operationId": "Get all processing orders",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/manifested": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Get a JSON representation of all manifest stage orders",
+        "summary": "Get manifested orders",
+        "operationId": "Get all manifested orders",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/show/{id}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Get order and shipment details",
+        "summary": "Get order Details",
+        "operationId": "Get order",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The order id"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/fetch": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Starts a background job which will fetch orders from all channels.",
+        "summary": "Fetch",
+        "operationId": "Fetch orders",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {}
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          } 
+        }
+      }
+    },
+    "/v1/orders/status": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "This API runs a status sync which pulls out the changes in order status and syncs them with the panel",
+        "summary": "Sync status",
+        "operationId": "Sync status",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "",
+            "schema": {}
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/cancel": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "This API cancels orders which are given",
+        "summary": "Cancel an order",
+        "operationId": "Cancel orders",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/CancelOrdersRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "Order cancel request taken",
+            "schema": {
+              "$ref": "#/definitions/CancelOrdersResponse"
+            }
+          },
+          "204": {
+            "description": "unprocessable input"
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "schema": {
+              "$ref": "#/definitions/login422Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/fulfill": {
+      "patch": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Fulfillment",
+        "summary": "Add inventory for order product",
+        "operationId": "Fulfillment",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/FulfillmentRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FulfillmentResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "#/definitions/login422Error"
+          }
+        }
+      }
+    },
+    "/v1/orders/mapping": {
+      "patch": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Map unmapped order products",
+        "summary": "Map orders products",
+        "operationId": "Mapping",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/MappingRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MappingResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "#/definitions/login422Error"
+          }
+        }
+      }
+    },
+    "/v1/orders/print/invoice": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Generates an invoice for an order through the order id. You can pass multiple order id’s as well, to generate their response",
+        "summary": "Generate Invoice",
+        "operationId": "Generate invoice",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GenerateInvoiceRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GenerateInvoiceResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "#/definitions/login422Error"
+          }
+        }
+      }
+    },
+    "/v1/orders/track": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Get tracking data of all orders",
+        "summary": "Get tracking Details",
+        "operationId": "Track",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Page number of data to display"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of orders to get per request"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Sort type (DESC, ASC)"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to sort by"
+        }, {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "To date"
+        }, {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "From date"
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Filter value"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to filter by"
+        }, {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Search for AWB or Channel Order ID"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetOrderResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "#/definitions/login422Error"
+          }
+        }
+      }
+    },
+    "/v1/orders/address/update": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "If you need to change the customer’s delivery address, you need to pass the order id and the API will show how to",
+        "summary": "Change address",
+        "operationId": "Change address",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ChangeAddressRequest"
+          }
+        }],
+        "responses": {
+          "202": {
+            "description": "Address updated",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/v1/orders/export": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Displays the URL of the CSV sheet of downloaded orders as a response",
+        "operationId": "Export orders",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/bulkExportResponse"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/print/manifest": {
+      "post": {
+        "tags": [
+          "Orders"
+        ],
+        "description": "Prints the manifest of the order id on the assumption that the manifest is created",
+        "summary": "Get menifest",
+        "operationId": "Get manifests",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GetManifestsRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GetManifestsResponse"
+              }
+            }
+          },
+          "404": {
+            "description": "not found",
+            "schema": {
+              "$ref": "#/definitions/404Error"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/create": {
+      "post": {
+        "tags": [
+          "Custom Orders"
+        ],
+        "description": "Shows the details of the order which needs to be created",
+        "summary": "Create Orders",
+        "operationId": "Create linked order.",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/CreateLinkedOrderRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateLinkedOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
+            "schema": {}
+          },
+          "403": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
+            "schema": {"$ref": "#/definitions/import403"}
+          }
+        }
+      }
+    },
+    "/v1/orders/import": {
+      "post": {
+        "tags": [
+          "Custom Orders"
+        ],
+        "description": "Mentions the order sheets into your panel. Should be a CSV file",
+        "summary": "Bulk Import",
+        "operationId": "Bulk import2",
+        "consumes": ["multipart/form-data"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "file",
+          "in": "formData",
+          "required": true,
+          "type": "file"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/v1/orders/sample": {
+      "get": {
+        "tags": [
+          "Custom Orders"
+        ],
+        "description": "Export sample import file",
+        "summary": "Get sample format for Orders Import",
+        "operationId": "Bulk sample1",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "/v1/orders/create/adhoc": {
+      "post": {
+        "tags": [
+          "Custom Orders"
+        ],
+        "description": "Shows the details of the order which needs to be created",
+        "summary": "Create quick orders",
+        "operationId": "Create quick order",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/CreateQuickOrderRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateQuickOrderResponse"
+            }
+          },
+          "403": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
+            "schema": {"$ref": "#/definitions/import403"}
+          }
+        }
+      }
+    },
+    "/v1/errors/{id}/check": {
+      "get": {
+        "tags": ["FIle Imports"],
+        "summary": "Get file import results from Bulk order, products, listing imports.",
+        "description": "Check Import Response",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#definitions/fileImportResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/shipments": {
+      "get": {
+        "tags": [
+          "Shipments"
+        ],
+        "description": "Get all shipments",
+        "summary": "Get shipment Details",
+        "operationId": "Get all shipments",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Sort type (DESC, ASC)"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to sort by"
+        }, {
+          "name": "filter",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Filter value"
+        }, {
+          "name": "filter_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Field to filter by"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/v1/shipments/{id}": {
+      "get": {
+        "tags": [
+          "Shipments"
+        ],
+        "description": "Get shipment details",
+        "summary": "Get shipment Details of specific orders",
+        "operationId": "Details",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The shipment id"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DetailsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/inventory": {
+      "get": {
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Checks the availability of inventory according to the SKU",
+        "summary": "Get Details of orders with inventories",
+        "operationId": "Get inventories",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "page",
+          "in": "query",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "The page number which is to be displayed"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of products in each page in an integer format"
+        }, {
+          "name": "sort",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Whether to arrange the items in ascending or descending order"
+        }, {
+          "name": "sort_by",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetInventoriesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/inventory/{id}/update": {
+      "put": {
+        "tags": [
+          "Inventory"
+        ],
+        "description": "Through this API you can make changes to the inventory listings in your ShipRocket panel",
+        "summary": "Update Inventory",
+        "operationId": "Update inventory",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "You have to pass the product id of the inventory which is to be updated"
+          },
+          {
+            "name": "quantity",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The specific number which needs to be changed"
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "Added = The number is added to the inventory\nReplace = The original number is replaced by the specific number\nRemove = The specific number is deducted from the opening number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/UpdateInventoryResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/channels": {
+      "get": {
+        "tags": [
+          "Channels"
+        ],
+        "description": "The ShipRocket API for getting the data of all integrated channels in the ShipRocket account. ",
+        "summary": "Get all channels",
+        "operationId": "Get all2",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/channelsRequest"
+            }
+          }
+        }
+      }
+    },
+    "/v1/courier/serviceability/": {
+      "get": {
+        "tags": [
+          "Couriers"
+        ],
+        "description": "Shows the number of courier companies available for delivery from pickup point to customer delivery code, according to weight.",
+        "summary": "Check Serviceability",
+        "operationId": "Check serviceability",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+            "name": "pickup_postcode",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The pincode of the location from where the shipment is supposed to be picked up, in an integer format"
+          }, {
+            "name": "delivery_postcode",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The pincode of the location where the shipment is supposed to be delivered, in an integer format"
+          }, {
+            "name": "weight",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "Shipment weight, in kgs"
+          }, {
+            "name": "cod",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "If cash on delivery is required or not. Required =1, Prepaid =0"
+          },
+          {
+            "name": "order_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Order id of the shipment"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of serviceable courier compnies along with pricing",
+            "schema": {
+              "$ref": "#/definitions/CheckServiceabilityResponse"
+            }
+          },
+          "404": {
+            "description": "Postcode is not serviceable by SHIPROCKET",
+            "schema": {
+              "$ref": "#/definitions/CheckServiceabilityError"
+            }
+          }
+        }
+      }
+    },
+    "/v1/courier/assign/awb": {
+      "post": {
+        "tags": [
+          "Couriers"
+        ],
+        "description": "The ShipRocket API for generating the Air Waybill number for your shipment. You can get a single API or bulk API’s . It also gives you the option to reassign the AWB number",
+        "summary": "AWB Creeation",
+        "operationId": "Awb Creation",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/AwbCreationRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AwbCreationResponse"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AwbError500"
+            }
+          }
+        }
+      }
+    },
+    "/v1/courier/generate/pickup": {
+      "post": {
+        "tags": [
+          "Couriers"
+        ],
+        "description": "Get a JSON representation of pickup response for single and bulk requests.",
+        "summary": "Get Pickup Details",
+        "operationId": "Pickup creation",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/PickupCreationRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/PickupCreationResponse"
+            }
+          },
+          "500": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/v1/courier/generate/label": {
+      "post": {
+        "tags": [
+          "Generate Label"
+        ],
+        "description": "Get a label URL. Note:- For label URL, AWB code must be assigned on shipment id.",
+        "summary": "Generate Label",
+        "operationId": "Generate Label",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/GenerateLabelRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GenerateLabelResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/v1/courier/track/awb/{awb_code}": {
+      "get": {
+        "tags": [
+          "Tracking"
+        ],
+        "description": "Get a JSON of tracking data by AWB.",
+        "summary": "Get AWB tracking Details",
+        "operationId": "AWB Tracking",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "awb_code",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "awb code"
+        }, {
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/AwbTrackingRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AwbTrackingResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/v1/courier/track/shipment/{shipment_id}": {
+      "get": {
+        "tags": [
+          "Tracking"
+        ],
+        "description": "Get a JSON of tracking data by Shipment id.",
+        "summary": "Get shipment Tracking Details",
+        "operationId": "Shipment Tracking",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "shipment_id",
+          "in": "path",
+          "required": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Shipment ID"
+        }, {
+          "name": "body",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ShipmentTrackingRequest"
+          }
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ShipmentTrackingResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
+            "schema": {}
+          }
+        }
+      }
+    },
+    "/v1/billing/discrepancy": {
+      "get": {
+        "tags": [
+          "Discrepancy"
+        ],
+        "description": "Get discrepancy data",
+        "summary": "Get discrepancy Details",
+        "operationId": "Discrepancy",
+        "produces": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DiscrepancyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/account/details/statement": {
+      "get": {
+        "tags": [
+          "Statement"
+        ],
+        "description": "Get statements data",
+        "summary": "Get shipment Details",
+        "operationId": "Satement",
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "produces": ["application/json"],
+        "parameters": [{
+          "name": "page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Page number of data to display"
+        }, {
+          "name": "per_page",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of orders to get per request"
+        }, {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "To date"
+        }, {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "From date"
+        }, {
+          "name": "search",
+          "in": "query",
+          "required": false,
+          "type": "string",
+          "description": "Search for AWB or Channel Order ID"
+        }, {
+          "name": "export",
+          "in": "query",
+          "required": false,
+          "type": "integer",
+          "format": "int32",
+          "description": "Export the data in csv format"
+        }],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/SatementResponse"
             }
           }
         }
@@ -204,10 +2108,7 @@
           "example": "abcd1234"
         }
       },
-      "required": [
-        "email",
-        "password"
-      ]
+      "required": ["email", "password"]
     },
     "400Error": {
       "title": "400 error Bad Request",
@@ -298,15 +2199,932 @@
           "example": "huiyd878y823hh2hdu232h"
         }
       },
-      "required": [
-        "id",
-        "first_name",
-        "last_name",
-        "email",
-        "company_id",
-        "created_at",
-        "token"
-      ]
+      "required": ["id", "first_name", "last_name", "email", "company_id", "created_at", "token"]
+    },
+    "405Error": {
+      "title": "Post method instead of Get or vice versa",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "method not allowed"},
+        "status_code": {"type": "integer", "example": 405}
+      }
+    },
+    "GetCountriesResponse": {
+      "title": "Get countries response",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "description": "Status of response from server",
+          "format": "int32",
+          "example": "200"
+        },
+        "data": {
+          "type": "object",
+          "description": "Arrayed data",
+          "example": [{
+              "id": 1,
+              "name": "Afghanistan",
+              "iso_code_2": "AF",
+              "iso_code_3": "AFG",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 2,
+              "name": "Albania",
+              "iso_code_2": "AL",
+              "iso_code_3": "ALB",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 3,
+              "name": "Algeria",
+              "iso_code_2": "DZ",
+              "iso_code_3": "DZA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 4,
+              "name": "American Samoa",
+              "iso_code_2": "AS",
+              "iso_code_3": "ASM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 5,
+              "name": "Andorra",
+              "iso_code_2": "AD",
+              "iso_code_3": "AND",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 6,
+              "name": "Angola",
+              "iso_code_2": "AO",
+              "iso_code_3": "AGO",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 7,
+              "name": "Anguilla",
+              "iso_code_2": "AI",
+              "iso_code_3": "AIA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 8,
+              "name": "Antarctica",
+              "iso_code_2": "AQ",
+              "iso_code_3": "ATA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 9,
+              "name": "Antigua and Barbuda",
+              "iso_code_2": "AG",
+              "iso_code_3": "ATG",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 10,
+              "name": "Argentina",
+              "iso_code_2": "AR",
+              "iso_code_3": "ARG",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 11,
+              "name": "Armenia",
+              "iso_code_2": "AM",
+              "iso_code_3": "ARM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 12,
+              "name": "Aruba",
+              "iso_code_2": "AW",
+              "iso_code_3": "ABW",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 13,
+              "name": "Australia",
+              "iso_code_2": "AU",
+              "iso_code_3": "AUS",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 14,
+              "name": "Austria",
+              "iso_code_2": "AT",
+              "iso_code_3": "AUT",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 15,
+              "name": "Azerbaijan",
+              "iso_code_2": "AZ",
+              "iso_code_3": "AZE",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 16,
+              "name": "Bahamas",
+              "iso_code_2": "BS",
+              "iso_code_3": "BHS",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 17,
+              "name": "Bahrain",
+              "iso_code_2": "BH",
+              "iso_code_3": "BHR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 18,
+              "name": "Bangladesh",
+              "iso_code_2": "BD",
+              "iso_code_3": "BGD",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 19,
+              "name": "Barbados",
+              "iso_code_2": "BB",
+              "iso_code_3": "BRB",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 20,
+              "name": "Belarus",
+              "iso_code_2": "BY",
+              "iso_code_3": "BLR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 21,
+              "name": "Belgium",
+              "iso_code_2": "BE",
+              "iso_code_3": "BEL",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 22,
+              "name": "Belize",
+              "iso_code_2": "BZ",
+              "iso_code_3": "BLZ",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 23,
+              "name": "Benin",
+              "iso_code_2": "BJ",
+              "iso_code_3": "BEN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 24,
+              "name": "Bermuda",
+              "iso_code_2": "BM",
+              "iso_code_3": "BMU",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 25,
+              "name": "Bhutan",
+              "iso_code_2": "BT",
+              "iso_code_3": "BTN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 26,
+              "name": "Bolivia",
+              "iso_code_2": "BO",
+              "iso_code_3": "BOL",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 27,
+              "name": "Bosnia and Herzegowina",
+              "iso_code_2": "BA",
+              "iso_code_3": "BIH",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 28,
+              "name": "Botswana",
+              "iso_code_2": "BW",
+              "iso_code_3": "BWA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 29,
+              "name": "Bouvet Island",
+              "iso_code_2": "BV",
+              "iso_code_3": "BVT",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 30,
+              "name": "Brazil",
+              "iso_code_2": "BR",
+              "iso_code_3": "BRA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 31,
+              "name": "British Indian Ocean Territory",
+              "iso_code_2": "IO",
+              "iso_code_3": "IOT",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 32,
+              "name": "Brunei Darussalam",
+              "iso_code_2": "BN",
+              "iso_code_3": "BRN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 33,
+              "name": "Bulgaria",
+              "iso_code_2": "BG",
+              "iso_code_3": "BGR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 34,
+              "name": "Burkina Faso",
+              "iso_code_2": "BF",
+              "iso_code_3": "BFA",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 35,
+              "name": "Burundi",
+              "iso_code_2": "BI",
+              "iso_code_3": "BDI",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 36,
+              "name": "Cambodia",
+              "iso_code_2": "KH",
+              "iso_code_3": "KHM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 37,
+              "name": "Cameroon",
+              "iso_code_2": "CM",
+              "iso_code_3": "CMR",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 38,
+              "name": "Canada",
+              "iso_code_2": "CA",
+              "iso_code_3": "CAN",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 39,
+              "name": "Cape Verde",
+              "iso_code_2": "CV",
+              "iso_code_3": "CPV",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            },
+            {
+              "id": 40,
+              "name": "Cayman Islands",
+              "iso_code_2": "KY",
+              "iso_code_3": "CYM",
+              "address_format": "",
+              "postcode_required": 0,
+              "status": 1
+            }
+          ]
+        }
+      },
+      "required": ["status", "data"]
+    },
+    "channelsRequest": {
+      "title": "get channels request",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "The respective channel id’s of the various channels which are to be integrated with the ShipRocket panel."
+              },
+              "name": {
+                "type": "string",
+                "description": ""
+              },
+              "status": {
+                "type": "string",
+                "description": ""
+              },
+              "settings": {
+                "type": "object",
+                "properties": {
+                  "dimensions": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "weight": {
+                    "type": "integer",
+                    "description": ""
+                  },
+                  "order_status": {
+                    "type": "string",
+                    "description": ""
+                  }
+                },
+                "description": ""
+              },
+              "auth": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": ""
+              },
+              "connections": {
+                "type": "integer",
+                "description": ""
+              },
+              "orders_sync": {
+                "type": "integer",
+                "description": ""
+              },
+              "inventory_sync": {
+                "type": "integer",
+                "description": ""
+              },
+              "orders_synced_on": {
+                "type": "string",
+                "description": ""
+              },
+              "inventory_synced_on": {
+                "type": "string",
+                "description": ""
+              },
+              "base_channel_code": {
+                "type": "string",
+                "description": "The two letter code for the respective channels. Please note that the “Manual” channel"
+              },
+              "base_channel": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "description": ""
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "type": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "logo": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "settings_sample": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": ""
+                      },
+                      "help": {
+                        "type": "string",
+                        "description": ""
+                      },
+                      "settings": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": ""
+                      }
+                    },
+                    "description": ""
+                  },
+                  "auth_sample": {
+                    "type": "object",
+                    "description": "The various keys required for the channel integration"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": ""
+                  }
+                },
+                "description": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "404Error": {
+      "title": "404 not found",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "404 not found"},
+        "status_code": {"type": "integer", "example": 404}
+      }
+    },
+    "productImportResponse": {
+      "title": "import success",
+      "type": "object",
+      "properties": {
+        "id": {"type": "integer", "example": 12}
+      }
+    },
+    "import403": {
+      "title": "incorrect format",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "403 bad request"},
+        "status_code": {"type": "integer", "example": 403}
+      }
+    },
+    "GetZonesResponse": {
+      "title": "Get zones response",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+        },
+        "data": {
+          "type": "object",
+          "example": [{
+              "id": 1,
+              "country_id": 1,
+              "code": "BDS",
+              "name": "Badakhshan",
+              "status": 1
+            },
+            {
+              "id": 2,
+              "country_id": 1,
+              "code": "BDG",
+              "name": "Badghis",
+              "status": 1
+            },
+            {
+              "id": 3,
+              "country_id": 1,
+              "code": "BGL",
+              "name": "Baghlan",
+              "status": 1
+            },
+            {
+              "id": 4,
+              "country_id": 1,
+              "code": "BAL",
+              "name": "Balkh",
+              "status": 1
+            },
+            {
+              "id": 5,
+              "country_id": 1,
+              "code": "BAM",
+              "name": "Bamian",
+              "status": 1
+            },
+            {
+              "id": 6,
+              "country_id": 1,
+              "code": "FRA",
+              "name": "Farah",
+              "status": 1
+            },
+            {
+              "id": 7,
+              "country_id": 1,
+              "code": "FYB",
+              "name": "Faryab",
+              "status": 1
+            },
+            {
+              "id": 8,
+              "country_id": 1,
+              "code": "GHA",
+              "name": "Ghazni",
+              "status": 1
+            },
+            {
+              "id": 9,
+              "country_id": 1,
+              "code": "GHO",
+              "name": "Ghowr",
+              "status": 1
+            },
+            {
+              "id": 10,
+              "country_id": 1,
+              "code": "HEL",
+              "name": "Helmand",
+              "status": 1
+            },
+            {
+              "id": 11,
+              "country_id": 1,
+              "code": "HER",
+              "name": "Herat",
+              "status": 1
+            },
+            {
+              "id": 12,
+              "country_id": 1,
+              "code": "JOW",
+              "name": "Jowzjan",
+              "status": 1
+            },
+            {
+              "id": 13,
+              "country_id": 1,
+              "code": "KAB",
+              "name": "Kabul",
+              "status": 1
+            },
+            {
+              "id": 14,
+              "country_id": 1,
+              "code": "KAN",
+              "name": "Kandahar",
+              "status": 1
+            },
+            {
+              "id": 15,
+              "country_id": 1,
+              "code": "KAP",
+              "name": "Kapisa",
+              "status": 1
+            },
+            {
+              "id": 16,
+              "country_id": 1,
+              "code": "KHO",
+              "name": "Khost",
+              "status": 1
+            },
+            {
+              "id": 17,
+              "country_id": 1,
+              "code": "KNR",
+              "name": "Konar",
+              "status": 1
+            },
+            {
+              "id": 18,
+              "country_id": 1,
+              "code": "KDZ",
+              "name": "Kondoz",
+              "status": 1
+            },
+            {
+              "id": 19,
+              "country_id": 1,
+              "code": "LAG",
+              "name": "Laghman",
+              "status": 1
+            },
+            {
+              "id": 20,
+              "country_id": 1,
+              "code": "LOW",
+              "name": "Lowgar",
+              "status": 1
+            },
+            {
+              "id": 21,
+              "country_id": 1,
+              "code": "NAN",
+              "name": "Nangrahar",
+              "status": 1
+            },
+            {
+              "id": 22,
+              "country_id": 1,
+              "code": "NIM",
+              "name": "Nimruz",
+              "status": 1
+            },
+            {
+              "id": 23,
+              "country_id": 1,
+              "code": "NUR",
+              "name": "Nurestan",
+              "status": 1
+            },
+            {
+              "id": 24,
+              "country_id": 1,
+              "code": "ORU",
+              "name": "Oruzgan",
+              "status": 1
+            },
+            {
+              "id": 25,
+              "country_id": 1,
+              "code": "PIA",
+              "name": "Paktia",
+              "status": 1
+            },
+            {
+              "id": 26,
+              "country_id": 1,
+              "code": "PKA",
+              "name": "Paktika",
+              "status": 1
+            },
+            {
+              "id": 27,
+              "country_id": 1,
+              "code": "PAR",
+              "name": "Parwan",
+              "status": 1
+            },
+            {
+              "id": 28,
+              "country_id": 1,
+              "code": "SAM",
+              "name": "Samangan",
+              "status": 1
+            },
+            {
+              "id": 29,
+              "country_id": 1,
+              "code": "SAR",
+              "name": "Sar-e Pol",
+              "status": 1
+            },
+            {
+              "id": 30,
+              "country_id": 1,
+              "code": "TAK",
+              "name": "Takhar",
+              "status": 1
+            }
+          ]
+        }
+      },
+      "required": ["status", "data"]
+    },
+    "401Error": {
+      "title": "Invalid token",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Token Signature could not be verified."
+        },
+        "status_code":  {
+          "type": "integer",
+          "example": 401
+        }
+      }
+    },
+    "GetProductsResponse": {
+      "title": "Get products response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "integer"},
+              "sku": {"type": "string"},
+              "hsn": {"type": "string"},
+              "name": {"type": "string"},
+              "description": {"type": "string"},
+              "category_code": {"type": "string"},
+              "category_name": {"type": "string"},
+              "image": {"type": "string"},
+              "weight": {"type": "string"},
+              "size": {"type": "string"},
+              "cost_price": {"type": "string"},
+              "mrp": {"type": "string"},
+              "tax_code": {"type": "string"},
+              "low_stock": {"type": "integer"},
+              "ean": {"type": "string"},
+              "upc": {"type": "string"},
+              "isbn": {"type": "string"},
+              "created_at": {"type": "string"},
+              "updated_at": {"type": "string"},
+              "quantity": {"type": "integer"},
+              "color": {"type": "string"},
+              "brand": {"type": "string"},
+              "dimensions": {"type": "string"},
+              "status": {"type": "string"},
+              "type": {"type": "string"}
+            }
+          },
+          "example": [
+              {
+              "id": 319134,
+              "sku": "inactive",
+              "hsn": "",
+              "name": "inactive",
+              "description": "",
+              "category_code": "default",
+              "category_name": "Default Category",
+              "category_tax_code": "default",
+              "image": "",
+              "weight": "0.5 kg",
+              "size": "",
+              "cost_price": "0.00",
+              "mrp": "0.00",
+              "tax_code": "default",
+              "low_stock": 0,
+              "ean": "",
+              "upc": "",
+              "isbn": "",
+              "created_at": "23 Jun 2017 02:17 PM",
+              "updated_at": "23 Jun 2017 02:17 PM",
+              "quantity": 11,
+              "color": "",
+              "brand": "",
+              "dimensions": "10 x 10 x 10 cm",
+              "status": "INACTIVE",
+              "type": "Single"
+          },
+          {
+              "id": 318862,
+              "sku": "sanity",
+              "hsn": "",
+              "name": "sanity",
+              "description": "",
+              "category_code": "new",
+              "category_name": "new",
+              "category_tax_code": "5",
+              "image": "",
+              "weight": "0.5 kg",
+              "size": "",
+              "cost_price": "0.00",
+              "mrp": "0.00",
+              "tax_code": "5",
+              "low_stock": 0,
+              "ean": "",
+              "upc": "",
+              "isbn": "",
+              "created_at": "23 Jun 2017 01:13 PM",
+              "updated_at": "23 Jun 2017 01:13 PM",
+              "quantity": 8,
+              "color": "",
+              "brand": "",
+              "dimensions": "10 x 10 x 10 cm",
+              "status": "ACTIVE",
+              "type": "Single"
+            }
+          ]
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total": {"type": "integer"},
+                "count": {"type": "integer"},
+                "per_page": {"type": "integer"},
+                "current_page": {"type": "integer"},
+                "total_pages": {"type": "integer"},
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "total": 7,
+                "count": 7,
+                "per_page": 15,
+                "current_page": 1,
+                "total_pages": 1,
+                "links": []
+              }
+            }
+          }
+        }
+      },
+      "required": ["data", "meta"]
+    },
+    "addProduct422": {
+      "title": "unprocessable data",
+      "type": "object",
+      "properties": {
+        "message": {"type": "string", "example": "There were errors in adding new product!"},
+        "errors": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "array", "items": {"type": "string"}, "example": "The name field is required."},
+            "type": {"type": "array", "items": {"type": "string"}, "example": "The type field is required."},
+            "sku": {"type": "array", "items": {"type": "string"}, "example": "The sku field is required."}
+          }
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 422
+        }
+      }
     },
     "AddRequest": {
       "title": "Add request",
@@ -442,75 +3260,85 @@
           }
         }
       },
-      "required": [
-        "sku",
-        "name",
-        "tax_code",
-        "type",
-        "qty",
-        "low_stock",
-        "category_code",
-        "description",
-        "brand",
-        "size",
-        "weight",
-        "length",
-        "width",
-        "height",
-        "ean",
-        "upc",
-        "isbn",
-        "color",
-        "imei_serialnumber",
-        "cost_price",
-        "mrp",
-        "status",
-        "image_url",
-        "components"
-      ]
+      "required": ["sku", "name", "tax_code", "type", "qty", "low_stock", "category_code", "description", "brand", "size", "weight", "length", "width", "height", "ean", "upc", "isbn", "color", "imei_serialnumber", "cost_price", "mrp", "status", "image_url", "components"]
     },
-    "addProduct422": {
-      "title": "unprocessable data",
+    "ShowResponse": {
+      "title": "Show response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "integer"},
+            "sku": {"type": "string"},
+            "hsn": {"type": "string"},
+            "name": {"type": "string"},
+            "description": {"type": "string"},
+            "category_code": {"type": "string"},
+            "category_name": {"type": "string"},
+            "image": {"type": "string"},
+            "weight": {"type": "string"},
+            "size": {"type": "string"},
+            "cost_price": {"type": "string"},
+            "mrp": {"type": "string"},
+            "tax_code": {"type": "string"},
+            "low_stock": {"type": "integer"},
+            "ean": {"type": "string"},
+            "upc": {"type": "string"},
+            "isbn": {"type": "string"},
+            "created_at": {"type": "string"},
+            "updated_at": {"type": "string"},
+            "quantity": {"type": "integer"},
+            "color": {"type": "string"},
+            "brand": {"type": "string"},
+            "dimensions": {"type": "string"},
+            "status": {"type": "string"},
+            "type": {"type": "string"}
+          }
+        }
+      },
+      "required": ["data"]
+    },
+    "show400": {
+      "title": "invalid product id",
       "type": "object",
       "properties": {
         "message": {
           "type": "string",
-          "example": "There were errors in adding new product!"
-        },
-        "errors": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": "The name field is required."
-            },
-            "type": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": "The type field is required."
-            },
-            "sku": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": "The sku field is required."
-            }
-          }
+          "example": "This product is either inactive or does not exist"
         },
         "status_code": {
           "type": "integer",
-          "example": 422
+          "example": 400
         }
       }
     },
-    "GetProductsResponse": {
-      "title": "Get products response",
+    "UpdateImeiRequest": {
+      "title": "Update IMEI request",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "type": "object",
+            "properties": {
+              "order_product_id": {
+                "type": "integer",
+                "description": "Shows the rank of the product id "
+              },
+              "imei": {
+                "type": "string",
+                "description": "Shows the IMEI number of the particular model"
+              }
+            }
+          }
+        }
+      },
+      "required": ["data"]
+    },
+    "GetAllResponse": {
+      "title": "Get all response",
       "type": "object",
       "properties": {
         "data": {
@@ -518,139 +3346,51 @@
           "items": {
             "type": "object",
             "properties": {
-              "id": {
-                "type": "integer"
-              },
-              "sku": {
-                "type": "string"
-              },
-              "hsn": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "category_code": {
-                "type": "string"
-              },
-              "category_name": {
-                "type": "string"
-              },
-              "image": {
-                "type": "string"
-              },
-              "weight": {
-                "type": "string"
-              },
-              "size": {
-                "type": "string"
-              },
-              "cost_price": {
-                "type": "string"
-              },
-              "mrp": {
-                "type": "string"
-              },
-              "tax_code": {
-                "type": "string"
-              },
-              "low_stock": {
-                "type": "integer"
-              },
-              "ean": {
-                "type": "string"
-              },
-              "upc": {
-                "type": "string"
-              },
-              "isbn": {
-                "type": "string"
-              },
-              "created_at": {
-                "type": "string"
-              },
-              "updated_at": {
-                "type": "string"
-              },
-              "quantity": {
-                "type": "integer"
-              },
-              "color": {
-                "type": "string"
-              },
-              "brand": {
-                "type": "string"
-              },
-              "dimensions": {
-                "type": "string"
-              },
-              "status": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              }
+              "id": {"type": "integer"},
+              "title": {"type": "string"},
+              "image": {"type": "string"},
+              "price": {"type": "string"},
+              "quantity": {"type": "integer"},
+              "sku": {"type": "string"},
+              "channel_sku": {"type": "string"},
+              "channel_id": {"type": "integer"},
+              "channel_name": {"type": "string"},
+              "base_channel_code": {"type": "string"},
+              "channel_product_id": {"type": "string"},
+              "inventory": {"type": "integer"},
+              "synced_on": {"type": "string"}
             }
           },
           "example": [
             {
-              "id": 319134,
-              "sku": "inactive",
-              "hsn": "",
-              "name": "inactive",
-              "description": "",
-              "category_code": "default",
-              "category_name": "Default Category",
-              "category_tax_code": "default",
-              "image": "",
-              "weight": "0.5 kg",
-              "size": "",
-              "cost_price": "0.00",
-              "mrp": "0.00",
-              "tax_code": "default",
-              "low_stock": 0,
-              "ean": "",
-              "upc": "",
-              "isbn": "",
-              "created_at": "23 Jun 2017 02:17 PM",
-              "updated_at": "23 Jun 2017 02:17 PM",
-              "quantity": 11,
-              "color": "",
-              "brand": "",
-              "dimensions": "10 x 10 x 10 cm",
-              "status": "INACTIVE",
-              "type": "Single"
+                "id": 416474,
+                "title": "product2",
+                "image": "",
+                "price": "500.00",
+                "quantity": -4,
+                "sku": "shopify",
+                "channel_sku": "product2",
+                "channel_id": 23423,
+                "channel_name": "SHOPIFY",
+                "base_channel_code": "SH",
+                "channel_product_id": "10808202516",
+                "inventory": 18,
+                "synced_on": "8 Jun 2017 01:15 PM"
             },
             {
-              "id": 318862,
-              "sku": "sanity",
-              "hsn": "",
-              "name": "sanity",
-              "description": "",
-              "category_code": "new",
-              "category_name": "new",
-              "category_tax_code": "5",
-              "image": "",
-              "weight": "0.5 kg",
-              "size": "",
-              "cost_price": "0.00",
-              "mrp": "0.00",
-              "tax_code": "5",
-              "low_stock": 0,
-              "ean": "",
-              "upc": "",
-              "isbn": "",
-              "created_at": "23 Jun 2017 01:13 PM",
-              "updated_at": "23 Jun 2017 01:13 PM",
-              "quantity": 8,
-              "color": "",
-              "brand": "",
-              "dimensions": "10 x 10 x 10 cm",
-              "status": "ACTIVE",
-              "type": "Single"
+                "id": 416475,
+                "title": "product",
+                "image": "",
+                "price": "400.00",
+                "quantity": -1,
+                "sku": "Iphone5s",
+                "channel_sku": "product",
+                "channel_id": 23423,
+                "channel_name": "SHOPIFY",
+                "base_channel_code": "SH",
+                "channel_product_id": "10807289684",
+                "inventory": 0,
+                "synced_on": "5 Jun 2017 03:27 PM"
             }
           ]
         },
@@ -660,21 +3400,11 @@
             "pagination": {
               "type": "object",
               "properties": {
-                "total": {
-                  "type": "integer"
-                },
-                "count": {
-                  "type": "integer"
-                },
-                "per_page": {
-                  "type": "integer"
-                },
-                "current_page": {
-                  "type": "integer"
-                },
-                "total_pages": {
-                  "type": "integer"
-                },
+                "total": {"type": "integer"},
+                "count": {"type": "integer"},
+                "per_page": {"type": "integer"},
+                "current_page": {"type": "integer"},
+                "total_pages": {"type": "integer"},
                 "links": {
                   "type": "array",
                   "items": {
@@ -693,21 +3423,1446 @@
             }
           }
         }
-      }
+      },
+      "required": ["data", "meta"]
     },
-    "401Error": {
-      "title": "Invalid token",
+    "MapRequest": {
+      "title": "Map request",
       "type": "object",
       "properties": {
+        "product_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The item in the Master Catalogue"
+        },
+        "listing_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The item in the Channel Catalogue"
+        },
+        "ID": {
+          "type": "integer",
+          "description": "Same id as placed in their respective GET codes"
+        }
+      },
+      "required": ["product_id", "listing_id"]
+    },
+    "GetAllOrdersResponse": {
+      "title": "Get all orders response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "meta": {
+          "type": "object"
+        }
+      },
+      "required": ["data", "meta"]
+    },
+    "GetAllManifestedOrdersResponse": {
+      "title": "Get all manifested orders response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "meta": {
+          "type": "object"
+        }
+      },
+      "required": ["data", "meta"]
+    },
+    "GetOrdersCountResponse": {
+      "title": "Get orders count response",
+      "type": "object",
+      "properties": {
+        "manifested_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "processing_count": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unprocessing_count": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "required": ["manifested_count", "processing_count", "unprocessing_count"]
+    },
+    "GetOrderResponse": {
+      "title": "Get order response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+              "id": {"type": "integer","example": 123},
+              "channel_id": {"type": "integer","example": 456},
+              "channel_name": {"type": "string","example": "My Channel"},
+              "base_channel_code": {"type": "string","example": "MC"},
+              "channel_order_id": {"type": "string","example": "Test1504508157347"},
+              "customer_name": {"type": "string","example": "first last"},
+              "customer_email": {"type": "string","example": "test@gmail.com"},
+              "customer_phone": {"type": "string","example": "9876543210"},
+              "payment_status": {"type": "string","example": "Pending"},
+              "total": {"type": "string","example": "100.00"},
+              "tax": {"type": "string","example": "0.00"},
+              "sla": {"type": "string","example": "2 days"},
+              "shipping_method": {"type": "string","example": "SR"},
+              "expedited": {"type": "string","example": "0"},
+              "status": {"type": "string","example": "NEW"},
+              "status_code": {"type": "integer","example": 1},
+              "payment_method": {"type": "string","example": "Prepaid"},
+              "is_international": {"type": "integer","example": 0},
+              "purpose_of_shipment": {"type": "integer","example": 0},
+              "channel_created_at": {"type": "string","example": "4 Sep 2017, 12:26 PM"},
+              "created_at": {"type": "string","example": "4 Sep 2017, 12:26 PM"},
+              "products": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "integer","example": 123},
+                    "channel_order_product_id": {"type": "integer","example": 456},
+                    "name": {"type": "string","example": "test product"},
+                    "channel_sku": {"type": "string","example": "ABCD1234"},
+                    "quantity": {"type": "integer","example": 1},
+                    "product_id": {"type": "integer","example": 123},
+                    "available": {"type": "string","example": "0"},
+                    "status": {"type": "string","example": "UNDEFINED"},
+                    "hsn": {"type": "string","example": "54673478"}
+                  }
+                }
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {"type": "integer","example": 123},
+                    "isd_code": {"type": "string","example": "+91"},
+                    "courier": {"type": "string","example": "FedEx"},
+                    "weight": {"type": "string","example": "0.5"},
+                    "dimensions": {"type": "string","example": "10x10x10"},
+                    "awb": {"type": "string","example": "123"},
+                    "return_awb": {"type": "string","example": "321"},
+                    "volumetric_weight": {"type": "string","example": "0.5"}
+                    }
+                  }
+                },
+              "activities": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "ORDER_CREATED"
+                  }
+              }
+          }
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total": {"type": "integer","example": 123},
+                "count": {"type": "integer","example": 1},
+                "per_page": {"type": "integer","example": 12},
+                "current_page": {"type": "integer","example": 1},
+                "total_pages": {"type": "integer","example": 32},
+                "links": {
+                  "type": "object",
+                  "properties": {
+                    "next": {"type": "string", "example": "https://krmct001.kartrocket.com/v1/orders?page=2"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": ["data"]
+    },
+    "CancelOrdersRequest": {
+      "title": "Cancel orders request",
+      "type": "object",
+      "description": "Mentions the ids of the orders which are to be cancelled. If there are multiple orders then you can cancel them by just entering them in multiple lines",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": ["ids"]
+    },
+    "CancelOrdersResponse": {
+      "title": "Order Cancel request",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": "200"
+        },
         "message": {
           "type": "string",
-          "example": "Token Signature could not be verified."
+          "example": "Your request to cancel order id order6 has been taken. Since the AWB has already been assigned,  the freight amount against that order is blocked and it will be added back automatically in to your balance in 3-4 working days after the verification by the concerned team."
+        }
+      }
+    },
+    "FulfillmentRequest": {
+      "title": "Fulfillment request",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "order_id": {"type": "integer","example": 123},
+              "order_product_id": {"type": "integer","example": 321},
+              "quantity": {"type": "string","example": "1"},
+              "action": {"type": "string","example": "add"}
+            }
+          }
+        }
+      },
+      "required": ["data"]
+    },
+    "FulfillmentResponse": {
+      "title": "Fulfillment response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "order_id": {"type": "integer","example": 123},
+            "order_product_id": {"type": "integer","example": 321},
+            "quantity": {"type": "string","example": "1"},
+            "action": {"type": "string","example": "add"}
+          }
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": ["data", "success", "message"]
+    },
+    "MappingRequest": {
+      "title": "Mapping request",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "order_id": {"type": "integer","example": 123},
+              "order_product_id": {"type": "integer","example": 321},
+              "master_sku": {"type": "string","example": "H3HEDE"}
+            }
+          }
+        }
+      },
+      "required": ["data"]
+    },
+    "MappingResponse": {
+      "title": "Mapping response",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "order_id": {"type": "integer","example": 123},
+              "order_product_id": {"type": "integer","example": 321},
+              "master_sku": {"type": "string","example": "H3HEDE"}
+            }
+          },
+          "status_code": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0
+          },
+          "message": {
+            "type": "string",
+            "example": "No product found matching this master sku"
+          },
+          "success": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "required": ["data", "status_code", "message", "success"]
+    },
+    "GenerateInvoiceRequest": {
+      "title": "Generate invoice request",
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "description": "Mentions the ids of the orders which are to be invoiced. If there are multiple orders then you can cancel them by just entering them in multiple lines",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": ["ids"]
+    },
+    "GenerateInvoiceResponse": {
+      "title": "Generate invoice response",
+      "type": "object",
+      "properties": {
+        "is_invoice_created": {
+          "type": "boolean",
+          "description": "Mentions the response to if the invoice is created by the system or not"
+        },
+        "invoice_url": {
+          "type": "string",
+          "description": "If the answer to the aforementioned question is true, then it displays the url of a pdf file with the order invoice"
+        },
+        "not_created": {
+          "type": "array",
+          "description": "If the invoice is not created then it shows this fact",
+          "items": {
+            "type": "string",
+            "example": ""
+          }
+        }
+      },
+      "required": ["is_invoice_created", "invoice_url", "not_created"]
+    },
+    "ChangeAddressRequest": {
+      "title": "Shows the address which needs to be updated",
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Order of the customer whose address details need to be changed"
+        },
+        "shipping_customer_name": {
+          "type": "string",
+          "description": "The name of the customer whose details need to be changed"
+        },
+        "shipping_phone": {
+          "type": "string",
+          "description": "The customer’s phone number"
+        },
+        "shipping_address": {
+          "type": "string",
+          "description": "1st line of the address"
+        },
+        "shipping_address_2": {
+          "type": "string",
+          "description": "2nd line of the address"
+        },
+        "shipping_city": {
+          "type": "string",
+          "description": "The city where it is to be shipped"
+        },
+        "shipping_state": {
+          "type": "string",
+          "description": "The state where it is to be shipped"
+        },
+        "shipping_country": {
+          "type": "string",
+          "description": "The country where it is to be shipped"
+        },
+        "shipping_pincode": {
+          "type": "integer",
+          "description": "The pincode of the customer",
+          "format": "int32"
+        }
+      },
+      "required": ["order_id", "shipping_customer_name", "shipping_phone", "shipping_address", "shipping_address_2", "shipping_city", "shipping_state", "shipping_country", "shipping_pincode"]
+    },
+    "GetManifestsRequest": {
+      "title": "Get manifests request",
+      "type": "object",
+      "properties": {
+        "order_ids": {
+          "type": "array",
+          "description": "Mentions the ids of the orders whose manifest is to be printed",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": ["order_ids"]
+    },
+    "GetManifestsResponse": {
+      "title": "Get manifests response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "https://s3-ap-southeast-1.amazonaws.com/kr-multichannel/1/manifest/MAN-00212.pdf"
+          },
+          "description": "Displays the url of a pdf file with the manifest"
+        }
+      },
+      "required": ["data"]
+    },
+    "CreateLinkedOrderRequest": {
+      "title": "Create linked order. request",
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "description": "Creates the order id"
+        },
+        "order_date": {
+          "type": "string",
+          "description": "Mentions the date and time when the order was created"
+        },
+        "channel_id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The id of the channel where the order is placed"
+        },
+        "billing_customer_name": {
+          "type": "string",
+          "description": "The customer’s name"
+        },
+        "billing_last_name": {
+          "type": "string",
+          "description": "The customer’s last name"
+        },
+        "billing_address": {
+          "type": "string",
+          "description": "The first two address lines of the customer"
+        },
+        "billing_address_2": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_city": {
+          "type": "string",
+          "description": "Geographical details of the customer’s adress"
+        },
+        "billing_state": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_country": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_pincode": {
+          "type": "string",
+          "description": "Customer’s pincode"
+        },
+        "billing_email": {
+          "type": "string",
+          "description": "Customer’s email id"
+        },
+        "billing_phone": {
+          "type": "string",
+          "description": "Customer’s phone numberThe name of the person to whom the package is being shipped"
+        },
+        "shipping_is_billing": {
+          "type": "integer",
+          "format": "int32",
+          "description": ""
+        },
+        "shipping_customer_name": {
+          "type": "string",
+          "description": "The name of the person to whom the package is being shipped"
+        },
+        "shipping_last_name": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_address": {
+          "type": "string",
+          "description": "Address of the person to whom the package is being shipped to"
+        },
+        "shipping_address_2": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_city": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_country": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_pincode": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_state": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_email": {
+          "type": "string",
+          "description": "Email id of the person whom the package is being shipped to"
+        },
+        "shipping_phone": {
+          "type": "string",
+          "description": "Phone number of the person whom the package is being shipped to"
+        },
+        "order_items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sku": {
+                "type": "string",
+                "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)"
+              },
+              "units": {
+                "type": "integer",
+                "description": "Total number of units being shipped"
+              },
+              "selling_price": {
+                "type": "integer",
+                "description": "Price at which it is being sold"
+              },
+              "discount": {
+                "type": "integer",
+                "description": ""
+              },
+              "HSN": {
+                "type": "string",
+                "description": "Harmonised System Nomenclature. A code number used to classify goods for taxation purposes. Done to determine which category of taxes do the goods come under"
+              }
+            }
+          }
+        },
+        "payment_method": {
+          "type": "string",
+          "description": "Specifies the payment method"
+        },
+        "shipping_charges": {
+          "type": "string",
+          "description": "Mentions the shipping charges"
+        },
+        "giftwrap_charges": {
+          "type": "string",
+          "description": "Mentions the charges for giftwrapping"
+        },
+        "transaction_charges": {
+          "type": "string",
+          "description": "Mentions the charges for the total transaction"
+        },
+        "total_discount": {
+          "type": "string",
+          "description": "Mentions the total discount offered"
+        },
+        "sub_total": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Mentions the total after these deductions"
+        },
+        "length": {
+          "type": "integer",
+          "description": "Mentions the product dimensions"
+        },
+        "breadth": {
+          "type": "integer",
+          "description": ""
+        },
+        "height": {
+          "type": "integer",
+          "description": ""
+        },
+        "weight": {
+          "type": "integer",
+          "description": ""
+        }
+      },
+      "required": ["order_id", "order_date", "channel_id", "billing_customer_name", "billing_last_name", "billing_address", "billing_address_2", "billing_city", "billing_state", "billing_country", "billing_pincode", "billing_email", "billing_phone", "shipping_is_billing", "shipping_customer_name", "shipping_last_name", "shipping_address", "shipping_address_2", "shipping_city", "shipping_country", "shipping_pincode", "shipping_state", "shipping_email", "shipping_phone", "order_items", "payment_method", "shipping_charges", "giftwrap_charges", "transaction_charges", "total_discount", "sub_total"]
+    },
+    "CreateLinkedOrderResponse": {
+      "title": "Create linked order. response",
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "example": "12345"
+        },
+        "status_code": {
+          "type": "string",
+          "example": "1"
+        },
+        "shipment_id": {
+          "type": "string",
+          "example": "1234"
+        },
+        "status": {
+          "type": "string",
+          "example": "NEW"
+        }
+      }
+    },
+    "CreateQuickOrderRequest": {
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "description": ""
+        },
+        "order_date": {
+          "type": "string",
+          "description": ""
+        },
+        "channel_id": {
+          "type": "integer",
+          "description": ""
+        },
+        "billing_customer_name": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_last_name": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_address": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_address_2": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_city": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_state": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_country": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_pincode": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_email": {
+          "type": "string",
+          "description": ""
+        },
+        "billing_phone": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_is_billing": {
+          "type": "boolean",
+          "description": ""
+        },
+        "shipping_customer_name": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_last_name": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_address": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_address_2": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_city": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_country": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_pincode": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_state": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_email": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_phone": {
+          "type": "string",
+          "description": ""
+        },
+        "order_items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "example": "test"
+            },
+            "sku": {
+              "type": "string",
+              "description": ""
+            },
+            "units": {
+              "type": "string",
+              "description": ""
+            },
+            "selling_price": {
+              "type": "string",
+              "description": ""
+            },
+            "discount": {
+              "type": "string",
+              "description": ""
+            },
+            "hsn": {
+              "type": "string",
+              "description": ""
+            }
+          },
+          "description": ""
+        },
+        "payment_method": {
+          "type": "string",
+          "description": ""
+        },
+        "shipping_charges": {
+          "type": "string",
+          "description": ""
+        },
+        "giftwrap_charges": {
+          "type": "string",
+          "description": ""
+        },
+        "transaction_charges": {
+          "type": "string",
+          "description": ""
+        },
+        "total_discount": {
+          "type": "string",
+          "description": ""
+        },
+        "sub_total": {
+          "type": "integer",
+          "description": ""
+        },
+        "length": {
+          "type": "string",
+          "description": ""
+        },
+        "breadth": {
+          "type": "integer",
+          "description": ""
+        },
+        "height": {
+          "type": "integer",
+          "description": ""
+        },
+        "weight": {
+          "type": "integer",
+          "description": ""
+        }
+      }
+    },
+    "CreateQuickOrderResponse": {
+      "title": "Create quick order response",
+      "type": "object",
+      "properties": {
+        "order_id": {
+          "type": "integer",
+          "example": 123
+        },
+        "shipment_id": {
+          "type": "integer",
+          "example": 546
+        },
+        "status": {
+          "type": "string",
+          "example": "NEW"
         },
         "status_code": {
           "type": "integer",
-          "example": 401
+          "example": 1
+        },
+        "onboarding_completed_now": {
+          "type": "integer",
+          "example": 0
+        }
+      },
+      "required": ["status", "status_code"]
+    },
+  "DetailsResponse": {
+    "title": "Details response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "object"
+      }
+    },
+    "required": ["data"]
+  },
+  "GetInventoriesResponse": {
+    "title": "Get inventories response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "The product id"
+            },
+            "sku": {
+              "type": "string",
+              "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)"
+            },
+            "category_name": {
+              "type": "string",
+              "description": "If the product comes under a certain specified category or not. If not, then it will be named as default"
+            },
+            "is_combo": {
+              "type": "integer",
+              "description": ""
+            },
+            "name": {
+              "type": "string",
+              "description": "Product name"
+            },
+            "type": {
+              "type": "string",
+              "description": "Mention of the type of product"
+            },
+            "color": {
+              "type": "string",
+              "description": "Mentions the product color"
+            },
+            "brand": {
+              "type": "string",
+              "description": "Mentions the brand of the product."
+            },
+            "total_quantity": {
+              "type": "integer",
+              "description": "Shows the total number of pieces of the product as listed"
+            },
+            "available_quantity": {
+              "type": "integer",
+              "description": "Shows the quantity which can be shipped"
+            },
+            "blocked_quantity": {
+              "type": "integer",
+              "description": "Shows the number of product pieces which cannot be shipped"
+            },
+            "updated_on": {
+              "type": "string",
+              "description": "Displays the time of inventory updation"
+            }
+          }
+        }
+      },
+      "meta": {
+        "type": "object",
+        "properties": {
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "total": {
+                "type": "integer",
+                "description": "Shows the total number of products whose inventories were checked in the paginated page"
+              },
+              "count": {
+                "type": "integer",
+                "description": "Show the results for that paginated page"
+              },
+              "per_page": {
+                "type": "integer",
+                "description": "Shows the number of products which are listd per page"
+              },
+              "current_page": {
+                "type": "integer",
+                "description": "Shows the current page of the total number of pages"
+              },
+              "total_pages": {
+                "type": "integer",
+                "description": "Shows the total number of pages"
+              },
+              "links": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Lists the links to the inventories"
+              }
+            }
+          }
         }
       }
+    },
+    "required": ["data", "meta"]
+  },
+  "UpdateInventoryResponse": {
+    "title": "Update inventory response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "object",
+        "properties": {
+          "available_quantity": {
+            "type": "integer",
+            "description": "Shows the quantity which can be shipped"
+          },
+          "blocked_quantity": {
+            "type": "integer",
+            "description": "Shows the number of product pieces which cannot be shipped"
+          },
+          "total_quantity": {
+            "type": "integer",
+            "description": "Shows the total number of pieces of the product as listed"
+          }
+        }
+      }
+    },
+    "required": ["data"]
+  },
+  "CheckServiceabilityError": {
+    "title": "PINCODE is not serviceable",
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string",
+        "description": "Postcode is not secviceable by SHIPROCKET"
+      },
+      "status_code": {
+        "type": "string",
+        "description": "HTTP status of request"
+      }
+    }
+  },
+  "CheckServiceabilityResponse": {
+    "title": "Check serviceability response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["status", "data"]
+  },
+  "PickupAvailabilityResponse": {
+    "title": "Pickup availability response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["status", "data"]
+  },
+  "DeliveryAvailabilityResponse": {
+    "title": "Delivery availability response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["status", "data"]
+  },
+  "SetCouriersPreferencesRequest": {
+    "title": "Set couriers preferences request",
+    "type": "object",
+    "properties": {
+      "courier_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "required": ["courier_id"]
+  },
+  "SetCouriersPreferencesResponse": {
+    "title": "Set couriers preferences response",
+    "type": "object",
+    "properties": {
+      "courier_name": {
+        "type": "string"
+      },
+      "courier_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "preference_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "address_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "company_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "date": {
+        "type": "string"
+      }
+    },
+    "required": ["courier_name", "courier_id", "preference_id", "address_id", "company_id", "date"]
+  },
+  "GetCouriersListResponse": {
+    "title": "Get couriers list response",
+    "type": "object",
+    "properties": {
+      "couriers": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["couriers"]
+  },
+  "SetCouriersPriorityRequest": {
+    "title": "Set couriers priority request",
+    "type": "object",
+    "properties": {
+      "courier_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "required": ["courier_id"]
+  },
+  "SetCouriersPriorityResponse": {
+    "title": "Set couriers priority response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "integer",
+        "format": "int32"
+      }
+    },
+    "required": ["status"]
+  },
+  "GetCouriersPreferencesResponse": {
+    "title": "Get couriers preferences response",
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "preference_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "courier_id": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "courier_name": {
+        "type": "string"
+      }
+    },
+    "required": ["id", "preference_id", "courier_id", "courier_name"]
+  },
+  "AwbCreationRequest": {
+    "title": "Awb creation request",
+    "type": "object",
+    "properties": {
+      "shipment_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The shipment id as generated in the shipment section"
+        }
+      },
+      "courier_id": {
+        "type": "integer",
+        "format": "int32",
+        "description": "The courier id from above"
+      },
+      "weight": {
+        "type": "string",
+        "description": "The total weight of the package"
+      },
+      "manifest_id": {
+        "type": "integer",
+        "description": "The manifest id as generated earlier"
+      },
+      "channel_order_id": {
+        "type": "integer",
+        "description": "Channel order id as provided by ShipRocket orders API"
+      },
+      "status": {
+        "type": "string",
+        "description": "Status of the activity"
+      }
+    },
+    "required": ["shipment_id"]
+  },
+  "AwbCreationResponse": {
+    "title": "Awb creation response",
+    "type": "object",
+    "properties": {
+      "awb_assign_status": {
+        "type": "integer",
+        "format": "int32",
+        "description": "It will be 1, implying that the status has been assigned"
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "courier_company_id": {
+                "type": "integer",
+                "description": "id of the courier company"
+              },
+              "awb_code": {
+                "type": "string",
+                "description": "The AWB code generated"
+              },
+              "cod": {
+                "type": "integer",
+                "description": "If there is COD then response =1, else it will be 0"
+              },
+              "order_id": {
+                "type": "integer",
+                "description": "Order id as generated earlier"
+              },
+              "shipment_id": {
+                "type": "integer",
+                "description": "Shipment id as generated in the shipment section"
+              },
+              "freight_percentage": {
+                "type": "string",
+                "description": ""
+              },
+              "flat_charges": {
+                "type": "string",
+                "description": ""
+              },
+              "awb_code_status": {
+                "type": "integer",
+                "description": ""
+              },
+              "assigned_date_time": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "description": ""
+                  },
+                  "timezone_type": {
+                    "type": "integer",
+                    "description": ""
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "description": ""
+                  }
+                },
+                "description": ""
+              },
+              "applied_weight": {
+                "type": "string",
+                "description": ""
+              },
+              "company_id": {
+                "type": "integer",
+                "description": ""
+              },
+              "company_address_id": {
+                "type": "integer",
+                "description": ""
+              },
+              "id": {
+                "type": "integer",
+                "description": ""
+              },
+              "applied_weight_amount": {
+                "type": "integer",
+                "description": ""
+              }
+            }
+          }
+        }
+      }
+    },
+    "required": ["awb_assign_status", "response"]
+  },
+  "AwbError500": {
+    "title": "Awb creation error 500",
+    "type": "object",
+    "properties": {
+      "awb_assign_status": {
+        "type": "string",
+        "description": "Status if the code has been generated or not. In this case it would be a 0"
+      },
+      "data": {
+        "type": "string",
+        "description": "Passes a statement saying it is not possible"
+      }
+    },
+    "required": ["awb_assign_status"]
+  },
+  "PickupCreationRequest": {
+    "title": "Pickup creation request",
+    "type": "object",
+    "properties": {
+      "shipment_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "manifest_id": {
+        "type": "integer",
+        "description": ""
+      },
+      "status": {
+        "type": "string",
+        "description": ""
+      }
+    },
+    "required": ["shipment_id"]
+  },
+  "PickupCreationResponse": {
+    "title": "Pickup creation response",
+    "type": "object",
+    "properties": {
+      "pickup_status": {
+        "type": "integer",
+        "format": "int32",
+        "description": "Status if the package has been picked up or not"
+      },
+      "message": {
+        "type": "string",
+        "description": ""
+      },
+      "response": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "manifest_url": {
+        "type": "string",
+        "description": "Url of the pdf file which shows the pickup manifest which has been created"
+      }
+    }
+  },
+  "GenerateLabelRequest": {
+    "title": "Generate Label request",
+    "type": "object",
+    "properties": {
+      "shipment_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "required": ["shipment_id"]
+  },
+  "GenerateLabelResponse": {
+    "title": "Generate Label response",
+    "type": "object",
+    "properties": {
+      "label_created": {
+        "type": "integer",
+        "format": "int32"
+      },
+      "label_url": {
+        "type": "string"
+      },
+      "response": {
+        "type": "string"
+      }
+    }
+  },
+  "AwbTrackingRequest": {
+    "title": "AWB Tracking request",
+    "type": "object",
+    "properties": {
+      "awb_code": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "required": ["awb_code"]
+  },
+  "AwbTrackingResponse": {
+    "title": "AWB Tracking response",
+    "type": "object",
+    "properties": {
+      "tracking_data": {
+        "type": "object"
+      }
+    },
+    "required": ["tracking_data"]
+  },
+  "ShipmentTrackingRequest": {
+    "title": "Shipment Tracking request",
+    "type": "object",
+    "properties": {
+      "shipment_id": {
+        "type": "array",
+        "items": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "required": ["shipment_id"]
+  },
+  "ShipmentTrackingResponse": {
+    "title": "Shipment Tracking response",
+    "type": "object",
+    "properties": {
+      "tracking_data": {
+        "type": "object"
+      }
+    },
+    "required": ["tracking_data"]
+  },
+  "DiscrepancyResponse": {
+    "title": "Discrepancy response",
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "data": {
+        "type": "object"
+      },
+      "upper_fold_text": {
+        "type": "string"
+      },
+      "lower_fild_text": {
+        "type": "string"
+      }
+    },
+    "required": ["status", "data", "upper_fold_text", "lower_fild_text"]
+  },
+  "fileImportResponse": {
+    "title": "Import Response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    },
+    "required": ["data"]
+  },
+  "SatementResponse": {
+    "title": "Satement response",
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      },
+      "meta": {
+        "type": "object"
+      }
+    }
+  },
+  "bulkExportResponse": {
+    "title": "export all products",
+    "type": "object",
+    "properties": {
+      "download_url": {
+        "type": "string",
+        "example": "https://s3-ap-southeast-1.amazonaws.com/kr-shipmultichannel/imports/c_21642/export-2017-08-28.csv"
+      }
+    }
+  },
+  "export401":{
+    "title": "unauthorized access",
+    "type": "object",
+    "properties": {
+      "message": {"type": "string", "example": "Failed to authenticate because of bad credentials or an invalid authorization header."},
+      "status_code": {"type": "integer", "example": 401}
+    }
+  },
+  "listing400": {
+    "title": "no file provided",
+    "type": "object",
+    "properties": {
+      "message": {"type": "string","example": "FIle required"},
+      "status_code": {"type": "integer","example": 400}
     }
   }
+}
 }
