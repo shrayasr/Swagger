@@ -487,7 +487,7 @@
         "tags": [
           "Listings"
         ],
-        "description": "Downloading the list of mapped items in the channel catalog sheet. After mapping items you can see the number of products of one channel, which are present in the Master Catalogue.",
+        "description": "Export mapped- Downloads the list of mapped items in the channel catalog sheet. After mapping items you can see the number of products of one channel, which are present in the Master Catalog.",
         "summary": "Export Mapped",
         "operationId": "Export mapped",
         "produces": ["application/json"],
@@ -524,7 +524,7 @@
         "tags": [
           "Listings"
         ],
-        "description": "Downloading the list of unmapped items in the channel catalog sheet.",
+        "description": "Downloads the list of unmapped items in the channel catalog sheet.",
         "summary": "Export Unmapped",
         "operationId": "Export un-mapped",
         "produces": ["application/json"],
@@ -561,7 +561,7 @@
         "tags": [
           "Listings"
         ],
-        "description": "Downloading a sample of the catalogue sheet.",
+        "description": "Downloads a sample of the catalog sheet.",
         "summary": "Export sample",
         "operationId": "Export sample",
         "produces": ["application/json"],
@@ -598,7 +598,7 @@
         "tags": [
           "Listings"
         ],
-        "description": "The items which are to be linked",
+        "description": "This API helps you map your channel product to a product present in master catalog",
         "summary": "Map",
         "operationId": "Map",
         "security": [
@@ -735,117 +735,6 @@
         }
       }
     },
-    "/v1/orders/unprocessable": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "description": "Get a JSON representation of all unprocessable orders",
-        "summary": "Get all unprocessable orders",
-        "operationId": "Get all unprocessable orders",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/GetOrderResponse"
-            }
-          },
-          "401": {
-            "description": "unauthorized access",
-            "schema": {
-              "$ref": "#/definitions/export401"
-            }
-          },
-          "405": {
-            "description": "method not allowed",
-            "schema": {
-              "$ref": "#/definitions/405Error"
-            }
-          }
-        }
-      }
-    },
-    "/orders/processing": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "description": "Get a JSON representation of orders in processing",
-        "summary": "Get orders in Processing",
-        "operationId": "Get all processing orders",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/GetOrderResponse"
-            }
-          },
-          "401": {
-            "description": "unauthorized access",
-            "schema": {
-              "$ref": "#/definitions/export401"
-            }
-          },
-          "405": {
-            "description": "method not allowed",
-            "schema": {
-              "$ref": "#/definitions/405Error"
-            }
-          }
-        }
-      }
-    },
-    "/v1/orders/manifested": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "description": "Get a JSON representation of all manifest stage orders",
-        "summary": "Get manifested orders",
-        "operationId": "Get all manifested orders",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/GetOrderResponse"
-            }
-          },
-          "401": {
-            "description": "unauthorized access",
-            "schema": {
-              "$ref": "#/definitions/export401"
-            }
-          },
-          "405": {
-            "description": "method not allowed",
-            "schema": {
-              "$ref": "#/definitions/405Error"
-            }
-          }
-        }
-      }
-    },
     "/v1/orders/show/{id}": {
       "get": {
         "tags": [
@@ -930,7 +819,7 @@
         "tags": [
           "Orders"
         ],
-        "description": "This API runs a status sync which pulls out the changes in order status and syncs them with the panel",
+        "description": "This API runs a status sync which pulls out the changes in order status and syncs them in the panel",
         "summary": "Sync status",
         "operationId": "Sync status",
         "produces": ["application/json"],
@@ -965,7 +854,7 @@
         "tags": [
           "Orders"
         ],
-        "description": "This API cancels orders which are given",
+        "description": "Cancel the orders by passing their order ID’s in the given below API.",
         "summary": "Cancel an order",
         "operationId": "Cancel orders",
         "produces": ["application/json"],
@@ -1018,7 +907,7 @@
         "tags": [
           "Orders"
         ],
-        "description": "Fulfillment",
+        "description": "This API allows you to add inventory for order product by passing the order id and order product id",
         "summary": "Add inventory for order product",
         "operationId": "Fulfillment",
         "produces": ["application/json"],
@@ -1264,8 +1153,7 @@
         "tags": [
           "Orders"
         ],
-        "description": "If you need to change the customer’s delivery address, you need to pass the order id and the API will show how to",
-        "summary": "Change address",
+        "description": "Update the customer’s delivery address by passing the order id in the given below API",
         "operationId": "Change address",
         "produces": ["application/json"],
         "security": [
@@ -1331,7 +1219,7 @@
           "Orders"
         ],
         "description": "Prints the manifest of the order id on the assumption that the manifest is created",
-        "summary": "Get menifest",
+        "summary": "Get manifest",
         "operationId": "Get manifests",
         "security": [
             {
@@ -1452,7 +1340,7 @@
         "tags": [
           "Custom Orders"
         ],
-        "description": "Export sample import file",
+        "description": "Get sample format for Orders Import excel file",
         "summary": "Get sample format for Orders Import",
         "operationId": "Bulk sample1",
         "produces": ["application/json"],
@@ -1477,7 +1365,7 @@
         "tags": [
           "Custom Orders"
         ],
-        "description": "Shows the details of the order which needs to be created",
+        "description": "Pass all the required order fields to create a quick order . Quick order are the ones where we do not store the product details in master catalog( inventory management as a feature is not present).",
         "summary": "Create quick orders",
         "operationId": "Create quick order",
         "security": [
@@ -1812,7 +1700,7 @@
           "Couriers"
         ],
         "description": "The ShipRocket API for generating the Air Waybill number for your shipment. You can get a single API or bulk API’s . It also gives you the option to reassign the AWB number",
-        "summary": "AWB Creeation",
+        "summary": "AWB Creation",
         "operationId": "Awb Creation",
         "security": [
             {
@@ -3313,30 +3201,6 @@
         }
       }
     },
-    "UpdateImeiRequest": {
-      "title": "Update IMEI request",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "description": "",
-          "items": {
-            "type": "object",
-            "properties": {
-              "order_product_id": {
-                "type": "integer",
-                "description": "Shows the rank of the product id "
-              },
-              "imei": {
-                "type": "string",
-                "description": "Shows the IMEI number of the particular model"
-              }
-            }
-          }
-        }
-      },
-      "required": ["data"]
-    },
     "GetAllResponse": {
       "title": "Get all response",
       "type": "object",
@@ -3446,57 +3310,6 @@
         }
       },
       "required": ["product_id", "listing_id"]
-    },
-    "GetAllOrdersResponse": {
-      "title": "Get all orders response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "meta": {
-          "type": "object"
-        }
-      },
-      "required": ["data", "meta"]
-    },
-    "GetAllManifestedOrdersResponse": {
-      "title": "Get all manifested orders response",
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "meta": {
-          "type": "object"
-        }
-      },
-      "required": ["data", "meta"]
-    },
-    "GetOrdersCountResponse": {
-      "title": "Get orders count response",
-      "type": "object",
-      "properties": {
-        "manifested_count": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "processing_count": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "unprocessing_count": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "required": ["manifested_count", "processing_count", "unprocessing_count"]
     },
     "GetOrderResponse": {
       "title": "Get order response",
@@ -3708,8 +3521,7 @@
             "example": false
           }
         }
-      },
-      "required": ["data", "status_code", "message", "success"]
+      }
     },
     "GenerateInvoiceRequest": {
       "title": "Generate invoice request",
@@ -4382,143 +4194,6 @@
       }
     },
     "required": ["status", "data"]
-  },
-  "PickupAvailabilityResponse": {
-    "title": "Pickup availability response",
-    "type": "object",
-    "properties": {
-      "status": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "data": {
-        "type": "array",
-        "items": {
-          "type": "object"
-        }
-      }
-    },
-    "required": ["status", "data"]
-  },
-  "DeliveryAvailabilityResponse": {
-    "title": "Delivery availability response",
-    "type": "object",
-    "properties": {
-      "status": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "data": {
-        "type": "array",
-        "items": {
-          "type": "object"
-        }
-      }
-    },
-    "required": ["status", "data"]
-  },
-  "SetCouriersPreferencesRequest": {
-    "title": "Set couriers preferences request",
-    "type": "object",
-    "properties": {
-      "courier_id": {
-        "type": "array",
-        "items": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "required": ["courier_id"]
-  },
-  "SetCouriersPreferencesResponse": {
-    "title": "Set couriers preferences response",
-    "type": "object",
-    "properties": {
-      "courier_name": {
-        "type": "string"
-      },
-      "courier_id": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "preference_id": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "address_id": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "company_id": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "date": {
-        "type": "string"
-      }
-    },
-    "required": ["courier_name", "courier_id", "preference_id", "address_id", "company_id", "date"]
-  },
-  "GetCouriersListResponse": {
-    "title": "Get couriers list response",
-    "type": "object",
-    "properties": {
-      "couriers": {
-        "type": "array",
-        "items": {
-          "type": "object"
-        }
-      }
-    },
-    "required": ["couriers"]
-  },
-  "SetCouriersPriorityRequest": {
-    "title": "Set couriers priority request",
-    "type": "object",
-    "properties": {
-      "courier_id": {
-        "type": "array",
-        "items": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "required": ["courier_id"]
-  },
-  "SetCouriersPriorityResponse": {
-    "title": "Set couriers priority response",
-    "type": "object",
-    "properties": {
-      "status": {
-        "type": "integer",
-        "format": "int32"
-      }
-    },
-    "required": ["status"]
-  },
-  "GetCouriersPreferencesResponse": {
-    "title": "Get couriers preferences response",
-    "type": "object",
-    "properties": {
-      "id": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "preference_id": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "courier_id": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "courier_name": {
-        "type": "string"
-      }
-    },
-    "required": ["id", "preference_id", "courier_id", "courier_name"]
   },
   "AwbCreationRequest": {
     "title": "Awb creation request",
