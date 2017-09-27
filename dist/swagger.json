@@ -121,7 +121,7 @@
         "tags": [
           "Products"
         ],
-        "description": "Shows all the details of all the products that a ShipRocket user has. This can be filtered according to details like number of products per page, ascending or descending order sorting order. ",
+        "description": "Shows all the details of all the products that a ShipRocket user has. This can be filtered according to details like number of products per page, ascending or descending sorting order. ",
         "summary": "Get Products",
         "operationId": "Get products",
         "produces": ["application/json"],
@@ -312,7 +312,7 @@
         "tags": [
           "Products"
         ],
-        "description": "The particular sample which is to be downloaded",
+        "description": "Downloads all Products Details in CSV format",
         "summary": "Bulk Sample",
         "operationId": "Bulk export",
         "produces": ["application/json"],
@@ -1311,7 +1311,7 @@
         "tags": [
           "Custom Orders"
         ],
-        "description": "Mentions the order sheets into your panel. Should be a CSV file",
+        "description": "Import orders in bulk to your Shiprocket panel from a csv file",
         "summary": "Bulk Import",
         "operationId": "Bulk import2",
         "consumes": ["multipart/form-data"],
@@ -1365,7 +1365,7 @@
         "tags": [
           "Custom Orders"
         ],
-        "description": "Pass all the required order fields to create a quick order . Quick order are the ones where we do not store the product details in master catalog( inventory management as a feature is not present).",
+        "description": "Pass all the required order fields to create a quick order. Quick order are the ones where we do not store the product details in master catalog.",
         "summary": "Create quick orders",
         "operationId": "Create quick order",
         "security": [
@@ -1427,7 +1427,7 @@
         "tags": [
           "Shipments"
         ],
-        "description": "Get all shipments",
+        "description": "Get details of all shipments",
         "summary": "Get shipment Details",
         "operationId": "Get all shipments",
         "security": [
@@ -1476,7 +1476,7 @@
         "tags": [
           "Shipments"
         ],
-        "description": "Get shipment details",
+        "description": "Get details of specified shipment ID",
         "summary": "Get shipment Details of specific orders",
         "operationId": "Details",
         "security": [
@@ -1699,7 +1699,7 @@
         "tags": [
           "Couriers"
         ],
-        "description": "The ShipRocket API for generating the Air Waybill number for your shipment. You can get a single API or bulk API’s . It also gives you the option to reassign the AWB number",
+        "description": "The ShipRocket API for generating the Air Waybill number for your shipment. You can get a single AWB or bulk AWB’s . It also gives you the option to reassign the AWB number",
         "summary": "AWB Creation",
         "operationId": "Awb Creation",
         "security": [
@@ -1921,7 +1921,7 @@
           "Statement"
         ],
         "description": "Get statements data",
-        "summary": "Get shipment Details",
+        "summary": "Get statement Details",
         "operationId": "Satement",
         "security": [
             {
