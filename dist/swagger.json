@@ -18,7 +18,7 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/v1/auth/login": {
+    "/v1/external/auth/login": {
       "post": {
         "tags": [
           "Authentication"
@@ -57,7 +57,7 @@
         }
       }
     },
-    "/v1/countries": {
+    "/v1/external/countries": {
       "get": {
         "tags": [
           "Countries"
@@ -83,7 +83,7 @@
         }
       }
     },
-    "/v1/countries/show/{id}": {
+    "/v1/external/countries/show/{id}": {
       "get": {
         "tags": [
           "Countries"
@@ -116,7 +116,7 @@
         }
       }
     },
-    "/v1/products": {
+    "/v1/external/products": {
       "get": {
         "tags": [
           "Products"
@@ -225,7 +225,7 @@
         }
       }
     },
-    "/v1/products/show/{id}": {
+    "/v1/external/products/show/{id}": {
       "get": {
         "tags": [
           "Products"
@@ -268,7 +268,7 @@
         }
       }
     },
-    "/v1/products/import": {
+    "/v1/external/products/import": {
       "post": {
         "tags": [
           "Products"
@@ -307,7 +307,7 @@
         }
       }
     },
-    "/v1/products/export": {
+    "/v1/external/products/export": {
       "get": {
         "tags": [
           "Products"
@@ -338,7 +338,7 @@
         }
       }
     },
-    "/v1/products/sample": {
+    "/v1/external/products/sample": {
       "get": {
         "tags": [
           "Products"
@@ -366,7 +366,7 @@
         }
       }
     },
-    "/v1/listings": {
+    "/v1/external/listings": {
       "get": {
         "tags": [
           "Listings"
@@ -441,7 +441,7 @@
         }
       }
     },
-    "/v1/listings/import": {
+    "/v1/external/listings/import": {
       "post": {
         "tags": [
           "Listings"
@@ -482,7 +482,7 @@
         }
       }
     },
-    "/v1/listings/export/mapped": {
+    "/v1/external/listings/export/mapped": {
       "get": {
         "tags": [
           "Listings"
@@ -519,7 +519,7 @@
         }
       }
     },
-    "/v1/listings/export/unmapped": {
+    "/v1/external/listings/export/unmapped": {
       "get": {
         "tags": [
           "Listings"
@@ -556,7 +556,7 @@
         }
       }
     },
-    "/v1/listings/sample": {
+    "/v1/external/listings/sample": {
       "get": {
         "tags": [
           "Listings"
@@ -593,7 +593,7 @@
         }
       }
     },
-    "/v1/listings/link": {
+    "/v1/external/listings/link": {
       "post": {
         "tags": [
           "Listings"
@@ -642,7 +642,7 @@
         }
       }
     },
-    "/v1/orders": {
+    "/v1/external/orders": {
       "get": {
         "tags": [
           "Orders"
@@ -735,7 +735,7 @@
         }
       }
     },
-    "/v1/orders/show/{id}": {
+    "/v1/external/orders/show/{id}": {
       "get": {
         "tags": [
           "Orders"
@@ -779,7 +779,7 @@
         }
       }
     },
-    "/v1/orders/fetch": {
+    "/v1/external/orders/fetch": {
       "get": {
         "tags": [
           "Orders"
@@ -814,7 +814,7 @@
         }
       }
     },
-    "/v1/orders/status": {
+    "/v1/external/orders/status": {
       "get": {
         "tags": [
           "Orders"
@@ -849,7 +849,7 @@
         }
       }
     },
-    "/v1/orders/cancel": {
+    "/v1/external/orders/cancel": {
       "post": {
         "tags": [
           "Orders"
@@ -902,7 +902,7 @@
         }
       }
     },
-    "/v1/orders/fulfill": {
+    "/v1/external/orders/fulfill": {
       "patch": {
         "tags": [
           "Orders"
@@ -952,7 +952,7 @@
         }
       }
     },
-    "/v1/orders/mapping": {
+    "/v1/external/orders/mapping": {
       "patch": {
         "tags": [
           "Orders"
@@ -1002,7 +1002,7 @@
         }
       }
     },
-    "/v1/orders/print/invoice": {
+    "/v1/external/orders/print/invoice": {
       "post": {
         "tags": [
           "Orders"
@@ -1052,7 +1052,7 @@
         }
       }
     },
-    "/v1/orders/track": {
+    "/v1/external/orders/track": {
       "get": {
         "tags": [
           "Orders"
@@ -1148,7 +1148,7 @@
         }
       }
     },
-    "/v1/orders/address/update": {
+    "/v1/external/orders/address/update": {
       "post": {
         "tags": [
           "Orders"
@@ -1177,7 +1177,7 @@
         }
       }
     },
-    "/v1/orders/export": {
+    "/v1/external/orders/export": {
       "post": {
         "tags": [
           "Orders"
@@ -1213,7 +1213,7 @@
         }
       }
     },
-    "/v1/orders/print/manifest": {
+    "/v1/external/orders/print/manifest": {
       "post": {
         "tags": [
           "Orders"
@@ -1266,7 +1266,7 @@
         }
       }
     },
-    "/v1/orders/create": {
+    "/v1/external/orders/create": {
       "post": {
         "tags": [
           "Custom Orders"
@@ -1306,7 +1306,7 @@
         }
       }
     },
-    "/v1/orders/import": {
+    "/v1/external/orders/import": {
       "post": {
         "tags": [
           "Custom Orders"
@@ -1335,7 +1335,7 @@
         }
       }
     },
-    "/v1/orders/sample": {
+    "/v1/external/orders/sample": {
       "get": {
         "tags": [
           "Custom Orders"
@@ -1360,7 +1360,7 @@
         }
       }
     },
-    "/v1/orders/create/adhoc": {
+    "/v1/external/orders/create/adhoc": {
       "post": {
         "tags": [
           "Custom Orders"
@@ -1396,7 +1396,7 @@
         }
       }
     },
-    "/v1/errors/{id}/check": {
+    "/v1/external/errors/{id}/check": {
       "get": {
         "tags": ["FIle Imports"],
         "summary": "Get file import results from Bulk order, products, listing imports.",
@@ -1422,7 +1422,7 @@
         }
       }
     },
-    "/v1/shipments": {
+    "/v1/external/shipments": {
       "get": {
         "tags": [
           "Shipments"
@@ -1471,7 +1471,7 @@
         }
       }
     },
-    "/v1/shipments/{id}": {
+    "/v1/external/shipments/{id}": {
       "get": {
         "tags": [
           "Shipments"
@@ -1503,7 +1503,7 @@
         }
       }
     },
-    "/v1/inventory": {
+    "/v1/external/inventory": {
       "get": {
         "tags": [
           "Inventory"
@@ -1554,7 +1554,7 @@
         }
       }
     },
-    "/v1/inventory/{id}/update": {
+    "/v1/external/inventory/{id}/update": {
       "put": {
         "tags": [
           "Inventory"
@@ -1602,7 +1602,7 @@
         }
       }
     },
-    "/v1/channels": {
+    "/v1/external/channels": {
       "get": {
         "tags": [
           "Channels"
@@ -1627,7 +1627,7 @@
         }
       }
     },
-    "/v1/courier/serviceability/": {
+    "/v1/external/courier/serviceability/": {
       "get": {
         "tags": [
           "Couriers"
@@ -1694,7 +1694,7 @@
         }
       }
     },
-    "/v1/courier/assign/awb": {
+    "/v1/external/courier/assign/awb": {
       "post": {
         "tags": [
           "Couriers"
@@ -1732,7 +1732,7 @@
         }
       }
     },
-    "/v1/courier/generate/pickup": {
+    "/v1/external/courier/generate/pickup": {
       "post": {
         "tags": [
           "Couriers"
@@ -1768,7 +1768,7 @@
         }
       }
     },
-    "/v1/courier/generate/label": {
+    "/v1/external/courier/generate/label": {
       "post": {
         "tags": [
           "Generate Label"
@@ -1804,7 +1804,7 @@
         }
       }
     },
-    "/v1/courier/track/awb/{awb_code}": {
+    "/v1/external/courier/track/awb/{awb_code}": {
       "get": {
         "tags": [
           "Tracking"
@@ -1847,7 +1847,7 @@
         }
       }
     },
-    "/v1/courier/track/shipment/{shipment_id}": {
+    "/v1/external/courier/track/shipment/{shipment_id}": {
       "get": {
         "tags": [
           "Tracking"
@@ -1890,7 +1890,7 @@
         }
       }
     },
-    "/v1/billing/discrepancy": {
+    "/v1/external/billing/discrepancy": {
       "get": {
         "tags": [
           "Discrepancy"
@@ -1915,7 +1915,7 @@
         }
       }
     },
-    "/v1/account/details/statement": {
+    "/v1/external/account/details/statement": {
       "get": {
         "tags": [
           "Statement"
@@ -3395,7 +3395,7 @@
                 "links": {
                   "type": "object",
                   "properties": {
-                    "next": {"type": "string", "example": "https://krmct001.kartrocket.com/v1/orders?page=2"}
+                    "next": {"type": "string", "example": "https://krmct001.kartrocket.com/v1/external/orders?page=2"}
                   }
                 }
               }
