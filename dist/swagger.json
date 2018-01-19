@@ -23,7 +23,7 @@
         "tags": [
           "Authentication"
         ],
-        "description": "The token is the authorization key that you need to pass before using the ShipRocket API's. \n\nGenerating the token is an extremely simple process. Simply type in your email id (alternate id for the ShipRocket API) and all your details will be generated.\n \n| Steps to Use Token\n  -----|\n 1. Copy the ***Token*** recieved in Response. \n2. Click on ***Authorize*** Button.\n3. Type ***Bearer &lt;token&gt;*** in the ***Value***.\n4. Click on ***Authorize*** and close the pop-up.\n5. Now you can use all the api's.\n\n***These login credentials are different from that used while Login into Shiprocket Panel.***",
+        "description": "The token is the authorization key that you need to pass before using the ShipRocket API's. \n\nGenerating the token is an extremely simple process. Simply type in your email id (alternate id for the ShipRocket API) and all your details will be generated.\n \n| Steps to Use Token\n  -----|\n 1. Copy the ***Token*** recieved in Response. \n2. Click on ***Authorize*** Button.\n3. Type ***Bearer &lt;token&gt;*** in the ***Value***.\n4. Click on ***Authorize*** and close the pop-up.\n5. Now you can use all the api's.",
         "summary": "Access Token",
         "operationId": "Get token",
         "produces": ["application/json"],
@@ -1213,10 +1213,41 @@
         }
       }
     },
+    "/v1/external/manifests/generate": {
+      "post": {
+        "tags": ["Manifests"],
+        "description": "Generate Manifests for single order or bulk orders.",
+        "summary": "Generate Manifests",
+        "operationId": "generate manifest",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/generateManifestRequest"
+          }
+        }],
+        "responses":{
+          "200": {
+            "description": "Manifests generated Successfully",
+            "schema": {
+              "$ref": "#/definitions/generateManifestResponse"
+            }
+          }
+        }
+      }
+    },
     "/v1/external/orders/print/manifest": {
       "post": {
         "tags": [
-          "Orders"
+          "Manifests"
         ],
         "description": "Prints the manifest of the order id on the assumption that the manifest is created",
         "summary": "Get manifest",
@@ -3636,6 +3667,37 @@
       },
       "required": ["data"]
     },
+    "generateManifestRequest": {
+      "title": "Generate Manifests Request",
+      "type": "object",
+      "properties": {
+        "shipment_id": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "description": "id(s) of shipment(s)",
+            "example": 123
+          }
+        }
+      },
+      "required": ["shipment_id"]
+    },
+    "generateManifestResponse": {
+      "title": "Generate Manifests Response",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "example": 200
+          },
+          "url": {
+            "type": "string",
+            "example": "http://example.com/manifests/manifests.csv"
+          }
+      },
+      "required": ["status", "url"]
+    },
     "CreateLinkedOrderRequest": {
       "title": "Create linked order. request",
       "type": "object",
@@ -3945,10 +4007,6 @@
             "units": {
               "type": "string",
               "description": ""
-            },
-            "tax": {
-              "type": "string",
-              "description": "Tax value in %"
             },
             "selling_price": {
               "type": "string",
