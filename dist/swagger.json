@@ -1269,7 +1269,7 @@
     "/v1/external/manifests/generate": {
       "post": {
         "tags": ["Manifests"],
-        "description": "Generate Manifests for single order or bulk orders.\n\n&lowast;***This should be used if print manifest doesn't give any URL***&lowast;",
+        "description": "Generate Manifests for single order or bulk orders.\n\n&lowast;***This should be used if print manifest doesn't return any URL***&lowast;",
         "summary": "Generate Manifests",
         "operationId": "generate manifest",
         "produces": ["application/json"],
