@@ -1213,37 +1213,6 @@
         }
       }
     },
-    "/v1/external/manifests/generate": {
-      "post": {
-        "tags": ["Manifests"],
-        "description": "Generate Manifests for single order or bulk orders.",
-        "summary": "Generate Manifests",
-        "operationId": "generate manifest",
-        "produces": ["application/json"],
-        "consumes": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "parameters": [{
-          "name": "data",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/generateManifestRequest"
-          }
-        }],
-        "responses":{
-          "200": {
-            "description": "Manifests generated Successfully",
-            "schema": {
-              "$ref": "#/definitions/generateManifestResponse"
-            }
-          }
-        }
-      }
-    },
     "/v1/external/orders/print/manifest": {
       "post": {
         "tags": [
@@ -1292,6 +1261,37 @@
             "description": "method not allowed",
             "schema": {
               "$ref": "#/definitions/405Error"
+            }
+          }
+        }
+      }
+    },
+    "/v1/external/manifests/generate": {
+      "post": {
+        "tags": ["Manifests"],
+        "description": "Generate Manifests for single order or bulk orders.\n\n&lowast;***This should be used if print manifest doesn't give any URL***&lowast;",
+        "summary": "Generate Manifests",
+        "operationId": "generate manifest",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "security": [
+            {
+                "Bearer": []
+            }
+        ],
+        "parameters": [{
+          "name": "data",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/generateManifestRequest"
+          }
+        }],
+        "responses":{
+          "200": {
+            "description": "Manifests generated Successfully",
+            "schema": {
+              "$ref": "#/definitions/generateManifestResponse"
             }
           }
         }
@@ -1447,7 +1447,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#definitions/fileImportResponse"
+              "$ref": "#/definitions/fileImportResponse"
             }
           }
         }
