@@ -3994,34 +3994,36 @@
           "description": ""
         },
         "order_items": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "example": "test"
-            },
-            "sku": {
-              "type": "string",
-              "description": ""
-            },
-            "units": {
-              "type": "string",
-              "description": ""
-            },
-            "selling_price": {
-              "type": "string",
-              "description": ""
-            },
-            "discount": {
-              "type": "string",
-              "description": ""
-            },
-            "hsn": {
-              "type": "string",
-              "description": ""
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": ""
+              },
+              "sku": {
+                "type": "string",
+                "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)"
+              },
+              "units": {
+                "type": "integer",
+                "description": "Total number of units being shipped"
+              },
+              "selling_price": {
+                "type": "integer",
+                "description": "Price at which it is being sold"
+              },
+              "discount": {
+                "type": "integer",
+                "description": ""
+              },
+              "HSN": {
+                "type": "string",
+                "description": "Harmonised System Nomenclature. A code number used to classify goods for taxation purposes. Done to determine which category of taxes do the goods come under"
+              }
             }
-          },
-          "description": ""
+          }
         },
         "payment_method": {
           "type": "string",
