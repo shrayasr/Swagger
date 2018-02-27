@@ -17,6 +17,7 @@
     },
   "consumes": ["application/json"],
   "produces": ["application/json"],
+  "tags": [{"name": "Authentication"}, {"name": "Orders"}, {"name": "Shipments"},{ "name": "Tracking"}, {"name": "Products"}, {"name": "Listings"}, {"name": "Couriers"}, {"name": "Channels"}, {"name": "Label"}, {"name": "Manifests"}, {"name": "Inventory"}, {"name": "Statement"}, {"name": "Discrepancy"}, {"name": "File Imports"}, {"name": "Countries"}],
   "paths": {
     "/v1/external/auth/login": {
       "post": {
@@ -1300,7 +1301,7 @@
     "/v1/external/orders/create": {
       "post": {
         "tags": [
-          "Custom Orders"
+          "Orders"
         ],
         "description": "Shows the details of the order which needs to be created",
         "summary": "Create Orders",
@@ -1340,7 +1341,7 @@
     "/v1/external/orders/import": {
       "post": {
         "tags": [
-          "Custom Orders"
+          "Orders"
         ],
         "description": "Import orders in bulk to your Shiprocket panel from a csv file",
         "summary": "Bulk Import",
@@ -1369,7 +1370,7 @@
     "/v1/external/orders/sample": {
       "get": {
         "tags": [
-          "Custom Orders"
+          "Orders"
         ],
         "description": "Get sample format for Orders Import excel file",
         "summary": "Get sample format for Orders Import",
@@ -1394,7 +1395,7 @@
     "/v1/external/orders/create/adhoc": {
       "post": {
         "tags": [
-          "Custom Orders"
+          "Orders"
         ],
         "description": "Pass all the required order fields to create a quick order. Quick order are the ones where we do not store the product details in master catalog.",
         "summary": "Create quick orders",
@@ -1429,7 +1430,7 @@
     },
     "/v1/external/errors/{id}/check": {
       "get": {
-        "tags": ["FIle Imports"],
+        "tags": ["File Imports"],
         "summary": "Get file import results from Bulk order, products, listing imports.",
         "description": "Check Import Response",
         "security": [
@@ -1802,7 +1803,7 @@
     "/v1/external/courier/generate/label": {
       "post": {
         "tags": [
-          "Generate Label"
+          "Label"
         ],
         "description": "Get a label URL. Note:- For label URL, AWB code must be assigned on shipment id.",
         "summary": "Generate Label",
