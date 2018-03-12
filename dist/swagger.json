@@ -1304,7 +1304,7 @@
           "Orders"
         ],
         "description": "Shows the details of the order which needs to be created",
-        "summary": "Create Orders",
+        "summary": "Create Channel Order",
         "operationId": "Create linked order.",
         "produces": ["application/json"],
         "security": [
@@ -1398,8 +1398,8 @@
           "Orders"
         ],
         "description": "Pass all the required order fields to create a quick order. Quick order are the ones where we do not store the product details in master catalog.",
-        "summary": "Create quick orders",
-        "operationId": "Create quick order",
+        "summary": "Create Custom order",
+        "operationId": "Create Custom order",
         "security": [
             {
                 "Bearer": []
@@ -4019,6 +4019,10 @@
                 "type": "integer",
                 "description": ""
               },
+              "tax": {
+                  "type": "integer",
+                  "description": ""
+                },
               "HSN": {
                 "type": "string",
                 "description": "Harmonised System Nomenclature. A code number used to classify goods for taxation purposes. Done to determine which category of taxes do the goods come under"
