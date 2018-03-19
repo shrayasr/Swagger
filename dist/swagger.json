@@ -1691,8 +1691,7 @@
             "name": "weight",
             "in": "query",
             "required": true,
-            "type": "integer",
-            "format": "int32",
+            "type": "string",
             "description": "Shipment weight, in kgs"
           }, {
             "name": "cod",
