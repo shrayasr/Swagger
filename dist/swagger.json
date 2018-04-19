@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0",
     "title": "ShiprocketAPI",
-    "description": "Welcome to ShipRocket’s API Documentation. Get a clear understanding of all the sections and codes that are used in ShipRocket’s API. ShipRocket API uses the JSON syntax. \n \n First you need to register with ShipRocket and create an account. Simply click on this [link](https://app.shiprocket.in/register) to complete the simple sign up process.\n \n Please note that to utilise the ShipRocket API's, you need to [upgrade](https://app.shiprocket.in/billing-plan-details) your plan to Advance or Pro. To get access to use the API's, you need to call to +91-9266623006 our customer care or send a mail to srs@kartrocket.com, stating that you would like to use ShipRocket Open API's. After that you will have to provide an alternate email id which will be used for the ShipRocket API.",
+    "description": "Welcome to ShipRocket’s API Documentation. Get a clear understanding of all the sections and codes that are used in ShipRocket’s API. ShipRocket API uses the JSON syntax. \n \n First you need to register with ShipRocket and create an account. Simply click on this [link](https://app.shiprocket.in/register) to complete the simple sign up process.\n \n Please note that to utilise the ShipRocket API's, you need to [upgrade](https://app.shiprocket.in/billing-plan-details) your plan to Advance or Pro. To get access to use the API's, you need to call to +91-9266623006 our customer care or send a mail to srs@kartrocket.com, stating that you would like to use ShipRocket Open API's. After that you will have to provide an alternate email id which will be used for the ShipRocket API."
   },
   "host": "apiv2.shiprocket.in",
   "schemes": ["https"],
@@ -3899,11 +3899,16 @@
       "properties": {
         "order_id": {
           "type": "string",
-          "description": ""
+          "description": "required|max:20"
         },
         "order_date": {
           "type": "string",
-          "description": ""
+          "description": "required"
+        },
+        "pickup_location": {
+          "type": "string",
+          "description": "",
+          "example": ""
         },
         "channel_id": {
           "type": "integer",
@@ -3911,7 +3916,7 @@
         },
         "billing_customer_name": {
           "type": "string",
-          "description": ""
+          "description": "required"
         },
         "billing_last_name": {
           "type": "string",
@@ -3919,39 +3924,35 @@
         },
         "billing_address": {
           "type": "string",
-          "description": ""
+          "description": "required|min:3"
         },
         "billing_address_2": {
           "type": "string",
-          "description": ""
+          "description": "max:50"
         },
         "billing_city": {
           "type": "string",
+          "description": "required|max:30"
+        },
+        "billing_pincode": {
+          "type": "integer",
           "description": ""
         },
         "billing_state": {
           "type": "string",
-          "description": ""
+          "description": "required"
         },
         "billing_country": {
           "type": "string",
-          "description": ""
-        },
-        "billing_pincode": {
-          "type": "string",
-          "description": ""
+          "description": "required"
         },
         "billing_email": {
           "type": "string",
-          "description": ""
-        },
-        "billing_phone": {
-          "type": "string",
-          "description": ""
+          "description": "required"
         },
         "shipping_is_billing": {
           "type": "boolean",
-          "description": ""
+          "description": "required"
         },
         "shipping_customer_name": {
           "type": "string",
@@ -3973,11 +3974,11 @@
           "type": "string",
           "description": ""
         },
-        "shipping_country": {
-          "type": "string",
+        "shipping_pincode": {
+          "type": "integer",
           "description": ""
         },
-        "shipping_pincode": {
+        "shipping_country": {
           "type": "string",
           "description": ""
         },
@@ -3989,10 +3990,6 @@
           "type": "string",
           "description": ""
         },
-        "shipping_phone": {
-          "type": "string",
-          "description": ""
-        },
         "order_items": {
           "type": "array",
           "items": {
@@ -4000,19 +3997,19 @@
             "properties": {
               "name": {
                 "type": "string",
-                "description": ""
+                "description": "required"
               },
               "sku": {
                 "type": "string",
-                "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)"
+                "description": "required"
               },
               "units": {
                 "type": "integer",
-                "description": "Total number of units being shipped"
+                "description": "required"
               },
               "selling_price": {
                 "type": "integer",
-                "description": "Price at which it is being sold"
+                "description": "required"
               },
               "discount": {
                 "type": "integer",
@@ -4022,7 +4019,7 @@
                   "type": "integer",
                   "description": ""
                 },
-              "HSN": {
+              "hsn": {
                 "type": "string",
                 "description": "Harmonised System Nomenclature. A code number used to classify goods for taxation purposes. Done to determine which category of taxes do the goods come under"
               }
@@ -4031,22 +4028,22 @@
         },
         "payment_method": {
           "type": "string",
-          "description": ""
+          "description": "required"
         },
         "shipping_charges": {
-          "type": "string",
+          "type": "integer",
           "description": ""
         },
         "giftwrap_charges": {
-          "type": "string",
+          "type": "integer",
           "description": ""
         },
         "transaction_charges": {
-          "type": "string",
+          "type": "integer",
           "description": ""
         },
         "total_discount": {
-          "type": "string",
+          "type": "integer",
           "description": ""
         },
         "sub_total": {
