@@ -6,18 +6,70 @@
     "description": "Welcome to ShipRocket’s API Documentation. Get a clear understanding of all the sections and codes that are used in ShipRocket’s API. ShipRocket API uses the JSON syntax. \n \n First you need to register with ShipRocket and create an account. Simply click on this [link](https://app.shiprocket.in/register) to complete the simple sign up process.\n \n Please note that to utilise the ShipRocket API's, you need to [upgrade](https://app.shiprocket.in/billing-plan-details) your plan to Advance or Pro. To get access to use the API's, you need to call to +91-9266623006 our customer care or send a mail to srs@kartrocket.com, stating that you would like to use ShipRocket Open API's. After that you will have to provide an alternate email id which will be used for the ShipRocket API."
   },
   "host": "apiv2.shiprocket.in",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
-        "Bearer": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header",
-            "description": "The api token provided by login api"
-        }
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "The api token provided by login api"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Authentication"
     },
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "tags": [{"name": "Authentication"}, {"name": "Orders"}, {"name": "Shipments"},{ "name": "Tracking"}, {"name": "Products"}, {"name": "Listings"}, {"name": "Couriers"}, {"name": "Channels"}, {"name": "Label"}, {"name": "Manifests"}, {"name": "Inventory"}, {"name": "Statement"}, {"name": "Discrepancy"}, {"name": "File Imports"}, {"name": "Countries"}],
+    {
+      "name": "Orders"
+    },
+    {
+      "name": "Shipments"
+    },
+    {
+      "name": "Tracking"
+    },
+    {
+      "name": "Products"
+    },
+    {
+      "name": "Listings"
+    },
+    {
+      "name": "Couriers"
+    },
+    {
+      "name": "Channels"
+    },
+    {
+      "name": "Label"
+    },
+    {
+      "name": "Manifests"
+    },
+    {
+      "name": "Inventory"
+    },
+    {
+      "name": "Statement"
+    },
+    {
+      "name": "Discrepancy"
+    },
+    {
+      "name": "File Imports"
+    },
+    {
+      "name": "Countries"
+    }
+  ],
   "paths": {
     "/v1/external/auth/login": {
       "post": {
@@ -27,15 +79,19 @@
         "description": "The token is the authorization key that you need to pass before using the ShipRocket API's. \n\nGenerating the token is an extremely simple process. Simply type in your email id (alternate id for the ShipRocket API) and all your details will be generated.\n \n| Steps to Use Token\n  -----|\n 1. Copy the ***Token*** recieved in Response. \n2. Click on ***Authorize*** Button.\n3. Type ***Bearer &lt;token&gt;*** in the ***Value***.\n4. Click on ***Authorize*** and close the pop-up.\n5. Now you can use all the api's.",
         "summary": "Access Token",
         "operationId": "Get token",
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/GetTokenRequest"
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetTokenRequest"
+            }
           }
-        }],
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -66,7 +122,9 @@
         "description": "Shows all the countries which are present in the ShipRocket database. ShipRocket API provides ISO Code 2 and ISO Code 3 country options and has a total of 44 countries in its database. This allows you to use these countries in your own dropdown menu.",
         "summary": "Countries",
         "operationId": "Get countries",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -92,15 +150,19 @@
         "description": "Shows all the zones which are present within a country.",
         "summary": "Get all zones",
         "operationId": "Get zones",
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The specific id of the country in integer format"
-        }],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The specific id of the country in integer format"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Name of the specific zone",
@@ -125,51 +187,60 @@
         "description": "Shows all the details of all the products that a ShipRocket user has. This can be filtered according to details like number of products per page, ascending or descending sorting order. ",
         "summary": "Get Products",
         "operationId": "Get products",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "page",
-          "in": "query",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The page number which is to be displayed"
-        }, {
-          "name": "per_page",
-          "in": "query",
-          "required": false,
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of products in each page"
-        }, {
-          "name": "sort",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Whether to arrange the items in ascending or descending order(DESC, ASC)"
-        }, {
-          "name": "sort_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
-        }, {
-          "name": "filter",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Value by which the results will be filtered"
-        }, {
-          "name": "filter_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Validation of filtered value (data to be matched)"
-        }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The page number which is to be displayed"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The total number of products in each page"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Whether to arrange the items in ascending or descending order(DESC, ASC)"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Value by which the results will be filtered"
+          },
+          {
+            "name": "filter_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Validation of filtered value (data to be matched)"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -198,25 +269,29 @@
         "description": "Add new product",
         "summary": "Add new Products",
         "operationId": "Add",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/AddRequest"
+        "security": [
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
             "schema": {}
-            },
+          },
           "422": {
             "description": "invalid data",
             "schema": {
@@ -234,19 +309,23 @@
         "description": "Shows individual product details",
         "summary": "Show",
         "operationId": "Show",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Id = The product id which is to be shown and the input should be in an integer format",
-          "type": "string"
-        }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id = The product id which is to be shown and the input should be in an integer format",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -281,17 +360,21 @@
           "multipart/form-data"
         ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "file",
-          "in": "formData",
-          "required": true,
-          "type": "file"
-        }],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -316,11 +399,13 @@
         "description": "Downloads all Products Details in CSV format",
         "summary": "Bulk Sample",
         "operationId": "Bulk export",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -347,11 +432,13 @@
         "description": "Export a sample CSV file for importing",
         "summary": "Get a sample format to Import Products",
         "operationId": "Bulk sample",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -376,50 +463,59 @@
         "summary": "Get all Listings",
         "operationId": "Get all",
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "page",
-          "in": "query",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Page number of the data which is to be displayed"
-        }, {
-          "name": "per_page",
-          "in": "query",
-          "required": false,
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of channel orders listed in each page"
-        }, {
-          "name": "sort",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "The order in which the listings should be sorted"
-        }, {
-          "name": "sort_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
-        }, {
-          "name": "filter",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Value by which the results will be filtered"
-        }, {
-          "name": "filter_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Validation of filtered value (data to be matched)"
-        }],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "Page number of the data which is to be displayed"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of channel orders listed in each page"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The order in which the listings should be sorted"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Value by which the results will be filtered"
+          },
+          {
+            "name": "filter_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Validation of filtered value (data to be matched)"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -450,19 +546,25 @@
         "description": "Import CSV containing channel catalog to master catalog mappings",
         "summary": "Import Catalog mappings",
         "operationId": "Bulk import1",
-        "consumes": ["multipart/form-data"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "consumes": [
+          "multipart/form-data"
         ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "file",
-          "in": "formData",
-          "required": true,
-          "type": "file"
-        }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -491,11 +593,13 @@
         "description": "Export mapped- Downloads the list of mapped items in the channel catalog sheet. After mapping items you can see the number of products of one channel, which are present in the Master Catalog.",
         "summary": "Export Mapped",
         "operationId": "Export mapped",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -528,11 +632,13 @@
         "description": "Downloads the list of unmapped items in the channel catalog sheet.",
         "summary": "Export Unmapped",
         "operationId": "Export un-mapped",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -565,11 +671,13 @@
         "description": "Downloads a sample of the catalog sheet.",
         "summary": "Export sample",
         "operationId": "Export sample",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -603,24 +711,27 @@
         "summary": "Map",
         "operationId": "Map",
         "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/MapRequest"
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MapRequest"
+            }
+          }
+        ],
         "responses": {
           "204": {
             "description": "Linking success",
-            "schema": {
-            }
+            "schema": {}
           },
           "400": {
             "description": "Input not Defined",
@@ -651,69 +762,81 @@
         "description": "The ShipRocket API for getting all the orders of a single seller. In this API the product and shipment activities will have sub arrays for individual products and shipments.\n\nBelow are the order status codes used: \n \n  Order Status Code | Descrition\n  ----- | -----\n  1 | New\n  2 | Invoiced\n  3 | Ready To Ship\n  4 | Pickup Scheduled\n  5 | Cancelled\n  6 | Shipped\n  7 | Delivered\n  8 | e-Payment Failed\n  9 | Returned\n  10 | Unmapped\n  11 | Out of Stock\n  12 | Pickup Queued\n  13 | Pickup Rescheduled\n  14 | Pickup error// Created when there is an error on pickup schedule\n  15 | RTO initiated\n  16 | RTO delivered\n  17 | RTO Acknowledged\n  18 | Cancellation Request\n  19 | Out for Delivery\n  20 | In Transit",
         "summary": "Get all orders",
         "operationId": "Get all orders",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "page",
-          "in": "query",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Page number of data to display"
-        }, {
-          "name": "per_page",
-          "in": "query",
-          "required": false,
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of orders to get per request"
-        }, {
-          "name": "sort",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Sort type (DESC, ASC)"
-        }, {
-          "name": "sort_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Field to sort by"
-        }, {
-          "name": "to",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "To date"
-        }, {
-          "name": "from",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "From date"
-        }, {
-          "name": "filter",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Filter value"
-        }, {
-          "name": "filter_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Field to filter by"
-        }, {
-          "name": "search",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Search for AWB or Channel Order ID"
-        }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "Page number of data to display"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of orders to get per request"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Sort type (DESC, ASC)"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Field to sort by"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "To date"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "From date"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter value"
+          },
+          {
+            "name": "filter_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Field to filter by"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Search for AWB or Channel Order ID"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -745,19 +868,23 @@
         "summary": "Get order Details",
         "operationId": "Get order",
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The order id"
-        }],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The order id"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -788,11 +915,13 @@
         "description": "Starts a background job which will fetch orders from all channels.",
         "summary": "Fetch",
         "operationId": "Fetch orders",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -811,7 +940,7 @@
             "schema": {
               "$ref": "#/definitions/405Error"
             }
-          } 
+          }
         }
       }
     },
@@ -823,11 +952,13 @@
         "description": "This API runs a status sync which pulls out the changes in order status and syncs them in the panel",
         "summary": "Sync status",
         "operationId": "Sync status",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -858,20 +989,24 @@
         "description": "Cancel the orders by passing their order ID’s in the given below API.",
         "summary": "Cancel an order",
         "operationId": "Cancel orders",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/CancelOrdersRequest"
+        "security": [
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelOrdersRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Order cancel request taken",
@@ -911,20 +1046,24 @@
         "description": "This API allows you to add inventory for order product by passing the order id and order product id",
         "summary": "Add inventory for order product",
         "operationId": "Fulfillment",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/FulfillmentRequest"
+        "security": [
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FulfillmentRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -961,20 +1100,24 @@
         "description": "Map unmapped order products",
         "summary": "Map orders products",
         "operationId": "Mapping",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/MappingRequest"
+        "security": [
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MappingRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1011,20 +1154,24 @@
         "description": "Generates an invoice for an order through the order id. You can pass multiple order id’s as well, to generate their response",
         "summary": "Generate Invoice",
         "operationId": "Generate invoice",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/GenerateInvoiceRequest"
+        "security": [
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateInvoiceRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1061,69 +1208,81 @@
         "description": "Get tracking data of all orders",
         "summary": "Get tracking Details",
         "operationId": "Track",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "page",
-          "in": "query",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Page number of data to display"
-        }, {
-          "name": "per_page",
-          "in": "query",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of orders to get per request"
-        }, {
-          "name": "sort",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Sort type (DESC, ASC)"
-        }, {
-          "name": "sort_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Field to sort by"
-        }, {
-          "name": "to",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "To date"
-        }, {
-          "name": "from",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "From date"
-        }, {
-          "name": "filter",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Filter value"
-        }, {
-          "name": "filter_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Field to filter by"
-        }, {
-          "name": "search",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Search for AWB or Channel Order ID"
-        }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "Page number of data to display"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of orders to get per request"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Sort type (DESC, ASC)"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Field to sort by"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "To date"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "From date"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter value"
+          },
+          {
+            "name": "filter_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Field to filter by"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Search for AWB or Channel Order ID"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1156,20 +1315,24 @@
         ],
         "description": "Update the customer’s delivery address by passing the order id in the given below API",
         "operationId": "Change address",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ChangeAddressRequest"
+        "security": [
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeAddressRequest"
+            }
+          }
+        ],
         "responses": {
           "202": {
             "description": "Address updated",
@@ -1185,11 +1348,13 @@
         ],
         "description": "Displays the URL of the CSV sheet of downloaded orders as a response",
         "operationId": "Export orders",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -1223,19 +1388,23 @@
         "summary": "Get manifest",
         "operationId": "Get manifests",
         "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/GetManifestsRequest"
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetManifestsRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1269,26 +1438,34 @@
     },
     "/v1/external/manifests/generate": {
       "post": {
-        "tags": ["Manifests"],
+        "tags": [
+          "Manifests"
+        ],
         "description": "Generate Manifests for single order or bulk orders.\n\n&lowast;***This should be used if print manifest doesn't return any URL***&lowast;",
         "summary": "Generate Manifests",
         "operationId": "generate manifest",
-        "produces": ["application/json"],
-        "consumes": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "data",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/generateManifestRequest"
+        "consumes": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
           }
-        }],
-        "responses":{
+        ],
+        "parameters": [
+          {
+            "name": "data",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/generateManifestRequest"
+            }
+          }
+        ],
+        "responses": {
           "200": {
             "description": "Manifests generated Successfully",
             "schema": {
@@ -1306,20 +1483,24 @@
         "description": "Shows the details of the order which needs to be created",
         "summary": "Create Channel Order",
         "operationId": "Create linked order.",
-        "produces": ["application/json"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "produces": [
+          "application/json"
         ],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/CreateLinkedOrderRequest"
+        "security": [
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateLinkedOrderRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1333,7 +1514,9 @@
           },
           "403": {
             "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {"$ref": "#/definitions/import403"}
+            "schema": {
+              "$ref": "#/definitions/import403"
+            }
           }
         }
       }
@@ -1346,19 +1529,25 @@
         "description": "Import orders in bulk to your Shiprocket panel from a csv file",
         "summary": "Bulk Import",
         "operationId": "Bulk import2",
-        "consumes": ["multipart/form-data"],
-        "security": [
-            {
-                "Bearer": []
-            }
+        "consumes": [
+          "multipart/form-data"
         ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "file",
-          "in": "formData",
-          "required": true,
-          "type": "file"
-        }],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "file",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1375,11 +1564,13 @@
         "description": "Get sample format for Orders Import excel file",
         "summary": "Get sample format for Orders Import",
         "operationId": "Bulk sample1",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -1401,19 +1592,23 @@
         "summary": "Create Custom order",
         "operationId": "Create Custom order",
         "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/CreateQuickOrderRequest"
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateQuickOrderRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1423,27 +1618,33 @@
           },
           "403": {
             "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {"$ref": "#/definitions/import403"}
+            "schema": {
+              "$ref": "#/definitions/import403"
+            }
           }
         }
       }
     },
     "/v1/external/errors/{id}/check": {
       "get": {
-        "tags": ["File Imports"],
+        "tags": [
+          "File Imports"
+        ],
         "summary": "Get file import results from Bulk order, products, listing imports.",
         "description": "Check Import Response",
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1463,36 +1664,43 @@
         "summary": "Get shipment Details",
         "operationId": "Get all shipments",
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "sort",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Sort type (DESC, ASC)"
-        }, {
-          "name": "sort_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Field to sort by"
-        }, {
-          "name": "filter",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Filter value"
-        }, {
-          "name": "filter_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Field to filter by"
-        }],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Sort type (DESC, ASC)"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Field to sort by"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Filter value"
+          },
+          {
+            "name": "filter_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Field to filter by"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1512,19 +1720,23 @@
         "summary": "Get shipment Details of specific orders",
         "operationId": "Details",
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The shipment id"
-        }],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The shipment id"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1544,38 +1756,45 @@
         "summary": "Get Details of orders with inventories",
         "operationId": "Get inventories",
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "page",
-          "in": "query",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "The page number which is to be displayed"
-        }, {
-          "name": "per_page",
-          "in": "query",
-          "required": false,
-          "type": "integer",
-          "format": "int32",
-          "description": "The total number of products in each page in an integer format"
-        }, {
-          "name": "sort",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Whether to arrange the items in ascending or descending order"
-        }, {
-          "name": "sort_by",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
-        }],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "The page number which is to be displayed"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The total number of products in each page in an integer format"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Whether to arrange the items in ascending or descending order"
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Allows to choose the value field by which the items will be sorted. Could be sorted by id, by sku, time created etc."
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1595,12 +1814,15 @@
         "summary": "Update Inventory",
         "operationId": "Update inventory",
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "produces": ["application/json"],
-        "parameters": [{
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
             "name": "id",
             "in": "path",
             "required": true,
@@ -1642,11 +1864,13 @@
         "description": "The ShipRocket API for getting the data of all integrated channels in the ShipRocket account. ",
         "summary": "Get all channels",
         "operationId": "Get all2",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -1668,38 +1892,89 @@
         "summary": "Check Serviceability",
         "operationId": "Check serviceability",
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "produces": ["application/json"],
-        "parameters": [{
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
             "name": "pickup_postcode",
             "in": "query",
             "required": true,
             "type": "integer",
             "format": "int32",
             "description": "The pincode of the location from where the shipment is supposed to be picked up, in an integer format"
-          }, {
+          },
+          {
             "name": "delivery_postcode",
             "in": "query",
             "required": true,
             "type": "integer",
             "format": "int32",
             "description": "The pincode of the location where the shipment is supposed to be delivered, in an integer format"
-          }, {
+          },
+          {
+            "name": "length",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Length in meters"
+          },
+          {
+            "name": "breadth",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "breadth in meters"
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "height in meters"
+          },
+          {
             "name": "weight",
             "in": "query",
             "required": true,
             "type": "string",
             "description": "Shipment weight, in kgs"
-          }, {
+          },
+          {
             "name": "cod",
             "in": "query",
             "required": true,
             "type": "integer",
             "format": "int32",
             "description": "If cash on delivery is required or not. Required =1, Prepaid =0"
+          },
+          {
+            "name": "declared_value",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Price of the order"
+          },
+          {
+            "name": "restricted_couriers",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Length of the package"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Surface/Air"
           },
           {
             "name": "order_id",
@@ -1734,19 +2009,23 @@
         "summary": "AWB Creation",
         "operationId": "Awb Creation",
         "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/AwbCreationRequest"
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AwbCreationRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1772,19 +2051,23 @@
         "summary": "Get Pickup Details",
         "operationId": "Pickup creation",
         "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/PickupCreationRequest"
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PickupCreationRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1808,19 +2091,23 @@
         "summary": "Generate Label",
         "operationId": "Generate Label",
         "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/GenerateLabelRequest"
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateLabelRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1844,26 +2131,31 @@
         "summary": "Get AWB tracking Details",
         "operationId": "AWB Tracking",
         "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "awb_code",
-          "in": "path",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "awb code"
-        }, {
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/AwbTrackingRequest"
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "awb_code",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "awb code"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AwbTrackingRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1887,26 +2179,31 @@
         "summary": "Get shipment Tracking Details",
         "operationId": "Shipment Tracking",
         "security": [
-            {
-                "Bearer": []
-            }
-        ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "shipment_id",
-          "in": "path",
-          "required": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "Shipment ID"
-        }, {
-          "name": "body",
-          "in": "body",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ShipmentTrackingRequest"
+          {
+            "Bearer": []
           }
-        }],
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "shipment_id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "Shipment ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShipmentTrackingRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -1929,11 +2226,13 @@
         "description": "Get discrepancy data",
         "summary": "Get discrepancy Details",
         "operationId": "Discrepancy",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
         "parameters": [],
         "responses": {
@@ -1955,51 +2254,60 @@
         "summary": "Get statement Details",
         "operationId": "Satement",
         "security": [
-            {
-                "Bearer": []
-            }
+          {
+            "Bearer": []
+          }
         ],
-        "produces": ["application/json"],
-        "parameters": [{
-          "name": "page",
-          "in": "query",
-          "required": false,
-          "type": "integer",
-          "format": "int32",
-          "description": "Page number of data to display"
-        }, {
-          "name": "per_page",
-          "in": "query",
-          "required": false,
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of orders to get per request"
-        }, {
-          "name": "to",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "To date"
-        }, {
-          "name": "from",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "From date"
-        }, {
-          "name": "search",
-          "in": "query",
-          "required": false,
-          "type": "string",
-          "description": "Search for AWB or Channel Order ID"
-        }, {
-          "name": "export",
-          "in": "query",
-          "required": false,
-          "type": "integer",
-          "format": "int32",
-          "description": "Export the data in csv format"
-        }],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Page number of data to display"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of orders to get per request"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "To date"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "From date"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Search for AWB or Channel Order ID"
+          },
+          {
+            "name": "export",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Export the data in csv format"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -2027,7 +2335,10 @@
           "example": "abcd1234"
         }
       },
-      "required": ["email", "password"]
+      "required": [
+        "email",
+        "password"
+      ]
     },
     "400Error": {
       "title": "400 error Bad Request",
@@ -2118,14 +2429,28 @@
           "example": "huiyd878y823hh2hdu232h"
         }
       },
-      "required": ["id", "first_name", "last_name", "email", "company_id", "created_at", "token"]
+      "required": [
+        "id",
+        "first_name",
+        "last_name",
+        "email",
+        "company_id",
+        "created_at",
+        "token"
+      ]
     },
     "405Error": {
       "title": "Post method instead of Get or vice versa",
       "type": "object",
       "properties": {
-        "message": {"type": "string", "example": "method not allowed"},
-        "status_code": {"type": "integer", "example": 405}
+        "message": {
+          "type": "string",
+          "example": "method not allowed"
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 405
+        }
       }
     },
     "GetCountriesResponse": {
@@ -2141,7 +2466,8 @@
         "data": {
           "type": "object",
           "description": "Arrayed data",
-          "example": [{
+          "example": [
+            {
               "id": 1,
               "name": "Afghanistan",
               "iso_code_2": "AF",
@@ -2504,7 +2830,10 @@
           ]
         }
       },
-      "required": ["status", "data"]
+      "required": [
+        "status",
+        "data"
+      ]
     },
     "channelsRequest": {
       "title": "get channels request",
@@ -2640,23 +2969,38 @@
       "title": "404 not found",
       "type": "object",
       "properties": {
-        "message": {"type": "string", "example": "404 not found"},
-        "status_code": {"type": "integer", "example": 404}
+        "message": {
+          "type": "string",
+          "example": "404 not found"
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 404
+        }
       }
     },
     "productImportResponse": {
       "title": "import success",
       "type": "object",
       "properties": {
-        "id": {"type": "integer", "example": 12}
+        "id": {
+          "type": "integer",
+          "example": 12
+        }
       }
     },
     "import403": {
       "title": "incorrect format",
       "type": "object",
       "properties": {
-        "message": {"type": "string", "example": "403 bad request"},
-        "status_code": {"type": "integer", "example": 403}
+        "message": {
+          "type": "string",
+          "example": "403 bad request"
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 403
+        }
       }
     },
     "GetZonesResponse": {
@@ -2670,7 +3014,8 @@
         },
         "data": {
           "type": "object",
-          "example": [{
+          "example": [
+            {
               "id": 1,
               "country_id": 1,
               "code": "BDS",
@@ -2883,7 +3228,10 @@
           ]
         }
       },
-      "required": ["status", "data"]
+      "required": [
+        "status",
+        "data"
+      ]
     },
     "401Error": {
       "title": "Invalid token",
@@ -2893,7 +3241,7 @@
           "type": "string",
           "example": "Token Signature could not be verified."
         },
-        "status_code":  {
+        "status_code": {
           "type": "integer",
           "example": 401
         }
@@ -2908,35 +3256,85 @@
           "items": {
             "type": "object",
             "properties": {
-              "id": {"type": "integer"},
-              "sku": {"type": "string"},
-              "hsn": {"type": "string"},
-              "name": {"type": "string"},
-              "description": {"type": "string"},
-              "category_code": {"type": "string"},
-              "category_name": {"type": "string"},
-              "image": {"type": "string"},
-              "weight": {"type": "string"},
-              "size": {"type": "string"},
-              "cost_price": {"type": "string"},
-              "mrp": {"type": "string"},
-              "tax_code": {"type": "string"},
-              "low_stock": {"type": "integer"},
-              "ean": {"type": "string"},
-              "upc": {"type": "string"},
-              "isbn": {"type": "string"},
-              "created_at": {"type": "string"},
-              "updated_at": {"type": "string"},
-              "quantity": {"type": "integer"},
-              "color": {"type": "string"},
-              "brand": {"type": "string"},
-              "dimensions": {"type": "string"},
-              "status": {"type": "string"},
-              "type": {"type": "string"}
+              "id": {
+                "type": "integer"
+              },
+              "sku": {
+                "type": "string"
+              },
+              "hsn": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "category_code": {
+                "type": "string"
+              },
+              "category_name": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "weight": {
+                "type": "string"
+              },
+              "size": {
+                "type": "string"
+              },
+              "cost_price": {
+                "type": "string"
+              },
+              "mrp": {
+                "type": "string"
+              },
+              "tax_code": {
+                "type": "string"
+              },
+              "low_stock": {
+                "type": "integer"
+              },
+              "ean": {
+                "type": "string"
+              },
+              "upc": {
+                "type": "string"
+              },
+              "isbn": {
+                "type": "string"
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "color": {
+                "type": "string"
+              },
+              "brand": {
+                "type": "string"
+              },
+              "dimensions": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
             }
           },
           "example": [
-              {
+            {
               "id": 319134,
               "sku": "inactive",
               "hsn": "",
@@ -2963,8 +3361,8 @@
               "dimensions": "10 x 10 x 10 cm",
               "status": "INACTIVE",
               "type": "Single"
-          },
-          {
+            },
+            {
               "id": 318862,
               "sku": "sanity",
               "hsn": "",
@@ -3000,11 +3398,21 @@
             "pagination": {
               "type": "object",
               "properties": {
-                "total": {"type": "integer"},
-                "count": {"type": "integer"},
-                "per_page": {"type": "integer"},
-                "current_page": {"type": "integer"},
-                "total_pages": {"type": "integer"},
+                "total": {
+                  "type": "integer"
+                },
+                "count": {
+                  "type": "integer"
+                },
+                "per_page": {
+                  "type": "integer"
+                },
+                "current_page": {
+                  "type": "integer"
+                },
+                "total_pages": {
+                  "type": "integer"
+                },
                 "links": {
                   "type": "array",
                   "items": {
@@ -3024,19 +3432,43 @@
           }
         }
       },
-      "required": ["data", "meta"]
+      "required": [
+        "data",
+        "meta"
+      ]
     },
     "addProduct422": {
       "title": "unprocessable data",
       "type": "object",
       "properties": {
-        "message": {"type": "string", "example": "There were errors in adding new product!"},
+        "message": {
+          "type": "string",
+          "example": "There were errors in adding new product!"
+        },
         "errors": {
           "type": "object",
           "properties": {
-            "name": {"type": "array", "items": {"type": "string"}, "example": "The name field is required."},
-            "type": {"type": "array", "items": {"type": "string"}, "example": "The type field is required."},
-            "sku": {"type": "array", "items": {"type": "string"}, "example": "The sku field is required."}
+            "name": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": "The name field is required."
+            },
+            "type": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": "The type field is required."
+            },
+            "sku": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": "The sku field is required."
+            }
           }
         },
         "status_code": {
@@ -3179,7 +3611,32 @@
           }
         }
       },
-      "required": ["sku", "name", "tax_code", "type", "qty", "low_stock", "category_code", "description", "brand", "size", "weight", "length", "width", "height", "ean", "upc", "isbn", "color", "imei_serialnumber", "cost_price", "mrp", "status", "image_url", "components"]
+      "required": [
+        "sku",
+        "name",
+        "tax_code",
+        "type",
+        "qty",
+        "low_stock",
+        "category_code",
+        "description",
+        "brand",
+        "size",
+        "weight",
+        "length",
+        "width",
+        "height",
+        "ean",
+        "upc",
+        "isbn",
+        "color",
+        "imei_serialnumber",
+        "cost_price",
+        "mrp",
+        "status",
+        "image_url",
+        "components"
+      ]
     },
     "ShowResponse": {
       "title": "Show response",
@@ -3188,35 +3645,87 @@
         "data": {
           "type": "object",
           "properties": {
-            "id": {"type": "integer"},
-            "sku": {"type": "string"},
-            "hsn": {"type": "string"},
-            "name": {"type": "string"},
-            "description": {"type": "string"},
-            "category_code": {"type": "string"},
-            "category_name": {"type": "string"},
-            "image": {"type": "string"},
-            "weight": {"type": "string"},
-            "size": {"type": "string"},
-            "cost_price": {"type": "string"},
-            "mrp": {"type": "string"},
-            "tax_code": {"type": "string"},
-            "low_stock": {"type": "integer"},
-            "ean": {"type": "string"},
-            "upc": {"type": "string"},
-            "isbn": {"type": "string"},
-            "created_at": {"type": "string"},
-            "updated_at": {"type": "string"},
-            "quantity": {"type": "integer"},
-            "color": {"type": "string"},
-            "brand": {"type": "string"},
-            "dimensions": {"type": "string"},
-            "status": {"type": "string"},
-            "type": {"type": "string"}
+            "id": {
+              "type": "integer"
+            },
+            "sku": {
+              "type": "string"
+            },
+            "hsn": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "category_code": {
+              "type": "string"
+            },
+            "category_name": {
+              "type": "string"
+            },
+            "image": {
+              "type": "string"
+            },
+            "weight": {
+              "type": "string"
+            },
+            "size": {
+              "type": "string"
+            },
+            "cost_price": {
+              "type": "string"
+            },
+            "mrp": {
+              "type": "string"
+            },
+            "tax_code": {
+              "type": "string"
+            },
+            "low_stock": {
+              "type": "integer"
+            },
+            "ean": {
+              "type": "string"
+            },
+            "upc": {
+              "type": "string"
+            },
+            "isbn": {
+              "type": "string"
+            },
+            "created_at": {
+              "type": "string"
+            },
+            "updated_at": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer"
+            },
+            "color": {
+              "type": "string"
+            },
+            "brand": {
+              "type": "string"
+            },
+            "dimensions": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
           }
         }
       },
-      "required": ["data"]
+      "required": [
+        "data"
+      ]
     },
     "show400": {
       "title": "invalid product id",
@@ -3241,51 +3750,77 @@
           "items": {
             "type": "object",
             "properties": {
-              "id": {"type": "integer"},
-              "title": {"type": "string"},
-              "image": {"type": "string"},
-              "price": {"type": "string"},
-              "quantity": {"type": "integer"},
-              "sku": {"type": "string"},
-              "channel_sku": {"type": "string"},
-              "channel_id": {"type": "integer"},
-              "channel_name": {"type": "string"},
-              "base_channel_code": {"type": "string"},
-              "channel_product_id": {"type": "string"},
-              "inventory": {"type": "integer"},
-              "synced_on": {"type": "string"}
+              "id": {
+                "type": "integer"
+              },
+              "title": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "price": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "integer"
+              },
+              "sku": {
+                "type": "string"
+              },
+              "channel_sku": {
+                "type": "string"
+              },
+              "channel_id": {
+                "type": "integer"
+              },
+              "channel_name": {
+                "type": "string"
+              },
+              "base_channel_code": {
+                "type": "string"
+              },
+              "channel_product_id": {
+                "type": "string"
+              },
+              "inventory": {
+                "type": "integer"
+              },
+              "synced_on": {
+                "type": "string"
+              }
             }
           },
           "example": [
             {
-                "id": 416474,
-                "title": "product2",
-                "image": "",
-                "price": "500.00",
-                "quantity": -4,
-                "sku": "shopify",
-                "channel_sku": "product2",
-                "channel_id": 23423,
-                "channel_name": "SHOPIFY",
-                "base_channel_code": "SH",
-                "channel_product_id": "10808202516",
-                "inventory": 18,
-                "synced_on": "8 Jun 2017 01:15 PM"
+              "id": 416474,
+              "title": "product2",
+              "image": "",
+              "price": "500.00",
+              "quantity": -4,
+              "sku": "shopify",
+              "channel_sku": "product2",
+              "channel_id": 23423,
+              "channel_name": "SHOPIFY",
+              "base_channel_code": "SH",
+              "channel_product_id": "10808202516",
+              "inventory": 18,
+              "synced_on": "8 Jun 2017 01:15 PM"
             },
             {
-                "id": 416475,
-                "title": "product",
-                "image": "",
-                "price": "400.00",
-                "quantity": -1,
-                "sku": "Iphone5s",
-                "channel_sku": "product",
-                "channel_id": 23423,
-                "channel_name": "SHOPIFY",
-                "base_channel_code": "SH",
-                "channel_product_id": "10807289684",
-                "inventory": 0,
-                "synced_on": "5 Jun 2017 03:27 PM"
+              "id": 416475,
+              "title": "product",
+              "image": "",
+              "price": "400.00",
+              "quantity": -1,
+              "sku": "Iphone5s",
+              "channel_sku": "product",
+              "channel_id": 23423,
+              "channel_name": "SHOPIFY",
+              "base_channel_code": "SH",
+              "channel_product_id": "10807289684",
+              "inventory": 0,
+              "synced_on": "5 Jun 2017 03:27 PM"
             }
           ]
         },
@@ -3295,11 +3830,21 @@
             "pagination": {
               "type": "object",
               "properties": {
-                "total": {"type": "integer"},
-                "count": {"type": "integer"},
-                "per_page": {"type": "integer"},
-                "current_page": {"type": "integer"},
-                "total_pages": {"type": "integer"},
+                "total": {
+                  "type": "integer"
+                },
+                "count": {
+                  "type": "integer"
+                },
+                "per_page": {
+                  "type": "integer"
+                },
+                "current_page": {
+                  "type": "integer"
+                },
+                "total_pages": {
+                  "type": "integer"
+                },
                 "links": {
                   "type": "array",
                   "items": {
@@ -3319,7 +3864,10 @@
           }
         }
       },
-      "required": ["data", "meta"]
+      "required": [
+        "data",
+        "meta"
+      ]
     },
     "MapRequest": {
       "title": "Map request",
@@ -3340,7 +3888,10 @@
           "description": "Same id as placed in their respective GET codes"
         }
       },
-      "required": ["product_id", "listing_id"]
+      "required": [
+        "product_id",
+        "listing_id"
+      ]
     },
     "GetOrderResponse": {
       "title": "Get order response",
@@ -3349,67 +3900,181 @@
         "data": {
           "type": "object",
           "properties": {
-              "id": {"type": "integer","example": 123},
-              "channel_id": {"type": "integer","example": 456},
-              "channel_name": {"type": "string","example": "My Channel"},
-              "base_channel_code": {"type": "string","example": "MC"},
-              "channel_order_id": {"type": "string","example": "Test1504508157347"},
-              "customer_name": {"type": "string","example": "first last"},
-              "customer_email": {"type": "string","example": "test@gmail.com"},
-              "customer_phone": {"type": "string","example": "9876543210"},
-              "payment_status": {"type": "string","example": "Pending"},
-              "total": {"type": "string","example": "100.00"},
-              "tax": {"type": "string","example": "0.00"},
-              "sla": {"type": "string","example": "2 days"},
-              "shipping_method": {"type": "string","example": "SR"},
-              "expedited": {"type": "string","example": "0"},
-              "status": {"type": "string","example": "NEW"},
-              "status_code": {"type": "integer","example": 1},
-              "payment_method": {"type": "string","example": "Prepaid"},
-              "is_international": {"type": "integer","example": 0},
-              "purpose_of_shipment": {"type": "integer","example": 0},
-              "channel_created_at": {"type": "string","example": "4 Sep 2017, 12:26 PM"},
-              "created_at": {"type": "string","example": "4 Sep 2017, 12:26 PM"},
-              "products": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {"type": "integer","example": 123},
-                    "channel_order_product_id": {"type": "integer","example": 456},
-                    "name": {"type": "string","example": "test product"},
-                    "channel_sku": {"type": "string","example": "ABCD1234"},
-                    "quantity": {"type": "integer","example": 1},
-                    "product_id": {"type": "integer","example": 123},
-                    "available": {"type": "string","example": "0"},
-                    "status": {"type": "string","example": "UNDEFINED"},
-                    "hsn": {"type": "string","example": "54673478"}
+            "id": {
+              "type": "integer",
+              "example": 123
+            },
+            "channel_id": {
+              "type": "integer",
+              "example": 456
+            },
+            "channel_name": {
+              "type": "string",
+              "example": "My Channel"
+            },
+            "base_channel_code": {
+              "type": "string",
+              "example": "MC"
+            },
+            "channel_order_id": {
+              "type": "string",
+              "example": "Test1504508157347"
+            },
+            "customer_name": {
+              "type": "string",
+              "example": "first last"
+            },
+            "customer_email": {
+              "type": "string",
+              "example": "test@gmail.com"
+            },
+            "customer_phone": {
+              "type": "string",
+              "example": "9876543210"
+            },
+            "payment_status": {
+              "type": "string",
+              "example": "Pending"
+            },
+            "total": {
+              "type": "string",
+              "example": "100.00"
+            },
+            "tax": {
+              "type": "string",
+              "example": "0.00"
+            },
+            "sla": {
+              "type": "string",
+              "example": "2 days"
+            },
+            "shipping_method": {
+              "type": "string",
+              "example": "SR"
+            },
+            "expedited": {
+              "type": "string",
+              "example": "0"
+            },
+            "status": {
+              "type": "string",
+              "example": "NEW"
+            },
+            "status_code": {
+              "type": "integer",
+              "example": 1
+            },
+            "payment_method": {
+              "type": "string",
+              "example": "Prepaid"
+            },
+            "is_international": {
+              "type": "integer",
+              "example": 0
+            },
+            "purpose_of_shipment": {
+              "type": "integer",
+              "example": 0
+            },
+            "channel_created_at": {
+              "type": "string",
+              "example": "4 Sep 2017, 12:26 PM"
+            },
+            "created_at": {
+              "type": "string",
+              "example": "4 Sep 2017, 12:26 PM"
+            },
+            "products": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 123
+                  },
+                  "channel_order_product_id": {
+                    "type": "integer",
+                    "example": 456
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "test product"
+                  },
+                  "channel_sku": {
+                    "type": "string",
+                    "example": "ABCD1234"
+                  },
+                  "quantity": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "product_id": {
+                    "type": "integer",
+                    "example": 123
+                  },
+                  "available": {
+                    "type": "string",
+                    "example": "0"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "UNDEFINED"
+                  },
+                  "hsn": {
+                    "type": "string",
+                    "example": "54673478"
                   }
                 }
-              },
-              "shipments": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {"type": "integer","example": 123},
-                    "isd_code": {"type": "string","example": "+91"},
-                    "courier": {"type": "string","example": "FedEx"},
-                    "weight": {"type": "string","example": "0.5"},
-                    "dimensions": {"type": "string","example": "10x10x10"},
-                    "awb": {"type": "string","example": "123"},
-                    "return_awb": {"type": "string","example": "321"},
-                    "volumetric_weight": {"type": "string","example": "0.5"}
-                    }
-                  }
-                },
-              "activities": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "example": "ORDER_CREATED"
-                  }
               }
+            },
+            "shipments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 123
+                  },
+                  "isd_code": {
+                    "type": "string",
+                    "example": "+91"
+                  },
+                  "courier": {
+                    "type": "string",
+                    "example": "FedEx"
+                  },
+                  "weight": {
+                    "type": "string",
+                    "example": "0.5"
+                  },
+                  "dimensions": {
+                    "type": "string",
+                    "example": "10x10x10"
+                  },
+                  "awb": {
+                    "type": "string",
+                    "example": "123"
+                  },
+                  "return_awb": {
+                    "type": "string",
+                    "example": "321"
+                  },
+                  "volumetric_weight": {
+                    "type": "string",
+                    "example": "0.5"
+                  }
+                }
+              }
+            },
+            "activities": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "example": "ORDER_CREATED"
+              }
+            }
           }
         },
         "meta": {
@@ -3418,15 +4083,33 @@
             "pagination": {
               "type": "object",
               "properties": {
-                "total": {"type": "integer","example": 123},
-                "count": {"type": "integer","example": 1},
-                "per_page": {"type": "integer","example": 12},
-                "current_page": {"type": "integer","example": 1},
-                "total_pages": {"type": "integer","example": 32},
+                "total": {
+                  "type": "integer",
+                  "example": 123
+                },
+                "count": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "per_page": {
+                  "type": "integer",
+                  "example": 12
+                },
+                "current_page": {
+                  "type": "integer",
+                  "example": 1
+                },
+                "total_pages": {
+                  "type": "integer",
+                  "example": 32
+                },
                 "links": {
                   "type": "object",
                   "properties": {
-                    "next": {"type": "string", "example": "https://krmct001.kartrocket.com/v1/external/orders?page=2"}
+                    "next": {
+                      "type": "string",
+                      "example": "https://krmct001.kartrocket.com/v1/external/orders?page=2"
+                    }
                   }
                 }
               }
@@ -3434,7 +4117,9 @@
           }
         }
       },
-      "required": ["data"]
+      "required": [
+        "data"
+      ]
     },
     "CancelOrdersRequest": {
       "title": "Cancel orders request",
@@ -3449,7 +4134,9 @@
           }
         }
       },
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "CancelOrdersResponse": {
       "title": "Order Cancel request",
@@ -3474,15 +4161,29 @@
           "items": {
             "type": "object",
             "properties": {
-              "order_id": {"type": "integer","example": 123},
-              "order_product_id": {"type": "integer","example": 321},
-              "quantity": {"type": "string","example": "1"},
-              "action": {"type": "string","example": "add"}
+              "order_id": {
+                "type": "integer",
+                "example": 123
+              },
+              "order_product_id": {
+                "type": "integer",
+                "example": 321
+              },
+              "quantity": {
+                "type": "string",
+                "example": "1"
+              },
+              "action": {
+                "type": "string",
+                "example": "add"
+              }
             }
           }
         }
       },
-      "required": ["data"]
+      "required": [
+        "data"
+      ]
     },
     "FulfillmentResponse": {
       "title": "Fulfillment response",
@@ -3491,10 +4192,22 @@
         "data": {
           "type": "object",
           "properties": {
-            "order_id": {"type": "integer","example": 123},
-            "order_product_id": {"type": "integer","example": 321},
-            "quantity": {"type": "string","example": "1"},
-            "action": {"type": "string","example": "add"}
+            "order_id": {
+              "type": "integer",
+              "example": 123
+            },
+            "order_product_id": {
+              "type": "integer",
+              "example": 321
+            },
+            "quantity": {
+              "type": "string",
+              "example": "1"
+            },
+            "action": {
+              "type": "string",
+              "example": "add"
+            }
           }
         },
         "success": {
@@ -3504,7 +4217,11 @@
           "type": "string"
         }
       },
-      "required": ["data", "success", "message"]
+      "required": [
+        "data",
+        "success",
+        "message"
+      ]
     },
     "MappingRequest": {
       "title": "Mapping request",
@@ -3515,14 +4232,25 @@
           "items": {
             "type": "object",
             "properties": {
-              "order_id": {"type": "integer","example": 123},
-              "order_product_id": {"type": "integer","example": 321},
-              "master_sku": {"type": "string","example": "H3HEDE"}
+              "order_id": {
+                "type": "integer",
+                "example": 123
+              },
+              "order_product_id": {
+                "type": "integer",
+                "example": 321
+              },
+              "master_sku": {
+                "type": "string",
+                "example": "H3HEDE"
+              }
             }
           }
         }
       },
-      "required": ["data"]
+      "required": [
+        "data"
+      ]
     },
     "MappingResponse": {
       "title": "Mapping response",
@@ -3533,9 +4261,18 @@
           "data": {
             "type": "object",
             "properties": {
-              "order_id": {"type": "integer","example": 123},
-              "order_product_id": {"type": "integer","example": 321},
-              "master_sku": {"type": "string","example": "H3HEDE"}
+              "order_id": {
+                "type": "integer",
+                "example": 123
+              },
+              "order_product_id": {
+                "type": "integer",
+                "example": 321
+              },
+              "master_sku": {
+                "type": "string",
+                "example": "H3HEDE"
+              }
             }
           },
           "status_code": {
@@ -3567,7 +4304,9 @@
           }
         }
       },
-      "required": ["ids"]
+      "required": [
+        "ids"
+      ]
     },
     "GenerateInvoiceResponse": {
       "title": "Generate invoice response",
@@ -3590,7 +4329,11 @@
           }
         }
       },
-      "required": ["is_invoice_created", "invoice_url", "not_created"]
+      "required": [
+        "is_invoice_created",
+        "invoice_url",
+        "not_created"
+      ]
     },
     "ChangeAddressRequest": {
       "title": "Shows the address which needs to be updated",
@@ -3635,7 +4378,17 @@
           "format": "int32"
         }
       },
-      "required": ["order_id", "shipping_customer_name", "shipping_phone", "shipping_address", "shipping_address_2", "shipping_city", "shipping_state", "shipping_country", "shipping_pincode"]
+      "required": [
+        "order_id",
+        "shipping_customer_name",
+        "shipping_phone",
+        "shipping_address",
+        "shipping_address_2",
+        "shipping_city",
+        "shipping_state",
+        "shipping_country",
+        "shipping_pincode"
+      ]
     },
     "GetManifestsRequest": {
       "title": "Get manifests request",
@@ -3650,7 +4403,9 @@
           }
         }
       },
-      "required": ["order_ids"]
+      "required": [
+        "order_ids"
+      ]
     },
     "GetManifestsResponse": {
       "title": "Get manifests response",
@@ -3665,7 +4420,9 @@
           "description": "Displays the url of a pdf file with the manifest"
         }
       },
-      "required": ["data"]
+      "required": [
+        "data"
+      ]
     },
     "generateManifestRequest": {
       "title": "Generate Manifests Request",
@@ -3680,7 +4437,9 @@
           }
         }
       },
-      "required": ["shipment_id"]
+      "required": [
+        "shipment_id"
+      ]
     },
     "generateManifestResponse": {
       "title": "Generate Manifests Response",
@@ -3690,13 +4449,16 @@
           "type": "integer",
           "format": "int32",
           "example": 200
-          },
-          "url": {
-            "type": "string",
-            "example": "http://example.com/manifests/manifests.csv"
-          }
+        },
+        "url": {
+          "type": "string",
+          "example": "http://example.com/manifests/manifests.csv"
+        }
       },
-      "required": ["status", "url"]
+      "required": [
+        "status",
+        "url"
+      ]
     },
     "CreateLinkedOrderRequest": {
       "title": "Create linked order. request",
@@ -3870,7 +4632,39 @@
           "description": ""
         }
       },
-      "required": ["order_id", "order_date", "channel_id", "billing_customer_name", "billing_last_name", "billing_address", "billing_address_2", "billing_city", "billing_state", "billing_country", "billing_pincode", "billing_email", "billing_phone", "shipping_is_billing", "shipping_customer_name", "shipping_last_name", "shipping_address", "shipping_address_2", "shipping_city", "shipping_country", "shipping_pincode", "shipping_state", "shipping_email", "shipping_phone", "order_items", "payment_method", "shipping_charges", "giftwrap_charges", "transaction_charges", "total_discount", "sub_total"]
+      "required": [
+        "order_id",
+        "order_date",
+        "channel_id",
+        "billing_customer_name",
+        "billing_last_name",
+        "billing_address",
+        "billing_address_2",
+        "billing_city",
+        "billing_state",
+        "billing_country",
+        "billing_pincode",
+        "billing_email",
+        "billing_phone",
+        "shipping_is_billing",
+        "shipping_customer_name",
+        "shipping_last_name",
+        "shipping_address",
+        "shipping_address_2",
+        "shipping_city",
+        "shipping_country",
+        "shipping_pincode",
+        "shipping_state",
+        "shipping_email",
+        "shipping_phone",
+        "order_items",
+        "payment_method",
+        "shipping_charges",
+        "giftwrap_charges",
+        "transaction_charges",
+        "total_discount",
+        "sub_total"
+      ]
     },
     "CreateLinkedOrderResponse": {
       "title": "Create linked order. response",
@@ -3899,96 +4693,128 @@
       "properties": {
         "order_id": {
           "type": "string",
-          "description": "required|max:20"
+          "description": "required|max:20",
+          "example": "Test order 1"
         },
         "order_date": {
           "type": "string",
-          "description": "required"
+          "description": "required",
+          "example": "2018-05-08 12:23"
         },
         "pickup_location": {
           "type": "string",
           "description": "",
-          "example": ""
+          "example": "Location 1"
         },
         "channel_id": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": "12"
         },
         "billing_customer_name": {
           "type": "string",
-          "description": "required"
+          "description": "required",
+          "example": "John"
         },
         "billing_last_name": {
           "type": "string",
-          "description": ""
+          "description": "",
+          "example": "Doe"
         },
         "billing_address": {
           "type": "string",
-          "description": "required|min:3"
+          "description": "required|min:3",
+          "example": "#12, street 1"
         },
         "billing_address_2": {
           "type": "string",
-          "description": "max:50"
+          "description": "max:50",
+          "example": "Near Post office, Nehru Place"
         },
         "billing_city": {
           "type": "string",
-          "description": "required|max:30"
+          "description": "required|max:30",
+          "example": "New Delhi"
         },
         "billing_pincode": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": "110002"
         },
         "billing_state": {
           "type": "string",
-          "description": "required"
+          "description": "required",
+          "example": "Delhi"
         },
         "billing_country": {
           "type": "string",
-          "description": "required"
+          "description": "required",
+          "example": "India"
         },
         "billing_email": {
           "type": "string",
-          "description": "required"
+          "description": "required",
+          "example": "john@doe.com"
+        },
+        "billing_phone": {
+          "type": "integer",
+          "description": "mobile number",
+          "example": "9876543210"
         },
         "shipping_is_billing": {
           "type": "boolean",
-          "description": "required"
+          "description": "required",
+          "example": true
         },
         "shipping_customer_name": {
           "type": "string",
-          "description": ""
+          "description": "",
+          "example": ""
         },
         "shipping_last_name": {
           "type": "string",
-          "description": ""
+          "description": "",
+          "example": ""
         },
         "shipping_address": {
           "type": "string",
-          "description": ""
+          "description": "",
+          "example": ""
         },
         "shipping_address_2": {
           "type": "string",
-          "description": ""
+          "description": "",
+          "example": ""
         },
         "shipping_city": {
           "type": "string",
-          "description": ""
+          "description": "",
+          "example": ""
         },
         "shipping_pincode": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": ""
         },
         "shipping_country": {
           "type": "string",
-          "description": ""
+          "description": "",
+          "example": ""
         },
         "shipping_state": {
           "type": "string",
-          "description": ""
+          "description": "",
+          "example": ""
         },
         "shipping_email": {
           "type": "string",
-          "description": ""
+          "description": "",
+          "example": ""
+        },
+        "shipping_phone": {
+          "type": "integer",
+          "description": "",
+          "example": ""
         },
         "order_items": {
           "type": "array",
@@ -3997,74 +4823,91 @@
             "properties": {
               "name": {
                 "type": "string",
-                "description": "required"
+                "description": "required",
+                "example": "Test Product 1"
               },
               "sku": {
                 "type": "string",
-                "description": "required"
+                "description": "required",
+                "example": "abc123"
               },
               "units": {
                 "type": "integer",
-                "description": "required"
+                "description": "required",
+                "example": 20
               },
               "selling_price": {
                 "type": "integer",
-                "description": "required"
+                "description": "required",
+                "example": "200"
               },
               "discount": {
                 "type": "integer",
-                "description": ""
+                "description": "",
+                "example": ""
               },
               "tax": {
-                  "type": "integer",
-                  "description": ""
-                },
+                "type": "integer",
+                "description": "",
+                "example": ""
+              },
               "hsn": {
-                "type": "string",
-                "description": "Harmonised System Nomenclature. A code number used to classify goods for taxation purposes. Done to determine which category of taxes do the goods come under"
+                "type": "integer",
+                "description": "Harmonised System Nomenclature. A code number used to classify goods for taxation purposes. Done to determine which category of taxes do the goods come under",
+                "example": 123445
               }
             }
           }
         },
         "payment_method": {
           "type": "string",
-          "description": "required"
+          "description": "required",
+          "example": "Prepaid/COD"
         },
         "shipping_charges": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": 0
         },
         "giftwrap_charges": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": 0
         },
         "transaction_charges": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": 0
         },
         "total_discount": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": 0
         },
         "sub_total": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": 4000
         },
         "length": {
-          "type": "string",
-          "description": ""
+          "type": "integer",
+          "description": "",
+          "example": 18
         },
         "breadth": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": 18
         },
         "height": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": 40
         },
         "weight": {
           "type": "integer",
-          "description": ""
+          "description": "",
+          "example": 2.4
         }
       }
     },
@@ -4093,63 +4936,133 @@
           "example": 0
         }
       },
-      "required": ["status", "status_code"]
+      "required": [
+        "status",
+        "status_code"
+      ]
     },
-  "DetailsResponse": {
-    "title": "Details response",
-    "type": "object",
-    "properties": {
-      "data": {
-        "type": "object"
-      }
+    "DetailsResponse": {
+      "title": "Details response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "data"
+      ]
     },
-    "required": ["data"]
-  },
-  "GetInventoriesResponse": {
-    "title": "Get inventories response",
-    "type": "object",
-    "properties": {
-      "data": {
-        "type": "array",
-        "items": {
+    "GetInventoriesResponse": {
+      "title": "Get inventories response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "The product id"
+              },
+              "sku": {
+                "type": "string",
+                "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)"
+              },
+              "category_name": {
+                "type": "string",
+                "description": "If the product comes under a certain specified category or not. If not, then it will be named as default"
+              },
+              "is_combo": {
+                "type": "integer",
+                "description": ""
+              },
+              "name": {
+                "type": "string",
+                "description": "Product name"
+              },
+              "type": {
+                "type": "string",
+                "description": "Mention of the type of product"
+              },
+              "color": {
+                "type": "string",
+                "description": "Mentions the product color"
+              },
+              "brand": {
+                "type": "string",
+                "description": "Mentions the brand of the product."
+              },
+              "total_quantity": {
+                "type": "integer",
+                "description": "Shows the total number of pieces of the product as listed"
+              },
+              "available_quantity": {
+                "type": "integer",
+                "description": "Shows the quantity which can be shipped"
+              },
+              "blocked_quantity": {
+                "type": "integer",
+                "description": "Shows the number of product pieces which cannot be shipped"
+              },
+              "updated_on": {
+                "type": "string",
+                "description": "Displays the time of inventory updation"
+              }
+            }
+          }
+        },
+        "meta": {
           "type": "object",
           "properties": {
-            "id": {
-              "type": "integer",
-              "description": "The product id"
-            },
-            "sku": {
-              "type": "string",
-              "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)"
-            },
-            "category_name": {
-              "type": "string",
-              "description": "If the product comes under a certain specified category or not. If not, then it will be named as default"
-            },
-            "is_combo": {
-              "type": "integer",
-              "description": ""
-            },
-            "name": {
-              "type": "string",
-              "description": "Product name"
-            },
-            "type": {
-              "type": "string",
-              "description": "Mention of the type of product"
-            },
-            "color": {
-              "type": "string",
-              "description": "Mentions the product color"
-            },
-            "brand": {
-              "type": "string",
-              "description": "Mentions the brand of the product."
-            },
-            "total_quantity": {
-              "type": "integer",
-              "description": "Shows the total number of pieces of the product as listed"
-            },
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer",
+                  "description": "Shows the total number of products whose inventories were checked in the paginated page"
+                },
+                "count": {
+                  "type": "integer",
+                  "description": "Show the results for that paginated page"
+                },
+                "per_page": {
+                  "type": "integer",
+                  "description": "Shows the number of products which are listd per page"
+                },
+                "current_page": {
+                  "type": "integer",
+                  "description": "Shows the current page of the total number of pages"
+                },
+                "total_pages": {
+                  "type": "integer",
+                  "description": "Shows the total number of pages"
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Lists the links to the inventories"
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ]
+    },
+    "UpdateInventoryResponse": {
+      "title": "Update inventory response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
             "available_quantity": {
               "type": "integer",
               "description": "Shows the quantity which can be shipped"
@@ -4158,451 +5071,1215 @@
               "type": "integer",
               "description": "Shows the number of product pieces which cannot be shipped"
             },
-            "updated_on": {
-              "type": "string",
-              "description": "Displays the time of inventory updation"
+            "total_quantity": {
+              "type": "integer",
+              "description": "Shows the total number of pieces of the product as listed"
             }
           }
         }
       },
-      "meta": {
-        "type": "object",
-        "properties": {
-          "pagination": {
-            "type": "object",
-            "properties": {
-              "total": {
-                "type": "integer",
-                "description": "Shows the total number of products whose inventories were checked in the paginated page"
-              },
-              "count": {
-                "type": "integer",
-                "description": "Show the results for that paginated page"
-              },
-              "per_page": {
-                "type": "integer",
-                "description": "Shows the number of products which are listd per page"
-              },
-              "current_page": {
-                "type": "integer",
-                "description": "Shows the current page of the total number of pages"
-              },
-              "total_pages": {
-                "type": "integer",
-                "description": "Shows the total number of pages"
-              },
-              "links": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                },
-                "description": "Lists the links to the inventories"
-              }
-            }
-          }
+      "required": [
+        "data"
+      ]
+    },
+    "CheckServiceabilityError": {
+      "title": "PINCODE is not serviceable",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Postcode is not secviceable by SHIPROCKET"
+        },
+        "status_code": {
+          "type": "string",
+          "description": "HTTP status of request"
         }
       }
     },
-    "required": ["data", "meta"]
-  },
-  "UpdateInventoryResponse": {
-    "title": "Update inventory response",
-    "type": "object",
-    "properties": {
-      "data": {
-        "type": "object",
-        "properties": {
-          "available_quantity": {
-            "type": "integer",
-            "description": "Shows the quantity which can be shipped"
-          },
-          "blocked_quantity": {
-            "type": "integer",
-            "description": "Shows the number of product pieces which cannot be shipped"
-          },
-          "total_quantity": {
-            "type": "integer",
-            "description": "Shows the total number of pieces of the product as listed"
-          }
-        }
-      }
-    },
-    "required": ["data"]
-  },
-  "CheckServiceabilityError": {
-    "title": "PINCODE is not serviceable",
-    "type": "object",
-    "properties": {
-      "message": {
-        "type": "string",
-        "description": "Postcode is not secviceable by SHIPROCKET"
-      },
-      "status_code": {
-        "type": "string",
-        "description": "HTTP status of request"
-      }
-    }
-  },
-  "CheckServiceabilityResponse": {
-    "title": "Check serviceability response",
-    "type": "object",
-    "properties": {
-      "status": {
-        "type": "integer",
-        "format": "int32"
-      },
-      "data": {
-        "type": "array",
-        "items": {
-          "type": "object"
-        }
-      }
-    },
-    "required": ["status", "data"]
-  },
-  "AwbCreationRequest": {
-    "title": "Awb creation request",
-    "type": "object",
-    "properties": {
-      "shipment_id": {
-        "type": "array",
-        "items": {
+    "CheckServiceabilityResponse": {
+      "title": "Check serviceability response",
+      "type": "object",
+      "properties": {
+        "status": {
           "type": "integer",
           "format": "int32",
-          "description": "The shipment id as generated in the shipment section"
-        }
-      },
-      "courier_id": {
-        "type": "integer",
-        "format": "int32",
-        "description": "The courier id from above"
-      },
-      "weight": {
-        "type": "string",
-        "description": "The total weight of the package"
-      },
-      "manifest_id": {
-        "type": "integer",
-        "description": "The manifest id as generated earlier"
-      },
-      "channel_order_id": {
-        "type": "integer",
-        "description": "Channel order id as provided by ShipRocket orders API"
-      },
-      "status": {
-        "type": "string",
-        "description": "Status of the activity"
-      }
-    },
-    "required": ["shipment_id"]
-  },
-  "AwbCreationResponse": {
-    "title": "Awb creation response",
-    "type": "object",
-    "properties": {
-      "awb_assign_status": {
-        "type": "integer",
-        "format": "int32",
-        "description": "It will be 1, implying that the status has been assigned"
-      },
-      "response": {
-        "type": "object",
-        "properties": {
-          "data": {
+          "example": "200"
+        },
+        "data": {
+          "type": "array",
+          "items": {
             "type": "object",
             "properties": {
-              "courier_company_id": {
-                "type": "integer",
-                "description": "id of the courier company"
-              },
-              "awb_code": {
-                "type": "string",
-                "description": "The AWB code generated"
-              },
-              "cod": {
-                "type": "integer",
-                "description": "If there is COD then response =1, else it will be 0"
-              },
-              "order_id": {
-                "type": "integer",
-                "description": "Order id as generated earlier"
-              },
-              "shipment_id": {
-                "type": "integer",
-                "description": "Shipment id as generated in the shipment section"
-              },
-              "freight_percentage": {
-                "type": "string",
-                "description": ""
-              },
-              "flat_charges": {
-                "type": "string",
-                "description": ""
-              },
-              "awb_code_status": {
-                "type": "integer",
-                "description": ""
-              },
-              "assigned_date_time": {
+              "available_courier_companies": {
                 "type": "object",
                 "properties": {
-                  "date": {
-                    "type": "string",
-                    "description": ""
+                  "air": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "cod": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "courier_name": {
+                          "type": "string",
+                          "example": "DOTZOT"
+                        },
+                        "estimated_delivery_days": {
+                          "type": "integer",
+                          "example": 2.07
+                        },
+                        "rate": {
+                          "type": "integer",
+                          "example": 109
+                        }
+                      }
+                    }
                   },
-                  "timezone_type": {
-                    "type": "integer",
-                    "description": ""
+                  "surface": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "cod": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "courier_name": {
+                          "type": "string",
+                          "example": "DOTZOT"
+                        },
+                        "estimated_delivery_days": {
+                          "type": "integer",
+                          "example": 2.07
+                        },
+                        "rate": {
+                          "type": "integer",
+                          "example": 109
+                        }
+                      }
+                    }
                   },
-                  "timezone": {
+                  "zone": {
                     "type": "string",
-                    "description": ""
+                    "example": "z_a"
                   }
-                },
-                "description": ""
+                }
               },
-              "applied_weight": {
-                "type": "string",
-                "description": ""
+              "delivery": {
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "example": "New Delhi"
+                  },
+                  "postcode": {
+                    "type": "integer",
+                    "example": 110030
+                  },
+                  "state": {
+                    "type": "string",
+                    "example": "DELHI"
+                  }
+                }
               },
-              "company_id": {
-                "type": "integer",
-                "description": ""
+              "pickup": {
+                "type": "object",
+                "properties": {
+                  "city": {
+                    "type": "string",
+                    "example": "New Delhi"
+                  },
+                  "postcode": {
+                    "type": "integer",
+                    "example": 110062
+                  },
+                  "state": {
+                    "type": "string",
+                    "example": "DELHI"
+                  }
+                }
               },
-              "company_address_id": {
-                "type": "integer",
-                "description": ""
-              },
-              "id": {
-                "type": "integer",
-                "description": ""
-              },
-              "applied_weight_amount": {
-                "type": "integer",
-                "description": ""
+              "rates": {
+                "type": "object",
+                "properties": {
+                  "Lite": {
+                    "type": "object",
+                    "properties": {
+                      "air": {
+                        "type": "object",
+                        "properties": {
+                          "cod_charges": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 57.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 35.00
+                              }
+                            }
+                          },
+                          "zone_a": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 28.00
+                              }
+                            }
+                          },
+                          "zone_b": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 40.00
+                              }
+                            }
+                          },
+                          "zone_c": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 64.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 47.00
+                              }
+                            }
+                          },
+                          "zone_d": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 74.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          },
+                          "zone_e": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 90.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "surface": {
+                        "type": "object",
+                        "properties": {
+                          "cod_charges": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 57.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 35.00
+                              }
+                            }
+                          },
+                          "zone_a": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 28.00
+                              }
+                            }
+                          },
+                          "zone_b": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 40.00
+                              }
+                            }
+                          },
+                          "zone_c": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 64.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 47.00
+                              }
+                            }
+                          },
+                          "zone_d": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 74.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          },
+                          "zone_e": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 90.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "Basic": {
+                    "type": "object",
+                    "properties": {
+                      "air": {
+                        "type": "object",
+                        "properties": {
+                          "cod_charges": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 57.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 35.00
+                              }
+                            }
+                          },
+                          "zone_a": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 28.00
+                              }
+                            }
+                          },
+                          "zone_b": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 40.00
+                              }
+                            }
+                          },
+                          "zone_c": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 64.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 47.00
+                              }
+                            }
+                          },
+                          "zone_d": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 74.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          },
+                          "zone_e": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 90.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "surface": {
+                        "type": "object",
+                        "properties": {
+                          "cod_charges": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 57.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 35.00
+                              }
+                            }
+                          },
+                          "zone_a": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 28.00
+                              }
+                            }
+                          },
+                          "zone_b": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 40.00
+                              }
+                            }
+                          },
+                          "zone_c": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 64.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 47.00
+                              }
+                            }
+                          },
+                          "zone_d": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 74.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          },
+                          "zone_e": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 90.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "Advanced": {
+                    "type": "object",
+                    "properties": {
+                      "air": {
+                        "type": "object",
+                        "properties": {
+                          "cod_charges": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 57.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 35.00
+                              }
+                            }
+                          },
+                          "zone_a": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 28.00
+                              }
+                            }
+                          },
+                          "zone_b": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 40.00
+                              }
+                            }
+                          },
+                          "zone_c": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 64.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 47.00
+                              }
+                            }
+                          },
+                          "zone_d": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 74.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          },
+                          "zone_e": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 90.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "surface": {
+                        "type": "object",
+                        "properties": {
+                          "cod_charges": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 57.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 35.00
+                              }
+                            }
+                          },
+                          "zone_a": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 28.00
+                              }
+                            }
+                          },
+                          "zone_b": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 40.00
+                              }
+                            }
+                          },
+                          "zone_c": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 64.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 47.00
+                              }
+                            }
+                          },
+                          "zone_d": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 74.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          },
+                          "zone_e": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 90.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "Pro": {
+                    "type": "object",
+                    "properties": {
+                      "air": {
+                        "type": "object",
+                        "properties": {
+                          "cod_charges": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 57.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 35.00
+                              }
+                            }
+                          },
+                          "zone_a": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 28.00
+                              }
+                            }
+                          },
+                          "zone_b": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 40.00
+                              }
+                            }
+                          },
+                          "zone_c": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 64.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 47.00
+                              }
+                            }
+                          },
+                          "zone_d": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 74.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          },
+                          "zone_e": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 90.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "surface": {
+                        "type": "object",
+                        "properties": {
+                          "cod_charges": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 57.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 35.00
+                              }
+                            }
+                          },
+                          "zone_a": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 28.00
+                              }
+                            }
+                          },
+                          "zone_b": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 48.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 40.00
+                              }
+                            }
+                          },
+                          "zone_c": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 64.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 47.00
+                              }
+                            }
+                          },
+                          "zone_d": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 74.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          },
+                          "zone_e": {
+                            "type": "object",
+                            "properties": {
+                              "max": {
+                                "type": "integer",
+                                "example": 90.00
+                              },
+                              "min": {
+                                "type": "integer",
+                                "example": 48.00
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
         }
-      }
+      },
+      "required": [
+        "status",
+        "data"
+      ]
     },
-    "required": ["awb_assign_status", "response"]
-  },
-  "AwbError500": {
-    "title": "Awb creation error 500",
-    "type": "object",
-    "properties": {
-      "awb_assign_status": {
-        "type": "string",
-        "description": "Status if the code has been generated or not. In this case it would be a 0"
-      },
-      "data": {
-        "type": "string",
-        "description": "Passes a statement saying it is not possible"
-      }
-    },
-    "required": ["awb_assign_status"]
-  },
-  "PickupCreationRequest": {
-    "title": "Pickup creation request",
-    "type": "object",
-    "properties": {
-      "shipment_id": {
-        "type": "array",
-        "items": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "manifest_id": {
-        "type": "integer",
-        "description": ""
-      },
-      "status": {
-        "type": "string",
-        "description": ""
-      }
-    },
-    "required": ["shipment_id"]
-  },
-  "PickupCreationResponse": {
-    "title": "Pickup creation response",
-    "type": "object",
-    "properties": {
-      "pickup_status": {
-        "type": "integer",
-        "format": "int32",
-        "description": "Status if the package has been picked up or not"
-      },
-      "message": {
-        "type": "string",
-        "description": ""
-      },
-      "response": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "type": "string"
+    "AwbCreationRequest": {
+      "title": "Awb creation request",
+      "type": "object",
+      "properties": {
+        "shipment_id": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The shipment id as generated in the shipment section"
           }
         },
-        "description": ""
-      },
-      "manifest_url": {
-        "type": "string",
-        "description": "Url of the pdf file which shows the pickup manifest which has been created"
-      }
-    }
-  },
-  "GenerateLabelRequest": {
-    "title": "Generate Label request",
-    "type": "object",
-    "properties": {
-      "shipment_id": {
-        "type": "array",
-        "items": {
+        "courier_id": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "The courier id from above"
+        },
+        "weight": {
+          "type": "string",
+          "description": "The total weight of the package"
+        },
+        "manifest_id": {
+          "type": "integer",
+          "description": "The manifest id as generated earlier"
+        },
+        "channel_order_id": {
+          "type": "integer",
+          "description": "Channel order id as provided by ShipRocket orders API"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the activity"
+        }
+      },
+      "required": [
+        "shipment_id"
+      ]
+    },
+    "AwbCreationResponse": {
+      "title": "Awb creation response",
+      "type": "object",
+      "properties": {
+        "awb_assign_status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "It will be 1, implying that the status has been assigned"
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "object",
+              "properties": {
+                "courier_company_id": {
+                  "type": "integer",
+                  "description": "id of the courier company"
+                },
+                "awb_code": {
+                  "type": "string",
+                  "description": "The AWB code generated"
+                },
+                "cod": {
+                  "type": "integer",
+                  "description": "If there is COD then response =1, else it will be 0"
+                },
+                "order_id": {
+                  "type": "integer",
+                  "description": "Order id as generated earlier"
+                },
+                "shipment_id": {
+                  "type": "integer",
+                  "description": "Shipment id as generated in the shipment section"
+                },
+                "freight_percentage": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flat_charges": {
+                  "type": "string",
+                  "description": ""
+                },
+                "awb_code_status": {
+                  "type": "integer",
+                  "description": ""
+                },
+                "assigned_date_time": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "description": ""
+                    },
+                    "timezone_type": {
+                      "type": "integer",
+                      "description": ""
+                    },
+                    "timezone": {
+                      "type": "string",
+                      "description": ""
+                    }
+                  },
+                  "description": ""
+                },
+                "applied_weight": {
+                  "type": "string",
+                  "description": ""
+                },
+                "company_id": {
+                  "type": "integer",
+                  "description": ""
+                },
+                "company_address_id": {
+                  "type": "integer",
+                  "description": ""
+                },
+                "id": {
+                  "type": "integer",
+                  "description": ""
+                },
+                "applied_weight_amount": {
+                  "type": "integer",
+                  "description": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "awb_assign_status",
+        "response"
+      ]
+    },
+    "AwbError500": {
+      "title": "Awb creation error 500",
+      "type": "object",
+      "properties": {
+        "awb_assign_status": {
+          "type": "string",
+          "description": "Status if the code has been generated or not. In this case it would be a 0"
+        },
+        "data": {
+          "type": "string",
+          "description": "Passes a statement saying it is not possible"
+        }
+      },
+      "required": [
+        "awb_assign_status"
+      ]
+    },
+    "PickupCreationRequest": {
+      "title": "Pickup creation request",
+      "type": "object",
+      "properties": {
+        "shipment_id": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "manifest_id": {
+          "type": "integer",
+          "description": ""
+        },
+        "status": {
+          "type": "string",
+          "description": ""
+        }
+      },
+      "required": [
+        "shipment_id"
+      ]
+    },
+    "PickupCreationResponse": {
+      "title": "Pickup creation response",
+      "type": "object",
+      "properties": {
+        "pickup_status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Status if the package has been picked up or not"
+        },
+        "message": {
+          "type": "string",
+          "description": ""
+        },
+        "response": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "string"
+            }
+          },
+          "description": ""
+        },
+        "manifest_url": {
+          "type": "string",
+          "description": "Url of the pdf file which shows the pickup manifest which has been created"
         }
       }
     },
-    "required": ["shipment_id"]
-  },
-  "GenerateLabelResponse": {
-    "title": "Generate Label response",
-    "type": "object",
-    "properties": {
-      "label_created": {
-        "type": "integer",
-        "format": "int32"
+    "GenerateLabelRequest": {
+      "title": "Generate Label request",
+      "type": "object",
+      "properties": {
+        "shipment_id": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
       },
-      "label_url": {
-        "type": "string"
-      },
-      "response": {
-        "type": "string"
-      }
-    }
-  },
-  "AwbTrackingRequest": {
-    "title": "AWB Tracking request",
-    "type": "object",
-    "properties": {
-      "awb_code": {
-        "type": "array",
-        "items": {
+      "required": [
+        "shipment_id"
+      ]
+    },
+    "GenerateLabelResponse": {
+      "title": "Generate Label response",
+      "type": "object",
+      "properties": {
+        "label_created": {
           "type": "integer",
           "format": "int32"
+        },
+        "label_url": {
+          "type": "string"
+        },
+        "response": {
+          "type": "string"
         }
       }
     },
-    "required": ["awb_code"]
-  },
-  "AwbTrackingResponse": {
-    "title": "AWB Tracking response",
-    "type": "object",
-    "properties": {
-      "tracking_data": {
-        "type": "object"
-      }
-    },
-    "required": ["tracking_data"]
-  },
-  "ShipmentTrackingRequest": {
-    "title": "Shipment Tracking request",
-    "type": "object",
-    "properties": {
-      "shipment_id": {
-        "type": "array",
-        "items": {
-          "type": "integer",
-          "format": "int32"
+    "AwbTrackingRequest": {
+      "title": "AWB Tracking request",
+      "type": "object",
+      "properties": {
+        "awb_code": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
-      }
-    },
-    "required": ["shipment_id"]
-  },
-  "ShipmentTrackingResponse": {
-    "title": "Shipment Tracking response",
-    "type": "object",
-    "properties": {
-      "tracking_data": {
-        "type": "object"
-      }
-    },
-    "required": ["tracking_data"]
-  },
-  "DiscrepancyResponse": {
-    "title": "Discrepancy response",
-    "type": "object",
-    "properties": {
-      "status": {
-        "type": "string"
       },
-      "data": {
-        "type": "object"
-      },
-      "upper_fold_text": {
-        "type": "string"
-      },
-      "lower_fild_text": {
-        "type": "string"
-      }
+      "required": [
+        "awb_code"
+      ]
     },
-    "required": ["status", "data", "upper_fold_text", "lower_fild_text"]
-  },
-  "fileImportResponse": {
-    "title": "Import Response",
-    "type": "object",
-    "properties": {
-      "data": {
-        "type": "array",
-        "items": {
+    "AwbTrackingResponse": {
+      "title": "AWB Tracking response",
+      "type": "object",
+      "properties": {
+        "tracking_data": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "tracking_data"
+      ]
+    },
+    "ShipmentTrackingRequest": {
+      "title": "Shipment Tracking request",
+      "type": "object",
+      "properties": {
+        "shipment_id": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "required": [
+        "shipment_id"
+      ]
+    },
+    "ShipmentTrackingResponse": {
+      "title": "Shipment Tracking response",
+      "type": "object",
+      "properties": {
+        "tracking_data": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "tracking_data"
+      ]
+    },
+    "DiscrepancyResponse": {
+      "title": "Discrepancy response",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object"
+        },
+        "upper_fold_text": {
+          "type": "string"
+        },
+        "lower_fild_text": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "data",
+        "upper_fold_text",
+        "lower_fild_text"
+      ]
+    },
+    "fileImportResponse": {
+      "title": "Import Response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "data"
+      ]
+    },
+    "SatementResponse": {
+      "title": "Satement response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "meta": {
           "type": "object"
         }
       }
     },
-    "required": ["data"]
-  },
-  "SatementResponse": {
-    "title": "Satement response",
-    "type": "object",
-    "properties": {
-      "data": {
-        "type": "array",
-        "items": {
-          "type": "object"
+    "bulkExportResponse": {
+      "title": "export all products",
+      "type": "object",
+      "properties": {
+        "download_url": {
+          "type": "string",
+          "example": "https://s3-ap-southeast-1.amazonaws.com/kr-shipmultichannel/imports/c_21642/export-2017-08-28.csv"
         }
-      },
-      "meta": {
-        "type": "object"
       }
-    }
-  },
-  "bulkExportResponse": {
-    "title": "export all products",
-    "type": "object",
-    "properties": {
-      "download_url": {
-        "type": "string",
-        "example": "https://s3-ap-southeast-1.amazonaws.com/kr-shipmultichannel/imports/c_21642/export-2017-08-28.csv"
+    },
+    "export401": {
+      "title": "unauthorized access",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Failed to authenticate because of bad credentials or an invalid authorization header."
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 401
+        }
       }
-    }
-  },
-  "export401":{
-    "title": "unauthorized access",
-    "type": "object",
-    "properties": {
-      "message": {"type": "string", "example": "Failed to authenticate because of bad credentials or an invalid authorization header."},
-      "status_code": {"type": "integer", "example": 401}
-    }
-  },
-  "listing400": {
-    "title": "no file provided",
-    "type": "object",
-    "properties": {
-      "message": {"type": "string","example": "FIle required"},
-      "status_code": {"type": "integer","example": 400}
+    },
+    "listing400": {
+      "title": "no file provided",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "FIle required"
+        },
+        "status_code": {
+          "type": "integer",
+          "example": 400
+        }
+      }
     }
   }
-}
 }
