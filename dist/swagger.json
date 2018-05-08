@@ -1888,7 +1888,7 @@
         "tags": [
           "Couriers"
         ],
-        "description": "Shows the number of courier companies available for delivery from pickup point to customer delivery code, according to weight.",
+        "description": "Shows the number of courier companies available for delivery from pickup point to customer delivery code, along with the estimated delivery time in days.",
         "summary": "Check Serviceability",
         "operationId": "Check serviceability",
         "security": [
