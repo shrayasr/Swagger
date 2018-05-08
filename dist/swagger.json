@@ -1967,7 +1967,7 @@
             "items": {
               "type": "string"
             },
-            "description": "Length of the package"
+            "description": "Courier Ids which should be excluded"
           },
           {
             "name": "mode",
