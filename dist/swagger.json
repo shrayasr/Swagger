@@ -2204,7 +2204,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/SatementResponse"
+              "$ref": "#/definitions/StatementResponse"
             }
           }
         }
@@ -4650,14 +4650,14 @@
           "format": "int32",
           "example": 200
         },
-        "url": {
+        "manifest_url": {
           "type": "string",
           "example": "http://example.com/manifests/manifests.csv"
         }
       },
       "required": [
         "status",
-        "url"
+        "manifest_url"
       ]
     },
     "CreateLinkedOrderRequest": {
@@ -6394,16 +6394,21 @@
       "type": "object",
       "properties": {
         "status": {
-          "type": "string"
+          "type": "integer",
+          "example": 200
         },
         "data": {
-          "type": "object"
+          "type": "array",
+          "items": {},
+          "example": []
         },
         "upper_fold_text": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         },
         "lower_fild_text": {
-          "type": "string"
+          "type": "string",
+          "example": ""
         }
       },
       "required": [
@@ -6428,18 +6433,146 @@
         "data"
       ]
     },
-    "SatementResponse": {
+    "StatementResponse": {
       "title": "Satement response",
       "type": "object",
       "properties": {
         "data": {
           "type": "array",
           "items": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+              "transaction_id": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "order_id": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "channel_order_id": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "awb_code": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "return_awb_code": {
+                "type": "string",
+                "description": "",
+                "example": "null"
+              },
+              "applied_weight": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "charged_weight": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "billed_weight": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "action": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "charge": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "description": {
+                "type": "string",
+                "description": "",
+                "example": "Wallet balance"
+              },
+              "debit_amount": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "credit_amount": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "balance_amount": {
+                "type": "string",
+                "description": "",
+                "example": "-41819.57"
+              },
+              "balance_weight": {
+                "type": "integer",
+                "description": "",
+                "example": 0
+              },
+              "volumetric_weight": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "entered_weight": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              },
+              "created_at": {
+                "type": "string",
+                "description": "",
+                "example": ""
+              }
+            }
           }
         },
         "meta": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "pagination": {
+              "type": "object",
+              "properties": {
+                "total": {
+                  "type": "integer"
+                },
+                "count": {
+                  "type": "integer"
+                },
+                "per_page": {
+                  "type": "integer"
+                },
+                "current_page": {
+                  "type": "integer"
+                },
+                "total_pages": {
+                  "type": "integer"
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "total": 7,
+                "count": 7,
+                "per_page": 15,
+                "current_page": 1,
+                "total_pages": 1,
+                "links": []
+              }
+            }
+          }
         }
       }
     },
