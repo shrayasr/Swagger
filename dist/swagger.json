@@ -841,7 +841,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/GetOrderResponse"
+              "$ref": "#/definitions/GetOrdersResponse"
             }
           },
           "401": {
@@ -1180,114 +1180,6 @@
               "items": {
                 "$ref": "#/definitions/GenerateInvoiceResponse"
               }
-            }
-          },
-          "401": {
-            "description": "unauthorized access",
-            "schema": {
-              "$ref": "#/definitions/export401"
-            }
-          },
-          "405": {
-            "description": "method not allowed",
-            "schema": {
-              "$ref": "#/definitions/405Error"
-            }
-          },
-          "422": {
-            "description": "#/definitions/login422Error"
-          }
-        }
-      }
-    },
-    "/v1/external/orders/track": {
-      "get": {
-        "tags": [
-          "Orders"
-        ],
-        "description": "Get tracking data of all orders",
-        "summary": "Get tracking Details",
-        "operationId": "Track",
-        "produces": [
-          "application/json"
-        ],
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Page number of data to display"
-          },
-          {
-            "name": "per_page",
-            "in": "query",
-            "required": true,
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of orders to get per request"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Sort type (DESC, ASC)"
-          },
-          {
-            "name": "sort_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to sort by"
-          },
-          {
-            "name": "to",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "To date"
-          },
-          {
-            "name": "from",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "From date"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Filter value"
-          },
-          {
-            "name": "filter_by",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Field to filter by"
-          },
-          {
-            "name": "search",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "Search for AWB or Channel Order ID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/GetOrderResponse"
             }
           },
           "401": {
@@ -1877,7 +1769,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/channelsRequest"
+              "$ref": "#/definitions/channelsResponse"
             }
           }
         }
@@ -2835,8 +2727,8 @@
         "data"
       ]
     },
-    "channelsRequest": {
-      "title": "get channels request",
+    "channelsResponse": {
+      "title": "get channels response",
       "type": "object",
       "properties": {
         "data": {
@@ -2846,103 +2738,166 @@
             "properties": {
               "id": {
                 "type": "integer",
-                "description": "The respective channel id’s of the various channels which are to be integrated with the ShipRocket panel."
+                "description": "The respective channel id’s of the various channels which are to be integrated with the ShipRocket panel.",
+                "example": 1234
               },
               "name": {
                 "type": "string",
-                "description": ""
+                "description": "",
+                "example": "Manual"
               },
               "status": {
                 "type": "string",
-                "description": ""
+                "description": "",
+                "example": "Active"
               },
               "settings": {
                 "type": "object",
                 "properties": {
                   "dimensions": {
                     "type": "string",
-                    "description": ""
+                    "description": "",
+                    "example": "0x0x0"
                   },
                   "weight": {
                     "type": "integer",
-                    "description": ""
+                    "description": "",
+                    "example": 0
                   },
                   "order_status": {
                     "type": "string",
-                    "description": ""
+                    "description": "",
+                    "example": "Pending, COD"
                   }
                 },
-                "description": ""
+                "description": "Channel Settings"
               },
               "auth": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "store_url": {
+                      "type": "string",
+                      "description": "store web address",
+                      "example": "https://test.example.com"
+                    },
+                    "api_username": {
+                      "type": "string",
+                      "example": "Hell0W012Ld"
+                    },
+                    "api_key": {
+                      "type": "string",
+                      "description": "",
+                      "example": "helloworld"
+                    }
+                  }
                 },
                 "description": ""
               },
               "connections": {
                 "type": "integer",
-                "description": ""
+                "description": "",
+                "example": 1
               },
               "orders_sync": {
                 "type": "integer",
-                "description": ""
+                "description": "Syncing On / Off",
+                "example": 1
               },
               "inventory_sync": {
                 "type": "integer",
-                "description": ""
+                "description": "Inventory Sync On / Off",
+                "example": 0
               },
               "orders_synced_on": {
                 "type": "string",
-                "description": ""
+                "description": "Last Order Sync date or some message",
+                "example": "13 Apr 11:15 AM"
               },
               "inventory_synced_on": {
                 "type": "string",
-                "description": ""
+                "description": "Last Inventory Sync date or some message",
+                "example": "13 Apr 11:15 AM"
               },
               "base_channel_code": {
                 "type": "string",
-                "description": "The two letter code for the respective channels. Please note that the “Manual” channel"
+                "description": "The two letter code for the respective channels. Please note that the “Manual” channel",
+                "example": "CS"
               },
               "base_channel": {
                 "type": "object",
                 "properties": {
                   "id": {
                     "type": "integer",
-                    "description": ""
+                    "description": "",
+                    "example": 4
                   },
                   "name": {
                     "type": "string",
-                    "description": ""
+                    "description": "Channel Name",
+                    "example": "Manual"
                   },
                   "code": {
                     "type": "string",
-                    "description": ""
+                    "description": "",
+                    "example": "CS"
                   },
                   "type": {
                     "type": "string",
-                    "description": ""
+                    "description": "type of channel",
+                    "example": "Carts"
                   },
                   "logo": {
                     "type": "string",
-                    "description": ""
+                    "description": "Logo for channel",
+                    "example": "channel.png"
                   },
                   "settings_sample": {
                     "type": "object",
                     "properties": {
                       "name": {
                         "type": "string",
-                        "description": ""
+                        "description": "",
+                        "example": "Channel Settings"
                       },
                       "help": {
                         "type": "string",
-                        "description": ""
+                        "description": "",
+                        "example": "help"
                       },
                       "settings": {
                         "type": "array",
                         "items": {
-                          "type": "string"
+                          "type": "object",
+                          "properties": {
+                            "order_status": {
+                              "type": "object",
+                              "properties": {
+                                "code": {
+                                  "type": "string",
+                                  "description": "",
+                                  "example": "order_status"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "Name for reference",
+                                  "example": "Status to fetch"
+                                },
+                                "placeholder": {
+                                  "type": "string",
+                                  "description": "",
+                                  "example": "processing, on-hold etc"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "description": "",
+                                  "example": "text"
+                                }
+                              },
+                              "description": ""
+                            }
+                          }
                         },
                         "description": ""
                       }
@@ -2951,11 +2906,67 @@
                   },
                   "auth_sample": {
                     "type": "object",
+                    "properties": {
+                      "api_info": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "description": "",
+                            "example": "Manual"
+                          },
+                          "help": {
+                            "type": "string",
+                            "description": "",
+                            "example": "Provide credentials to integrate the channel"
+                          },
+                          "settings": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "code": {
+                                  "type": "string",
+                                  "description": ""
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": ""
+                                },
+                                "placeholder": {
+                                  "type": "string",
+                                  "description": ""
+                                }
+                              },
+                              "example": [
+                                {
+                                  "code": "store_url",
+                                  "name": "Store Url",
+                                  "placeholder": "e.g. https://abc/example.com"
+                                },
+                                {
+                                  "code": "api_username",
+                                  "name": "API Username",
+                                  "placeholder": "a1b2c3d4"
+                                },
+                                {
+                                  "code": "api_key",
+                                  "name": "api key",
+                                  "placeholder": "abcd1234"
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "description": ""
+                      }
+                    },
                     "description": "The various keys required for the channel integration"
                   },
                   "description": {
                     "type": "string",
-                    "description": ""
+                    "description": "",
+                    "example": ""
                   }
                 },
                 "description": ""
@@ -3892,6 +3903,195 @@
         "product_id",
         "listing_id"
       ]
+    },
+    "GetOrdersResponse": {
+      "title": "Get All Orders Response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": 123
+              },
+              "channel_id": {
+                "type": "integer",
+                "example": 456
+              },
+              "channel_name": {
+                "type": "string",
+                "example": "My Channel"
+              },
+              "base_channel_code": {
+                "type": "string",
+                "example": "MC"
+              },
+              "channel_order_id": {
+                "type": "string",
+                "example": "Test1504508157347"
+              },
+              "customer_name": {
+                "type": "string",
+                "example": "first last"
+              },
+              "customer_email": {
+                "type": "string",
+                "example": "test@gmail.com"
+              },
+              "customer_phone": {
+                "type": "string",
+                "example": "9876543210"
+              },
+              "payment_status": {
+                "type": "string",
+                "example": "Pending"
+              },
+              "total": {
+                "type": "string",
+                "example": "100.00"
+              },
+              "tax": {
+                "type": "string",
+                "example": "0.00"
+              },
+              "sla": {
+                "type": "string",
+                "example": "2 days"
+              },
+              "shipping_method": {
+                "type": "string",
+                "example": "SR"
+              },
+              "expedited": {
+                "type": "string",
+                "example": "0"
+              },
+              "status": {
+                "type": "string",
+                "example": "NEW"
+              },
+              "status_code": {
+                "type": "integer",
+                "example": 1
+              },
+              "payment_method": {
+                "type": "string",
+                "example": "Prepaid"
+              },
+              "is_international": {
+                "type": "integer",
+                "example": 0
+              },
+              "purpose_of_shipment": {
+                "type": "integer",
+                "example": 0
+              },
+              "channel_created_at": {
+                "type": "string",
+                "example": "4 Sep 2017, 12:26 PM"
+              },
+              "created_at": {
+                "type": "string",
+                "example": "4 Sep 2017, 12:26 PM"
+              },
+              "products": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 123
+                    },
+                    "channel_order_product_id": {
+                      "type": "integer",
+                      "example": 456
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "test product"
+                    },
+                    "channel_sku": {
+                      "type": "string",
+                      "example": "ABCD1234"
+                    },
+                    "quantity": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "product_id": {
+                      "type": "integer",
+                      "example": 123
+                    },
+                    "available": {
+                      "type": "string",
+                      "example": "0"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "UNDEFINED"
+                    },
+                    "hsn": {
+                      "type": "string",
+                      "example": "54673478"
+                    }
+                  }
+                }
+              },
+              "shipments": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 123
+                    },
+                    "isd_code": {
+                      "type": "string",
+                      "example": "+91"
+                    },
+                    "courier": {
+                      "type": "string",
+                      "example": "FedEx"
+                    },
+                    "weight": {
+                      "type": "string",
+                      "example": "0.5"
+                    },
+                    "dimensions": {
+                      "type": "string",
+                      "example": "10x10x10"
+                    },
+                    "awb": {
+                      "type": "string",
+                      "example": "123"
+                    },
+                    "return_awb": {
+                      "type": "string",
+                      "example": "321"
+                    },
+                    "volumetric_weight": {
+                      "type": "string",
+                      "example": "0.5"
+                    }
+                  }
+                }
+              },
+              "activities": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "example": ["ORDER_CREATED", "LABEL_GENERATED"]
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "GetOrderResponse": {
       "title": "Get order response",
