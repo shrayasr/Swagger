@@ -28,13 +28,22 @@
       "name": "Authentication"
     },
     {
+      "name": "Create/Update Order"
+    },
+    {
       "name": "Orders"
     },
     {
       "name": "Shipments"
     },
     {
+      "name": "Couriers"
+    },
+    {
       "name": "Tracking"
+    },
+    {
+      "name": "Label | Manifests | Invoice"
     },
     {
       "name": "Products"
@@ -43,16 +52,7 @@
       "name": "Listings"
     },
     {
-      "name": "Couriers"
-    },
-    {
       "name": "Channels"
-    },
-    {
-      "name": "Label"
-    },
-    {
-      "name": "Manifests"
     },
     {
       "name": "Inventory"
@@ -68,6 +68,9 @@
     },
     {
       "name": "Countries"
+    },
+    {
+      "name": "Pickup Address"
     }
   ],
   "paths": {
@@ -449,6 +452,45 @@
               "items": {
                 "type": "string"
               }
+            }
+          }
+        }
+      }
+    },
+    "/v1/external/settings/company/pickup": {
+      "get": {
+        "tags": [
+          "Pickup Address"
+        ],
+        "description": "Get Your pickup locations",
+        "summary": "Get All Pickup locations",
+        "operationId": "get pickup locations",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/GetPickupResponse"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
             }
           }
         }
@@ -913,7 +955,7 @@
           "Orders"
         ],
         "description": "Starts a background job which will fetch orders from all channels.",
-        "summary": "Fetch",
+        "summary": "Fetch Orders from channel into Shiprocet App",
         "operationId": "Fetch orders",
         "produces": [
           "application/json"
@@ -981,14 +1023,56 @@
         }
       }
     },
-    "/v1/external/orders/cancel": {
+    "/v1/external/orders/create/adhoc": {
       "post": {
         "tags": [
-          "Orders"
+          "Create/Update Order"
         ],
-        "description": "Cancel the orders by passing their order ID’s in the given below API.",
-        "summary": "Cancel an order",
-        "operationId": "Cancel orders",
+        "description": "Pass all the required order fields to create a quick order. Quick order are the ones where we do not store the product details in master catalog.",
+        "summary": "Create Custom order",
+        "operationId": "Create Custom order",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateQuickOrderRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/CreateQuickOrderResponse"
+            }
+          },
+          "403": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
+            "schema": {
+              "$ref": "#/definitions/import403"
+            }
+          }
+        }
+      }
+    },
+    "/v1/external/orders/create": {
+      "post": {
+        "tags": [
+          "Create/Update Order"
+        ],
+        "description": "Shows the details of the order which needs to be created",
+        "summary": "Create Channel Order",
+        "operationId": "Create linked order.",
         "produces": [
           "application/json"
         ],
@@ -1003,36 +1087,25 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CancelOrdersRequest"
+              "$ref": "#/definitions/CreateLinkedOrderRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Order cancel request taken",
+            "description": "",
             "schema": {
-              "$ref": "#/definitions/CancelOrdersResponse"
+              "$ref": "#/definitions/CreateLinkedOrderResponse"
             }
           },
-          "204": {
-            "description": "unprocessable input"
+          "400": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
+            "schema": {}
           },
-          "401": {
-            "description": "unauthorized access",
+          "403": {
+            "description": "Unexpected error in API call. See HTTP response body for details.",
             "schema": {
-              "$ref": "#/definitions/export401"
-            }
-          },
-          "405": {
-            "description": "method not allowed",
-            "schema": {
-              "$ref": "#/definitions/405Error"
-            }
-          },
-          "422": {
-            "description": "Invalid parameters",
-            "schema": {
-              "$ref": "#/definitions/login422Error"
+              "$ref": "#/definitions/import403"
             }
           }
         }
@@ -1041,7 +1114,7 @@
     "/v1/external/orders/fulfill": {
       "patch": {
         "tags": [
-          "Orders"
+          "Create/Update Order"
         ],
         "description": "This API allows you to add inventory for order product by passing the order id and order product id",
         "summary": "Add inventory for order product",
@@ -1095,7 +1168,7 @@
     "/v1/external/orders/mapping": {
       "patch": {
         "tags": [
-          "Orders"
+          "Create/Update Order"
         ],
         "description": "Map unmapped order products",
         "summary": "Map orders products",
@@ -1149,9 +1222,9 @@
     "/v1/external/orders/print/invoice": {
       "post": {
         "tags": [
-          "Orders"
+          "Label | Manifests | Invoice"
         ],
-        "description": "Generates an invoice for an order through the order id. You can pass multiple order id’s as well, to generate their response",
+        "description": "Generates an invoice for an order through the **order id**. You can pass multiple order id’s as well, to generate their response",
         "summary": "Generate Invoice",
         "operationId": "Generate invoice",
         "produces": [
@@ -1203,7 +1276,7 @@
     "/v1/external/orders/address/update": {
       "post": {
         "tags": [
-          "Orders"
+          "Create/Update Order"
         ],
         "description": "Update the customer’s delivery address by passing the order id in the given below API",
         "operationId": "Change address",
@@ -1229,6 +1302,63 @@
           "202": {
             "description": "Address updated",
             "schema": {}
+          }
+        }
+      }
+    },
+    "/v1/external/orders/cancel": {
+      "post": {
+        "tags": [
+          "Create/Update Order"
+        ],
+        "description": "Cancel the orders by passing their order ID’s in the given below API.",
+        "summary": "Cancel an order",
+        "operationId": "Cancel orders",
+        "produces": [
+          "application/json"
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CancelOrdersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Order cancel request taken",
+            "schema": {
+              "$ref": "#/definitions/CancelOrdersResponse"
+            }
+          },
+          "204": {
+            "description": "unprocessable input"
+          },
+          "401": {
+            "description": "unauthorized access",
+            "schema": {
+              "$ref": "#/definitions/export401"
+            }
+          },
+          "405": {
+            "description": "method not allowed",
+            "schema": {
+              "$ref": "#/definitions/405Error"
+            }
+          },
+          "422": {
+            "description": "Invalid parameters",
+            "schema": {
+              "$ref": "#/definitions/login422Error"
+            }
           }
         }
       }
@@ -1274,7 +1404,7 @@
     "/v1/external/orders/print/manifest": {
       "post": {
         "tags": [
-          "Manifests"
+          "Label | Manifests | Invoice"
         ],
         "description": "Prints the manifest of the order id on the assumption that the manifest is created",
         "summary": "Get manifest",
@@ -1331,7 +1461,7 @@
     "/v1/external/manifests/generate": {
       "post": {
         "tags": [
-          "Manifests"
+          "Label | Manifests | Invoice"
         ],
         "description": "Generate Manifests for single order or bulk orders.\n\n&lowast;***This should be used if print manifest doesn't return any URL***&lowast;",
         "summary": "Generate Manifests",
@@ -1367,56 +1497,10 @@
         }
       }
     },
-    "/v1/external/orders/create": {
-      "post": {
-        "tags": [
-          "Orders"
-        ],
-        "description": "Shows the details of the order which needs to be created",
-        "summary": "Create Channel Order",
-        "operationId": "Create linked order.",
-        "produces": [
-          "application/json"
-        ],
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateLinkedOrderRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/CreateLinkedOrderResponse"
-            }
-          },
-          "400": {
-            "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {}
-          },
-          "403": {
-            "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {
-              "$ref": "#/definitions/import403"
-            }
-          }
-        }
-      }
-    },
     "/v1/external/orders/import": {
       "post": {
         "tags": [
-          "Orders"
+          "Create/Update Order"
         ],
         "description": "Import orders in bulk to your Shiprocket panel from a csv file",
         "summary": "Bulk Import",
@@ -1470,48 +1554,6 @@
             "description": "",
             "schema": {
               "type": "object"
-            }
-          }
-        }
-      }
-    },
-    "/v1/external/orders/create/adhoc": {
-      "post": {
-        "tags": [
-          "Orders"
-        ],
-        "description": "Pass all the required order fields to create a quick order. Quick order are the ones where we do not store the product details in master catalog.",
-        "summary": "Create Custom order",
-        "operationId": "Create Custom order",
-        "security": [
-          {
-            "Bearer": []
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CreateQuickOrderRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/CreateQuickOrderResponse"
-            }
-          },
-          "403": {
-            "description": "Unexpected error in API call. See HTTP response body for details.",
-            "schema": {
-              "$ref": "#/definitions/import403"
             }
           }
         }
@@ -1977,7 +2019,7 @@
     "/v1/external/courier/generate/label": {
       "post": {
         "tags": [
-          "Label"
+          "Label | Manifests | Invoice"
         ],
         "description": "Get a label URL. Note:- For label URL, AWB code must be assigned on shipment id.",
         "summary": "Generate Label",
@@ -6115,22 +6157,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The courier id from above"
-        },
-        "weight": {
-          "type": "string",
-          "description": "The total weight of the package"
-        },
-        "manifest_id": {
-          "type": "integer",
-          "description": "The manifest id as generated earlier"
-        },
-        "channel_order_id": {
-          "type": "integer",
-          "description": "Channel order id as provided by ShipRocket orders API"
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the activity"
         }
       },
       "required": [
@@ -6259,14 +6285,6 @@
             "type": "integer",
             "format": "int32"
           }
-        },
-        "manifest_id": {
-          "type": "integer",
-          "description": ""
-        },
-        "status": {
-          "type": "string",
-          "description": ""
         }
       },
       "required": [
@@ -6611,6 +6629,81 @@
         "status_code": {
           "type": "integer",
           "example": 400
+        }
+      }
+    },
+    "GetPickupResponse": {
+      "title": "All pickup locations",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "shipping_address": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 123
+                  },
+                  "pickup_location": {
+                    "type": "string",
+                    "example": "NEWDELHI"
+                  },
+                  "address": {
+                    "type": "string",
+                    "example": "123, abc street"
+                  },
+                  "address_2": {
+                    "type": "string",
+                    "example": "near post office"
+                  },
+                  "city": {
+                    "type": "string",
+                    "example": "delhi"
+                  },
+                  "state": {
+                    "type": "string",
+                    "example": "delhi"
+                  },
+                  "country": {
+                    "type": "string",
+                    "example": "India"
+                  },
+                  "pin_code": {
+                    "type": "integer",
+                    "example": 110030
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "abc@xyz.com"
+                  },
+                  "phone": {
+                    "type": "integer",
+                    "example": 9876543210
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "ABC Pvt Ltd"
+                  },
+                  "company_id": {
+                    "type": "integer",
+                    "example": 321
+                  },
+                  "status": {
+                    "type": "integer",
+                    "example": 2
+                  }
+                }
+              }
+            },
+            "allow_more": {
+              "type": "string",
+              "example": "true"
+            }
+          }
         }
       }
     }
