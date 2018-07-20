@@ -4119,7 +4119,10 @@
                 "type": "array",
                 "items": {
                   "type": "string",
-                  "example": ["ORDER_CREATED", "LABEL_GENERATED"]
+                  "example": [
+                    "ORDER_CREATED",
+                    "LABEL_GENERATED"
+                  ]
                 }
               }
             }
@@ -6364,7 +6367,143 @@
       "type": "object",
       "properties": {
         "tracking_data": {
-          "type": "object"
+          "type": "object",
+          "properties": {
+            "track_status": {
+              "type": "integer",
+              "example": 1
+            },
+            "shipment_status": {
+              "type": "integer",
+              "example": 7
+            },
+            "shipment_track": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 44
+                  },
+                  "awb_code": {
+                    "type": "string",
+                    "example": "12345678"
+                  },
+                  "courier_company_id": {
+                    "type": "integer",
+                    "example": 10
+                  },
+                  "shipment_id": {
+                    "type": "integer",
+                    "example": 1234
+                  },
+                  "order_id": {
+                    "type": "integer",
+                    "example": 123
+                  },
+                  "pickup_date": {
+                    "type": "string",
+                    "example": "2016-11-02T19:47:50.655000"
+                  },
+                  "current_status": {
+                    "type": "string",
+                    "example": "Delivered"
+                  },
+                  "delivered_date": {
+                    "type": "string",
+                    "example": "2016-11-05T14:29:38.002000"
+                  },
+                  "delivered_to": {
+                    "type": "string",
+                    "example": "NA"
+                  },
+                  "origin": {
+                    "type": "string",
+                    "example": "Chennai_Egmore_C (Tamil Nadu)"
+                  },
+                  "destination": {
+                    "type": "string",
+                    "example": "Salem"
+                  },
+                  "service": {
+                    "type": "string",
+                    "example": "COD"
+                  },
+                  "shipment_type": {
+                    "type": "string",
+                    "example": "COD"
+                  },
+                  "packages": {
+                    "type": "integer",
+                    "example": 0
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "NA"
+                  },
+                  "weight": {
+                    "type": "string",
+                    "example": "NA"
+                  },
+                  "consignee_name": {
+                    "type": "string",
+                    "example": "John"
+                  },
+                  "consignee_address": {
+                    "type": "string",
+                    "example": "123, ABD Street, Salem, Tamil Nadu"
+                  },
+                  "contact_info": {
+                    "type": "string",
+                    "example": "9876543210"
+                  },
+                  "created_at": {
+                    "type": "string",
+                    "example": "2016-11-04 10:00:30"
+                  },
+                  "updated_at": {
+                    "type": "string",
+                    "example": "2016-11-05 20:00:24"
+                  }
+                }
+              }
+            },
+            "shipment_track_activities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "ship_track_id": {
+                    "type": "integer"
+                  },
+                  "date": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "activity": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id": 972,
+                  "ship_track_id": 44,
+                  "date": "2016-11-05 14:29:38",
+                  "location": "Salem (Tamil Nadu)",
+                  "activity": "Delivered - Delivered to consignee"
+                }
+              }
+            },
+            "track_url": {
+              "type": "string",
+              "example": "https://app.shiprocket.in/tracking/awb/12345"
+            }
+          }
         }
       },
       "required": [
