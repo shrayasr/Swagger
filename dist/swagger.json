@@ -1195,10 +1195,7 @@
           "200": {
             "description": "",
             "schema": {
-              "type": "array",
-              "items": {
                 "$ref": "#/definitions/MappingResponse"
-              }
             }
           },
           "401": {
@@ -1639,7 +1636,8 @@
           "200": {
             "description": "",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "$ref": "#/definitions/ShipmentsResponse"
             }
           }
         }
@@ -4705,6 +4703,10 @@
           "type": "string",
           "description": "Creates the order id"
         },
+        "pickup_code": {
+            "type": "string",
+            "description": "Name of the pickup location"
+        },
         "order_date": {
           "type": "string",
           "description": "Mentions the date and time when the order was created"
@@ -4807,6 +4809,10 @@
               "sku": {
                 "type": "string",
                 "description": "Stock Keeping Unit or the identification unit of an individual product (generally alphanumeric)"
+              },
+              "name": {
+                "type": "string",
+                "description": "Name of the product"
               },
               "units": {
                 "type": "integer",
@@ -5177,6 +5183,84 @@
         "status",
         "status_code"
       ]
+    },
+    "ShipmentsResponse": {
+        "title": "Get Shipments Response",
+        "type": "object",
+        "properties": {
+            "data": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "number": {
+                            "type": "string",
+                            "example": "1234"
+                        },
+                        "code": {
+                            "type": "string",
+                            "example": "abc"
+                        },
+                        "id": {
+                            "type": "string",
+                            "example": "123456"
+                        },
+                        "order_id": {
+                            "type": "string",
+                            "example": "123"
+                        },
+                        "products": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Mobile case"
+                                    },
+                                    "sku": {
+                                        "type": "string",
+                                        "example": "mcase01"
+                                    },
+                                    "quantity": {
+                                        "type": "string",
+                                        "example": "2"
+                                    }
+                                }
+                            }
+                        },
+                        "awb": {
+                            "type": "string",
+                            "example": "123456789"
+                        },
+                        "status": {
+                            "type": "string",
+                            "example": "In Transit"
+                        },
+                        "created_at": {
+                            "type": "string",
+                            "example": "2018-04-03 12:43:23"
+                        },
+                        "channel_id": {
+                            "type": "string",
+                            "example": "34"
+                        },
+                        "channel_name": {
+                            "type": "string",
+                            "example": "CUSTOM"
+                        },
+                        "base_channel_code": {
+                            "type": "string",
+                            "example": "CS"
+                        },
+                        "payment_method": {
+                            "type": "string",
+                            "example": "prepaid"
+                        }
+                    }
+                }
+            }
+        }
     },
     "DetailsResponse": {
       "title": "Details response",
