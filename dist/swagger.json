@@ -4687,7 +4687,7 @@
         },
         "manifest_url": {
           "type": "string",
-          "example": "http://example.com/manifests/manifests.csv"
+          "example": "https://s3-ap-southeast-1.amazonaws.com/kr-multichannel/1/manifest/MAN-00212.pdf"
         }
       },
       "required": [
@@ -6592,22 +6592,6 @@
       },
       "required": [
         "tracking_data"
-      ]
-    },
-    "ShipmentTrackingRequest": {
-      "title": "Shipment Tracking request",
-      "type": "object",
-      "properties": {
-        "shipment_id": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "required": [
-        "shipment_id"
       ]
     },
     "ShipmentTrackingResponse": {
