@@ -2118,14 +2118,6 @@
             "type": "integer",
             "format": "int32",
             "description": "Shipment ID"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ShipmentTrackingRequest"
-            }
           }
         ],
         "responses": {
