@@ -1195,7 +1195,7 @@
           "200": {
             "description": "",
             "schema": {
-                "$ref": "#/definitions/MappingResponse"
+              "$ref": "#/definitions/MappingResponse"
             }
           },
           "401": {
@@ -2229,6 +2229,46 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/StatementResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/shipments/create/forward-shipment": {
+      "post": {
+        "tags": [
+          "Shipments"
+        ],
+        "description": "Create and Ship Order along with label & manifest generation",
+        "summary": "Create and Ship Order along with label & manifest generation",
+        "operationId": "forward-shipment",
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateForwardOrderRequest"
+            },
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/CreateForwardOrderResponse"
             }
           }
         }
@@ -4696,8 +4736,8 @@
           "description": "Creates the order id"
         },
         "pickup_code": {
-            "type": "string",
-            "description": "Name of the pickup location"
+          "type": "string",
+          "description": "Name of the pickup location"
         },
         "order_date": {
           "type": "string",
@@ -5177,82 +5217,82 @@
       ]
     },
     "ShipmentsResponse": {
-        "title": "Get Shipments Response",
-        "type": "object",
-        "properties": {
-            "data": {
+      "title": "Get Shipments Response",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "string",
+                "example": "1234"
+              },
+              "code": {
+                "type": "string",
+                "example": "abc"
+              },
+              "id": {
+                "type": "string",
+                "example": "123456"
+              },
+              "order_id": {
+                "type": "string",
+                "example": "123"
+              },
+              "products": {
                 "type": "array",
                 "items": {
-                    "type": "object",
-                    "properties": {
-                        "number": {
-                            "type": "string",
-                            "example": "1234"
-                        },
-                        "code": {
-                            "type": "string",
-                            "example": "abc"
-                        },
-                        "id": {
-                            "type": "string",
-                            "example": "123456"
-                        },
-                        "order_id": {
-                            "type": "string",
-                            "example": "123"
-                        },
-                        "products": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Mobile case"
-                                    },
-                                    "sku": {
-                                        "type": "string",
-                                        "example": "mcase01"
-                                    },
-                                    "quantity": {
-                                        "type": "string",
-                                        "example": "2"
-                                    }
-                                }
-                            }
-                        },
-                        "awb": {
-                            "type": "string",
-                            "example": "123456789"
-                        },
-                        "status": {
-                            "type": "string",
-                            "example": "In Transit"
-                        },
-                        "created_at": {
-                            "type": "string",
-                            "example": "2018-04-03 12:43:23"
-                        },
-                        "channel_id": {
-                            "type": "string",
-                            "example": "34"
-                        },
-                        "channel_name": {
-                            "type": "string",
-                            "example": "CUSTOM"
-                        },
-                        "base_channel_code": {
-                            "type": "string",
-                            "example": "CS"
-                        },
-                        "payment_method": {
-                            "type": "string",
-                            "example": "prepaid"
-                        }
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Mobile case"
+                    },
+                    "sku": {
+                      "type": "string",
+                      "example": "mcase01"
+                    },
+                    "quantity": {
+                      "type": "string",
+                      "example": "2"
                     }
+                  }
                 }
+              },
+              "awb": {
+                "type": "string",
+                "example": "123456789"
+              },
+              "status": {
+                "type": "string",
+                "example": "In Transit"
+              },
+              "created_at": {
+                "type": "string",
+                "example": "2018-04-03 12:43:23"
+              },
+              "channel_id": {
+                "type": "string",
+                "example": "34"
+              },
+              "channel_name": {
+                "type": "string",
+                "example": "CUSTOM"
+              },
+              "base_channel_code": {
+                "type": "string",
+                "example": "CS"
+              },
+              "payment_method": {
+                "type": "string",
+                "example": "prepaid"
+              }
             }
+          }
         }
+      }
     },
     "DetailsResponse": {
       "title": "Details response",
@@ -6415,28 +6455,13 @@
           "format": "int32"
         },
         "label_url": {
-          "type": "string"
+          "type": "string",
+          "example": "https://s3-ap-southeast-1.amazonaws.com/kr-multichannel/1/label/00212.pdf"
         },
         "response": {
           "type": "string"
         }
       }
-    },
-    "AwbTrackingRequest": {
-      "title": "AWB Tracking request",
-      "type": "object",
-      "properties": {
-        "awb_code": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "required": [
-        "awb_code"
-      ]
     },
     "AwbTrackingResponse": {
       "title": "AWB Tracking response",
@@ -6893,6 +6918,416 @@
             "allow_more": {
               "type": "string",
               "example": "true"
+            }
+          }
+        }
+      }
+    },
+    "CreateForwardOrderRequest": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "example": "air",
+          "description": "air or surface"
+        },
+        "request_pickup": {
+          "type": "boolean",
+          "example": "true",
+          "description": "Request for pickup"
+        },
+        "courier_id": {
+          "type": "integer",
+          "example": "16",
+          "description": "Courier Company Id"
+        },
+        "order_id": {
+          "type": "integer",
+          "example": "Test Order",
+          "description": "Order id"
+        },
+        "isd_code": {
+          "type": "string",
+          "example": "+91",
+          "description": ""
+        },
+        "billing_isd_code": {
+          "type": "string",
+          "example": "+91",
+          "description": ""
+        },
+        "order_date": {
+          "type": "string",
+          "example": "2018-09-28T08:33:47.933Z",
+          "description": ""
+        },
+        "channel_id": {
+          "type": "integer",
+          "example": "12",
+          "description": "Channel Id if you manage inventory"
+        },
+        "billing_customer_name": {
+          "type": "string",
+          "example": "John",
+          "description": ""
+        },
+        "billing_last_name": {
+          "type": "string",
+          "example": "doe",
+          "description": ""
+        },
+        "billing_address": {
+          "type": "string",
+          "example": "#123, street 11",
+          "description": ""
+        },
+        "billing_address_2": {
+          "type": "string",
+          "example": "",
+          "description": ""
+        },
+        "billing_city": {
+          "type": "string",
+          "example": "Delhi",
+          "description": ""
+        },
+        "billing_state": {
+          "type": "string",
+          "example": "Delhi",
+          "description": ""
+        },
+        "billing_country": {
+          "type": "string",
+          "example": "India",
+          "description": ""
+        },
+        "billing_pincode": {
+          "type": "integer",
+          "example": "110030",
+          "description": ""
+        },
+        "billing_email": {
+          "type": "string",
+          "example": "abc@xyz.com",
+          "description": ""
+        },
+        "billing_phone": {
+          "type": "integer",
+          "example": "9876543210",
+          "description": "10 digit phone number"
+        },
+        "shipping_is_billing": {
+          "type": "boolean",
+          "example": "true",
+          "description": "Billing address and Shipping Address are same, then true otherwise false"
+        },
+        "shipping_customer_name": {
+          "type": "string",
+          "example": "",
+          "description": ""
+        },
+        "shipping_last_name": {
+          "type": "string",
+          "example": "",
+          "description": ""
+        },
+        "shipping_address": {
+          "type": "string",
+          "example": "",
+          "description": ""
+        },
+        "shipping_address_2": {
+          "type": "string",
+          "example": "",
+          "description": ""
+        },
+        "shipping_city": {
+          "type": "string",
+          "example": "",
+          "description": ""
+        },
+        "shipping_state": {
+          "type": "string",
+          "example": "",
+          "description": ""
+        },
+        "shipping_country": {
+          "type": "string",
+          "example": "",
+          "description": ""
+        },
+        "shipping_pincode": {
+          "type": "integer",
+          "example": "",
+          "description": ""
+        },
+        "shipping_email": {
+          "type": "string",
+          "example": "",
+          "description": ""
+        },
+        "shipping_phone": {
+          "type": "integer",
+          "example": "",
+          "description": ""
+        },
+        "order_items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "example": "Test Product",
+                "description": ""
+              },
+              "sku": {
+                "type": "string",
+                "example": "test_product_1",
+                "description": ""
+              },
+              "units": {
+                "type": "integer",
+                "example": "2",
+                "description": ""
+              },
+              "hsn": {
+                "type": "integer",
+                "example": "12345",
+                "description": ""
+              },
+              "selling_price": {
+                "type": "string",
+                "example": "234",
+                "description": ""
+              },
+              "tax": {
+                "type": "integer",
+                "example": "10",
+                "description": "Tax Percent"
+              },
+              "discount": {
+                "type": "integer",
+                "example": "20",
+                "description": "Discount Amount"
+              }
+            }
+          }
+        },
+        "payment_method": {
+          "type": "string",
+          "example": "COD",
+          "description": "COD or Prepaid"
+        },
+        "shipping_charges": {
+          "type": "integer",
+          "example": "50",
+          "description": ""
+        },
+        "giftwrap_charges": {
+          "type": "integer",
+          "example": "20",
+          "description": ""
+        },
+        "transaction_charges": {
+          "type": "integer",
+          "example": "10",
+          "description": ""
+        },
+        "total_discount": {
+          "type": "integer",
+          "example": "20",
+          "description": ""
+        },
+        "sub_total": {
+          "type": "integer",
+          "example": "5432",
+          "description": ""
+        },
+        "weight": {
+          "type": "string",
+          "example": "0.32",
+          "description": ""
+        },
+        "length": {
+          "type": "integer",
+          "example": "10",
+          "description": "Length in cm"
+        },
+        "breadth": {
+          "type": "integer",
+          "example": "10",
+          "description": "Breadth in cm"
+        },
+        "height": {
+          "type": "integer",
+          "example": "10",
+          "description": "Height in cm"
+        },
+        "pickup_location": {
+          "type": "string",
+          "example": "My Location",
+          "description": "Specify Pickup Location for the Pickup"
+        },
+        "vendor_details": {
+          "type": "object",
+          "description": "In case you want to give Pick address, which is not registered",
+          "properties": {
+            "email": {
+              "type": "string",
+              "example": "",
+              "description": ""
+            },
+            "phone": {
+              "type": "integer",
+              "example": "",
+              "description": ""
+            },
+            "address": {
+              "type": "string",
+              "example": "",
+              "description": ""
+            },
+            "address_2": {
+              "type": "string",
+              "example": "",
+              "description": ""
+            },
+            "city": {
+              "type": "string",
+              "example": "",
+              "description": ""
+            },
+            "state": {
+              "type": "string",
+              "example": "",
+              "description": ""
+            },
+            "country": {
+              "type": "string",
+              "example": "",
+              "description": ""
+            },
+            "pin_code": {
+              "type": "integer",
+              "example": "",
+              "description": ""
+            },
+            "pickup_location": {
+              "type": "string",
+              "example": "My Location New",
+              "description": "Location name for reference"
+            }
+          }
+        }
+      }
+    },
+    "CreateForwardOrderResponse": {
+      "title": "Success Response",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "example": "1",
+          "description": ""
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "order_created": {
+              "type": "boolean",
+              "example": true,
+              "description": ""
+            },
+            "awb_generated": {
+              "type": "boolean",
+              "example": true,
+              "description": ""
+            },
+            "label_generated": {
+              "type": "boolean",
+              "example": true,
+              "description": ""
+            },
+            "pickup_generated": {
+              "type": "boolean",
+              "example": true,
+              "description": ""
+            },
+            "manifest_generated": {
+              "type": "boolean",
+              "example": true,
+              "description": ""
+            },
+            "pickup_scheduled_date": {
+              "type": "string",
+              "example": "2018-09-29 10:10:51.000000",
+              "description": "Date of pickup"
+            },
+            "order_id": {
+              "type": "integer",
+              "example": "1234456",
+              "description": ""
+            },
+            "shipment_id": {
+              "type": "integer",
+              "example": "65434",
+              "description": ""
+            },
+            "awb_code": {
+              "type": "string",
+              "example": "A2345",
+              "description": ""
+            },
+            "courier_company_id": {
+              "type": "integer",
+              "example": "13",
+              "description": ""
+            },
+            "courier_name": {
+              "type": "string",
+              "example": "Delivery",
+              "description": ""
+            },
+            "assigned_date_time": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "example": "2018-09-29 10:10:51.000000",
+                  "description": ""
+                },
+                "timezone_type": {
+                  "type": "integer",
+                  "example": 3,
+                  "description": ""
+                },
+                "timezone": {
+                  "type": "string",
+                  "example": "Asia/Kolkata",
+                  "description": ""
+                }
+              }
+            },
+            "applied_weight": {
+              "type": "string",
+              "example": "0.7",
+              "description": ""
+            },
+            "cod": {
+              "type": "integer",
+              "example": 1,
+              "description": "1 for COD order, 0 for Prepaid"
+            },
+            "label_url": {
+              "type": "string",
+              "example": "",
+              "description": "https://s3-ap-southeast-1.amazonaws.com/kr-multichannel/1/label/00212.pdf"
+            },
+            "manifest_url": {
+              "type": "string",
+              "example": "",
+              "description": "https://s3-ap-southeast-1.amazonaws.com/kr-multichannel/1/manifest/MAN-00212.pdf"
             }
           }
         }
