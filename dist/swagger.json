@@ -1892,16 +1892,6 @@
             "description": "Price of the order"
           },
           {
-            "name": "restricted_couriers",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Courier Ids which should be excluded"
-          },
-          {
             "name": "mode",
             "in": "query",
             "required": false,
