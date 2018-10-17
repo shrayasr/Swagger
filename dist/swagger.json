@@ -2224,7 +2224,7 @@
         }
       }
     },
-    "/v1/shipments/create/forward-shipment": {
+    "/v1/external/shipments/create/forward-shipment": {
       "post": {
         "tags": [
           "Shipments"
