@@ -801,7 +801,7 @@
         "tags": [
           "Orders"
         ],
-        "description": "The ShipRocket API for getting all the orders of a single seller. In this API the product and shipment activities will have sub arrays for individual products and shipments.\n\nBelow are the order status codes used: \n \n  Order Status Code | Descrition\n  ----- | -----\n  1 | New\n  2 | Invoiced\n  3 | Ready To Ship\n  4 | Pickup Scheduled\n  5 | Cancelled\n  6 | Shipped\n  7 | Delivered\n  8 | e-Payment Failed\n  9 | Returned\n  10 | Unmapped\n  11 | Out of Stock\n  12 | Pickup Queued\n  13 | Pickup Rescheduled\n  14 | Pickup error// Created when there is an error on pickup schedule\n  15 | RTO initiated\n  16 | RTO delivered\n  17 | RTO Acknowledged\n  18 | Cancellation Request\n  19 | Out for Delivery\n  20 | In Transit",
+        "description": "The ShipRocket API for getting all the orders of a single seller. In this API the product and shipment activities will have sub arrays for individual products and shipments.\n **Filter values:** \n\n filter_by | filter | description \n ---- | ---- | ---- \n **payment_method** | | \n -> | cod | cash on delivery orders \n -> | Prepaid |  for prepaid orders\n **status** | |\n -> | 1 | New \n -> | 2 | Invoiced \n -> | 3 | Ready To Ship \n -> | 4 | Pickup Scheduled \n -> | 5 | Cancelled \n -> | 6 | Shipped \n -> | 7 | Delivered \n -> | 8 | e-Payment Failed \n -> | 9 | Returned \n -> | 10 | Unmapped \n -> | 11 | Out of Stock \n -> | 12 | Pickup Queued \n -> | 13 | Pickup Rescheduled \n -> | 14 | Pickup error// Created when there is an error on pickup schedule \n -> | 15 | RTO initiated \n -> | 16 | RTO delivered \n -> | 17 | RTO Acknowledged \n -> | 18 | Cancellation Request \n -> | 19 | Out for Delivery \n -> | 20 | In Transit",
         "summary": "Get all orders",
         "operationId": "Get all orders",
         "produces": [
@@ -841,7 +841,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Field to sort by"
+            "description": "Field to sort by (id, status)"
           },
           {
             "name": "to",
@@ -1455,7 +1455,7 @@
         }
       }
     },
-    "v1/external/manifests/print": {
+    "/v1/external/manifests/print": {
       "post": {
         "tags": [
           "Label | Manifests | Invoice"
