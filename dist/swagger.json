@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0",
     "title": "ShiprocketAPI",
-    "description": "Welcome to ShipRocket’s API Documentation. Get a clear understanding of all the sections and codes that are used in ShipRocket’s API. ShipRocket API uses the JSON syntax.\n\nFirst, you need to register with ShipRocket and create an account. Simply click on this [link](https://app.shiprocket.in/register) to complete the simple sign up process.\n\nPlease note that to utilize the ShipRocket API’s, you need to [upgrade](https://app.shiprocket.in/billing-plan-details) your plan to Advance or Pro. To get access to use the API’s, below the following steps:\n \n1. Navigate to Shiprocket Settings -> Company.\n2. Click on Generate API User Menu and then Click on Create API User.\n3. Please enter a Valid Email ID which is different from currently used registered email.\n4. Input an appropriate password.\n5. The next step will be to use the POST Authentication API in the given URL to Generate your Token for each request.\n \nFor more queries you can mail to support@shiprocket.in"
+    "description": "Welcome to ShipRocket’s API Documentation. Get a clear understanding of all the sections and codes that are used in ShipRocket’s API. ShipRocket API uses the JSON syntax.\n\nFirst, you need to register with ShipRocket and create an account. Simply click on this [link](https://app.shiprocket.in/register) to complete the simple sign up process.\n\nPlease note that to utilize the ShipRocket API’s, you need to [upgrade](https://app.shiprocket.in/billing-plan-details) your plan to Advance or Pro. To get access to use the API’s, below the following steps:\n \n1. Navigate to Shiprocket Settings -> Company.\n2. Click on Generate API User Menu and then Click on Create API User.\n3. Please enter a Valid Email ID which is different from currently used registered email.\n4. Input an appropriate password.\n5. The next step will be to use the Authentication API in the given URL to Generate your Token for each request.\n\n **Steps to Use Shiprocket API's**\n1. Generate the token using the *Authentication API* **(/v1/external/auth/login)**.\n2. Authenticate the API's by passing the token in the headers of each request as ***'Authorization: Bearer token_value'***.\n 3. Create an Order using the *Create Custom Order API* **(/v1/external/orders/create/adhoc)**.\n4. Assign AWB using *AWB creation API* **(/v1/external/courier/assign/awb)**. \n5. Request for PickUp using the *Request PickUp API* **(/v1/external/courier/generate/pickup)**.\n 6. Track your shipment using *Tracking API* **(/v1/external/track/awb/{awb_code}).**\n \nFor more queries you can drop an email to support@shiprocket.in ."
   },
   "host": "apiv2.shiprocket.in",
   "schemes": [
@@ -2020,8 +2020,8 @@
         "tags": [
           "Couriers"
         ],
-        "description": "Get a JSON representation of pickup response for single and bulk requests.",
-        "summary": "Get Pickup Details",
+        "description": "The API returns the pickup status along with the estimated pickup time",
+        "summary": "Request for PickUp",
         "operationId": "Pickup creation",
         "security": [
           {
