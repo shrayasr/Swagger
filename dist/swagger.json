@@ -25,52 +25,72 @@
   ],
   "tags": [
     {
-      "name": "Authentication"
+      "name": "Authentication",
+      "description": "Use this API to generate token"
     },
     {
-      "name": "Create/Update Order"
+      "name": "Create/Update Order",
+      "description": "Use these API's to Create a new Order or Update the existing ones"
     },
     {
-      "name": "Orders"
+      "name": "Orders",
+      "description": "Use thses API's to get the details about the Orders"
     },
     {
-      "name": "Shipments"
+      "name": "Shipments",
+      "description": "Use these API's to get Shipment details"
     },
     {
-      "name": "Couriers"
+      "name": "Couriers",
+      "description": "Use these API's to Check Serviceability, Assign AWB or Request For PickUp."
     },
     {
-      "name": "Tracking"
+      "name": "Label | Manifests | Invoice",
+      "description": "Use These API's to Generate or Print Label, Manifest and Invoice"
     },
     {
-      "name": "Label | Manifests | Invoice"
+      "name": "Wrapper API",
+      "description": "Use this API to Create & Ship Order"
     },
     {
-      "name": "Products"
+      "name": "Tracking",
+      "description": "Use these API's to get the Tracking Details"
     },
     {
-      "name": "Listings"
+      "name": "Pickup Address",
+      "description": "Use this API to get available PickUp Addresses"
     },
     {
-      "name": "Channels"
+      "name": "Products",
+      "description": "Use these API's to get/update details about Products"
     },
     {
-      "name": "Inventory"
+      "name": "Listings",
+      "description": "Use these API's to get/update details of Product Listings"
     },
     {
-      "name": "Statement"
+      "name": "Channels",
+      "description": "Use These API's to get details about Integrated Channels"
     },
     {
-      "name": "Discrepancy"
+      "name": "Inventory",
+      "description": "Use These API's to get/update details about Inventory"
     },
     {
-      "name": "File Imports"
+      "name": "Statement",
+      "description": "Use this API to get transaction details of your SR account"
     },
     {
-      "name": "Countries"
+      "name": "Discrepancy",
+      "description": "Use this API to get details of Weight Descripancy raised"
     },
     {
-      "name": "Pickup Address"
+      "name": "File Imports",
+      "description": "Use this API to get details of file Imports"
+    },
+    {
+      "name": "Countries",
+      "description": "Use these API's to get Countries & details"
     }
   ],
   "paths": {
@@ -1851,7 +1871,7 @@
         "tags": [
           "Couriers"
         ],
-        "description": "Shows the number of courier companies available for delivery from pickup point to customer delivery code, along with the estimated delivery time in days.",
+        "description": "Check for the list of available courier companies between pickup & delivery postcodes, along with the estimated delivery time in days and shipping charges. Here is the list of Courier Companies along with their id's:  \n\n Courier Name | Courier Id\n ----- | ----- \n BLUEDART | 1\n FEDEX | 2\n FEDEX PACKAGING* | 7\n DHL PACKET INTERNATIONAL* | 8\n DELHIVERY | 10\n FEDEX SURFACE | 12\n ECOMEXP | 14\nDOTZOT | 16\n XPRESSBEES | 33\n ARAMEX INTERNATIONAL* | 35 \n FEDEX YOUR PACK* | 36\n DHL PACKET PLUS* | 37\n DHL PARCEL DIRECT* | 38\n DELHIVERY SURFACE | 39\n GATI SURFACE | 40\n FEDEX FLAT RATE | 41\n FEDEX SURFACE LIGHT | 42\n DELHIVERY SURFACE STANDAR | 43\n DELHIVERY SURFACE LITE | 44\n ECOMEXP REVERSE** | 45\n SHADOW FAX REVERSE** | 46\n ECOM INTERNATIONAL* | 47\n *marked ouriers are for International Shipments\n **  marked Couriers are for return Shipments",
         "summary": "Check Serviceability",
         "operationId": "Check serviceability",
         "security": [
@@ -2258,7 +2278,7 @@
     "/v1/external/shipments/create/forward-shipment": {
       "post": {
         "tags": [
-          "Shipments"
+          "Wrapper API"
         ],
         "description": "Create and Ship Order along with label & manifest generation",
         "summary": "Create and Ship Order along with label & manifest generation",
