@@ -6999,27 +6999,27 @@
         "mode": {
           "type": "string",
           "example": "air",
-          "description": "air or surface"
+          "description": "Specify mode of shipment - air or surface"
         },
         "request_pickup": {
           "type": "boolean",
           "example": "true",
-          "description": "Request for pickup"
+          "description": "Request pickup"
         },
         "courier_id": {
           "type": "integer",
           "example": "16",
-          "description": "Courier Company Id"
+          "description": "Courier Company Id, refer to the Serviceability API in Courier section."
         },
-        "comment": {
+        "reseller_name": {
           "type": "string",
-          "description": "To specify From Name, enter the name starting with 'Reseller: ' follwed by from name",
-          "example": "Reseller: M/S Lal Enterprises"
+          "description": "Specify From Name",
+          "example": "M/S Lal Enterprises"
         },
         "order_id": {
           "type": "integer",
           "example": "Test Order",
-          "description": "Order id"
+          "description": "Order Number"
         },
         "isd_code": {
           "type": "string",
@@ -7034,117 +7034,117 @@
         "order_date": {
           "type": "string",
           "example": "2018-09-28T08:33:47.933Z",
-          "description": ""
+          "description": "Date of Order Creation"
         },
         "channel_id": {
           "type": "integer",
           "example": "12",
-          "description": "Channel Id if you manage inventory"
+          "description": "Channel Id to manage inventory, that can be fetched by Channels API"
         },
         "billing_customer_name": {
           "type": "string",
           "example": "John",
-          "description": ""
+          "description": "Bill to First Name"
         },
         "billing_last_name": {
           "type": "string",
           "example": "doe",
-          "description": ""
+          "description": "Bill to Last Name"
         },
         "billing_address": {
           "type": "string",
           "example": "#123, street 11",
-          "description": ""
+          "description": "Bill to Address line 1"
         },
         "billing_address_2": {
           "type": "string",
           "example": "",
-          "description": ""
+          "description": "Bill to Address line 2"
         },
         "billing_city": {
           "type": "string",
           "example": "Delhi",
-          "description": ""
+          "description": "Bill to City"
         },
         "billing_state": {
           "type": "string",
           "example": "Delhi",
-          "description": ""
+          "description": "Bill to State"
         },
         "billing_country": {
           "type": "string",
           "example": "India",
-          "description": ""
+          "description": "Bill to Country"
         },
         "billing_pincode": {
           "type": "integer",
           "example": "110030",
-          "description": ""
+          "description": "Bill to Pincode"
         },
         "billing_email": {
           "type": "string",
           "example": "abc@xyz.com",
-          "description": ""
+          "description": "Billing Email"
         },
         "billing_phone": {
           "type": "integer",
           "example": "9876543210",
-          "description": "10 digit phone number"
+          "description": "Billing Phone Number, should be 10 digit phone number"
         },
         "shipping_is_billing": {
           "type": "boolean",
-          "example": "true",
-          "description": "Billing address and Shipping Address are same, then true otherwise false"
+          "example": true,
+          "description": " If Billing address and Shipping Address are same, then true otherwise false"
         },
         "shipping_customer_name": {
           "type": "string",
           "example": "",
-          "description": ""
+          "description": "Ship to First Name"
         },
         "shipping_last_name": {
           "type": "string",
           "example": "",
-          "description": ""
+          "description": "Ship to Last Name"
         },
         "shipping_address": {
           "type": "string",
           "example": "",
-          "description": ""
+          "description": "Ship to Address line 1"
         },
         "shipping_address_2": {
           "type": "string",
           "example": "",
-          "description": ""
+          "description": "Ship to Address line 2"
         },
         "shipping_city": {
           "type": "string",
           "example": "",
-          "description": ""
+          "description": "Ship to City"
         },
         "shipping_state": {
           "type": "string",
           "example": "",
-          "description": ""
+          "description": "Ship to State"
         },
         "shipping_country": {
           "type": "string",
           "example": "",
-          "description": ""
+          "description": "Ship to Country"
         },
         "shipping_pincode": {
           "type": "integer",
           "example": "",
-          "description": ""
+          "description": "Ship to pincode"
         },
         "shipping_email": {
           "type": "string",
           "example": "",
-          "description": ""
+          "description": "Shipping Email"
         },
         "shipping_phone": {
           "type": "integer",
           "example": "",
-          "description": ""
+          "description": "Shipping Phone"
         },
         "order_items": {
           "type": "array",
@@ -7154,27 +7154,27 @@
               "name": {
                 "type": "string",
                 "example": "Test Product",
-                "description": ""
+                "description": "Product Name"
               },
               "sku": {
                 "type": "string",
                 "example": "test_product_1",
-                "description": ""
+                "description": "Product sku"
               },
               "units": {
                 "type": "integer",
                 "example": "2",
-                "description": ""
+                "description": "Quantity"
               },
               "hsn": {
                 "type": "integer",
                 "example": "12345",
-                "description": ""
+                "description": "HSN number"
               },
               "selling_price": {
                 "type": "string",
                 "example": "234",
-                "description": ""
+                "description": "Selling Price inclusive of tax"
               },
               "tax": {
                 "type": "integer",
@@ -7184,7 +7184,7 @@
               "discount": {
                 "type": "integer",
                 "example": "20",
-                "description": "Discount Amount"
+                "description": "Discount Amount inclusive of tax"
               }
             }
           }
@@ -7197,7 +7197,7 @@
         "shipping_charges": {
           "type": "integer",
           "example": "50",
-          "description": ""
+          "description": "Shipping Charges"
         },
         "giftwrap_charges": {
           "type": "integer",
@@ -7212,17 +7212,17 @@
         "total_discount": {
           "type": "integer",
           "example": "20",
-          "description": ""
+          "description": "Total discount on Order"
         },
         "sub_total": {
           "type": "integer",
           "example": "5432",
-          "description": ""
+          "description": "sub total"
         },
         "weight": {
           "type": "string",
           "example": "0.32",
-          "description": ""
+          "description": "Weight in Kgs"
         },
         "length": {
           "type": "integer",
@@ -7242,11 +7242,11 @@
         "pickup_location": {
           "type": "string",
           "example": "My Location",
-          "description": "Specify Pickup Location for the Pickup"
+          "description": "Specify a Name for the Pickup Location"
         },
         "vendor_details": {
           "type": "object",
-          "description": "In case you want to give Pick address, which is not registered",
+          "description": "Use if you want to give another Pick up address, which is not registered with ShipRocket",
           "properties": {
             "email": {
               "type": "string",
