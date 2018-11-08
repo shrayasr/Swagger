@@ -7258,6 +7258,11 @@
               "example": "",
               "description": ""
             },
+            "name": {
+              "type": "string",
+              "example": "",
+              "description": ""
+            },
             "address": {
               "type": "string",
               "example": "",
